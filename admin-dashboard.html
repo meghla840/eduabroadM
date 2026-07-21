@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel | Edu Abroad Limited</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Cormorant Garamond', 'serif'] },
+                    colors: {
+                        primary: '#1b3168', secondary: '#00a2e8', 'brand-green': '#39b54a', cream: '#e7e4df',
+                        brand: { 50: '#f0f4ff', 100: '#e0e8ff', 500: '#1b3168', 600: '#152654', 700: '#0f1b3b', 900: '#090f23' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Roboto', system-ui, sans-serif; color: #1a202c; background:#f7f6f3; }
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; font-size: 20px; vertical-align: middle; }
+        .nav-item.active { background: rgba(27,49,104,0.08); color: #1b3168; font-weight: 700; }
+        .nav-item.active .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeIn .35s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+        .status-chip { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+        .status-not_uploaded { background:#f1f5f9; color:#64748b; }
+        .status-pending { background:#fef9c3; color:#a16207; }
+        .status-verified { background:#dcfce7; color:#15803d; }
+        .status-rejected { background:#fee2e2; color:#b91c1c; }
+        .status-new { background:#e0f2fe; color:#0369a1; }
+        .plan-badge-free { background:#fef9c3; color:#a16207; }
+        .plan-badge-premium { background:#e0e8ff; color:#1b3168; }
+        #mobile-sidebar-overlay { position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 40; display:none; }
+        #mobile-sidebar-overlay.show { display:block; }
+        table th { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#94a3b8; font-weight:700; }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-72 bg-white border-r border-gray-100 flex-col justify-between fixed lg:static inset-y-0 left-0 z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex">
+            <div>
+                <div class="h-20 flex items-center px-6 border-b border-gray-100">
+                    <img src="images/logo_Black.png" alt="Edu Abroad" class="h-11 w-auto object-contain" />
+                    <span class="ml-2 text-[10px] font-black uppercase tracking-widest bg-primary/10 text-primary px-2 py-1 rounded-md">Admin</span>
+                </div>
+                <nav id="side-nav" class="p-4 space-y-1">
+                    <a href="#overview" data-panel="overview" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">space_dashboard</span> Dashboard
+                    </a>
+                    <a href="#clients" data-panel="clients" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">group</span> Clients
+                    </a>
+                    <a href="#documents" data-panel="documents" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">fact_check</span> Document Review
+                        <span id="doc-queue-badge" class="hidden ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full size-5 flex items-center justify-center">0</span>
+                    </a>
+                    <a href="#appointments" data-panel="appointments" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">event</span> Appointments
+                    </a>
+                    <a href="#doccheck-results" data-panel="doccheck-results" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">verified</span> Document Check Results
+                    </a>
+                    <a href="#activity" data-panel="activity" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">history</span> Activity Log
+                    </a>
+                    <div class="pt-3 mt-3 border-t border-gray-100"></div>
+                    <a href="#all-users" data-panel="all-users" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">groups</span> All Users
+                    </a>
+                    <a href="#employees" data-panel="employees" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">badge</span> Employees
+                    </a>
+                    <a href="#blogposts" data-panel="blogposts" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">article</span> Blog Posts
+                    </a>
+                    <a href="#universities" data-panel="universities" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">school</span> Universities
+                    </a>
+                    <a href="document-check.html" target="_blank" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">fact_check</span> Document Check <span class="ml-auto text-[10px] font-bold text-brand-green bg-green-50 px-2 py-0.5 rounded-full">Unlimited</span>
+                    </a>
+                    <a href="#messages" data-panel="messages" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">mail</span> Contact Messages
+                    </a>
+                </nav>
+            </div>
+            <div class="p-4 border-t border-gray-100">
+                <button id="reset-demo-btn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 font-semibold text-xs mb-1">
+                    <span class="material-symbols-outlined text-base">restart_alt</span> Reset Demo Data
+                </button>
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 font-semibold text-sm">
+                    <span class="material-symbols-outlined">logout</span> Log Out
+                </button>
+            </div>
+        </aside>
+        <div id="mobile-sidebar-overlay"></div>
+
+        <div class="flex-1 min-w-0">
+            <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-5 sm:px-8 sticky top-0 z-30">
+                <div class="flex items-center gap-4">
+                    <button id="menu-toggle" class="lg:hidden text-gray-600"><span class="material-symbols-outlined">menu</span></button>
+                    <div>
+                        <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold">Admin Panel</p>
+                        <h1 class="font-display text-2xl font-semibold text-gray-900 leading-tight">Edu Abroad Control Center</h1>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="hidden sm:flex text-xs font-semibold text-gray-500 hover:text-primary items-center gap-1">
+                        <span class="material-symbols-outlined text-base">home</span> Home
+                    </a>
+                    <div id="avatar" class="size-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">A</div>
+                </div>
+            </header>
+
+            <main class="p-5 sm:p-8 max-w-7xl mx-auto">
+
+                <!-- OVERVIEW -->
+                <section id="panel-overview" class="panel active space-y-6">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Total Clients</p>
+                            <p id="kpi-clients" class="font-display text-3xl font-semibold text-gray-900">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Pending Documents</p>
+                            <p id="kpi-pending" class="font-display text-3xl font-semibold text-amber-600">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Premium Members</p>
+                            <p id="kpi-premium" class="font-display text-3xl font-semibold text-primary">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Est. Monthly Revenue</p>
+                            <p id="kpi-revenue" class="font-display text-3xl font-semibold text-brand-green">—</p>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <h3 class="font-display text-xl font-semibold mb-5">Clients by Stage</h3>
+                            <div id="stage-breakdown" class="space-y-4"></div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <h3 class="font-display text-xl font-semibold mb-5">Recent Activity</h3>
+                            <div id="overview-activity" class="space-y-3 text-sm max-h-72 overflow-y-auto"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CLIENTS -->
+                <section id="panel-clients" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">Clients</h2>
+                        <input id="client-search" type="text" placeholder="Search by name or email…" class="h-11 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 w-64 max-w-full text-sm" />
+                    </div>
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-100">
+                                    <th class="text-left px-5 py-4">Client</th>
+                                    <th class="text-left px-5 py-4">Destination</th>
+                                    <th class="text-left px-5 py-4">Plan</th>
+                                    <th class="text-left px-5 py-4">Stage</th>
+                                    <th class="text-left px-5 py-4">Documents</th>
+                                    <th class="text-left px-5 py-4">Joined</th>
+                                    <th class="text-right px-5 py-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- DOCUMENTS QUEUE -->
+                <section id="panel-documents" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">Document Review Queue</h2>
+                        <div class="flex gap-2 text-xs font-semibold">
+                            <button data-filter="pending" class="doc-filter-btn active px-3 py-2 rounded-lg bg-primary text-white">Pending</button>
+                            <button data-filter="verified" class="doc-filter-btn px-3 py-2 rounded-lg bg-gray-100 text-gray-600">Verified</button>
+                            <button data-filter="rejected" class="doc-filter-btn px-3 py-2 rounded-lg bg-gray-100 text-gray-600">Rejected</button>
+                            <button data-filter="all" class="doc-filter-btn px-3 py-2 rounded-lg bg-gray-100 text-gray-600">All</button>
+                        </div>
+                    </div>
+                    <div id="doc-queue-list" class="space-y-4"></div>
+                </section>
+
+                <!-- APPOINTMENTS -->
+                <section id="panel-appointments" class="panel space-y-5">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Appointment Requests</h2>
+                    <div id="admin-appt-list" class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] divide-y divide-gray-50"></div>
+                </section>
+
+                <!-- DOCUMENT CHECK RESULTS (client-run cross-checks, viewable as cards) -->
+                <section id="panel-doccheck-results" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h2 class="font-display text-2xl font-semibold text-gray-900">Document Check Results</h2>
+                            <p class="text-sm text-gray-500 mt-1">Every cross-check a client has run, across all accounts. Click a card to view the full field-by-field report — free to view, no unlock needed.</p>
+                        </div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <button data-dcr-filter="all" class="dcr-filter-btn active bg-primary text-white text-xs font-bold uppercase tracking-wide px-4 py-2 rounded-full">All</button>
+                            <button data-dcr-filter="mismatch" class="dcr-filter-btn bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wide px-4 py-2 rounded-full">Mismatches</button>
+                            <button data-dcr-filter="match" class="dcr-filter-btn bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wide px-4 py-2 rounded-full">Clean Matches</button>
+                        </div>
+                    </div>
+                    <div id="admin-dcr-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                    <div id="admin-dcr-empty" class="hidden bg-white rounded-2xl p-10 text-center border border-gray-100 text-gray-400 text-sm">No document check results yet — once clients run a cross-check on the Document Check page, their reports will show up here as cards.</div>
+                </section>
+
+                <!-- Document Check Result Modal (admin) -->
+                <div id="admin-dcr-modal-overlay" class="hidden fixed inset-0 bg-black/50 z-[999] items-center justify-center p-4" style="display:none;">
+                    <div id="admin-dcr-modal" class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"></div>
+                </div>
+                <style>
+                    #admin-dcr-modal-overlay.active { display:flex !important; }
+                    .dcr-field-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+                    .dcr-stamp{ font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:2px 8px; border-radius:9999px; }
+                    .dcr-stamp.ok{ background:#dcfce7; color:#15803d; }
+                    .dcr-stamp.diff{ background:#fee2e2; color:#b91c1c; }
+                    .dcr-stamp.missing{ background:#fef9c3; color:#a16207; }
+                </style>
+
+                <!-- ACTIVITY -->
+                <section id="panel-activity" class="panel space-y-5">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Full Activity Log</h2>
+                    <div id="full-activity-list" class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] divide-y divide-gray-50"></div>
+                </section>
+
+                <!-- ALL USERS -->
+                <section id="panel-all-users" class="panel space-y-6">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">All Users &amp; Revenue</h2>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Total Users</p>
+                            <p id="au-kpi-total" class="font-display text-3xl font-semibold text-gray-900">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">New Today</p>
+                            <p id="au-kpi-today" class="font-display text-3xl font-semibold text-secondary">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Revenue Today</p>
+                            <p id="au-kpi-rev-today" class="font-display text-3xl font-semibold text-brand-green">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Total Revenue</p>
+                            <p id="au-kpi-rev-total" class="font-display text-3xl font-semibold text-primary">—</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                        <h3 class="font-display text-lg font-semibold mb-4">Signups &amp; Revenue — Last 14 Days</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm min-w-[560px]">
+                                <thead><tr class="border-b border-gray-100"><th class="text-left px-3 py-2">Date</th><th class="text-left px-3 py-2">New Users</th><th class="text-left px-3 py-2">Revenue</th></tr></thead>
+                                <tbody id="daily-stats-table"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-100">
+                                    <th class="text-left px-5 py-4">User</th>
+                                    <th class="text-left px-5 py-4">Role</th>
+                                    <th class="text-left px-5 py-4">Plan</th>
+                                    <th class="text-left px-5 py-4">Joined</th>
+                                    <th class="text-right px-5 py-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-users-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- EMPLOYEES -->
+                <section id="panel-employees" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">Employees</h2>
+                        <button id="add-employee-btn" class="h-11 px-5 rounded-xl bg-primary text-white text-sm font-bold flex items-center gap-2"><span class="material-symbols-outlined text-base">add</span> Add Employee</button>
+                    </div>
+                    <div id="employees-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+                </section>
+
+                <!-- BLOG POSTS -->
+                <section id="panel-blogposts" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">Blog Posts</h2>
+                        <button id="add-post-btn" class="h-11 px-5 rounded-xl bg-primary text-white text-sm font-bold flex items-center gap-2"><span class="material-symbols-outlined text-base">add</span> Add Post</button>
+                    </div>
+                    <div id="posts-list" class="space-y-4"></div>
+                </section>
+
+                <!-- CONTACT MESSAGES -->
+                <section id="panel-messages" class="panel space-y-5">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Contact Messages</h2>
+                    <div id="messages-list" class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] divide-y divide-gray-50"></div>
+                </section>
+
+                <!-- UNIVERSITIES -->
+                <section id="panel-universities" class="panel space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h2 class="font-display text-2xl font-semibold text-gray-900">Universities</h2>
+                            <p class="text-sm text-gray-400 mt-0.5">Manage partner universities used by the homepage Eligibility Checker.</p>
+                        </div>
+                        <button id="add-uni-btn" class="h-11 px-5 rounded-xl bg-primary text-white text-sm font-bold flex items-center gap-2"><span class="material-symbols-outlined text-base">add</span> Add University</button>
+                    </div>
+                    <div id="uni-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Client detail drawer -->
+    <div id="client-drawer-overlay" class="hidden fixed inset-0 bg-black/40 z-[60]"></div>
+    <div id="client-drawer" class="hidden fixed top-0 right-0 h-full w-full sm:w-[440px] bg-white z-[70] shadow-2xl overflow-y-auto transition-transform duration-300">
+        <div id="client-drawer-content" class="p-6 sm:p-7"></div>
+    </div>
+
+    <!-- Document review modal -->
+    <div id="review-modal" class="hidden fixed inset-0 bg-black/50 z-[60] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-7">
+            <h3 class="font-display text-xl font-semibold mb-1">Reject Document</h3>
+            <p class="text-sm text-gray-500 mb-4">Tell the client what needs to be fixed.</p>
+            <textarea id="reject-note" rows="3" placeholder="e.g. Image is blurry, please re-scan." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm mb-4"></textarea>
+            <div class="flex gap-3">
+                <button id="reject-cancel" class="flex-1 h-11 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm">Cancel</button>
+                <button id="reject-confirm" class="flex-1 h-11 rounded-xl bg-red-600 text-white font-semibold text-sm">Reject</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employee modal -->
+    <div id="employee-modal" class="hidden fixed inset-0 bg-black/50 z-[60] items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-7 my-8">
+            <h3 id="employee-modal-title" class="font-display text-xl font-semibold mb-5">Add Employee</h3>
+            <form id="employee-form" class="space-y-4">
+                <input type="hidden" id="emp-id" />
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Name</label><input required id="emp-name" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Designation</label><input required id="emp-designation" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Department</label><input id="emp-department" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Since (Year)</label><input id="emp-since" type="number" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Photo URL</label><input id="emp-photo" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Bio</label><textarea id="emp-bio" rows="3" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm"></textarea></div>
+                <label class="flex items-center gap-2 text-sm font-semibold text-gray-600"><input type="checkbox" id="emp-partner" class="size-4" /> Mark as Partner</label>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="employee-cancel" class="flex-1 h-11 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm">Cancel</button>
+                    <button type="submit" class="flex-1 h-11 rounded-xl bg-primary text-white font-semibold text-sm">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog post modal -->
+    <div id="post-modal" class="hidden fixed inset-0 bg-black/50 z-[60] items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-7 my-8">
+            <h3 id="post-modal-title" class="font-display text-xl font-semibold mb-5">Add Post</h3>
+            <form id="post-form" class="space-y-4">
+                <input type="hidden" id="post-id" />
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Type</label>
+                        <select id="post-type" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm bg-white">
+                            <option value="article">Article</option>
+                            <option value="video">Video</option>
+                        </select>
+                    </div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Category</label><input id="post-category" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Title</label><input required id="post-title" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Excerpt</label><input id="post-excerpt" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Cover Image URL</label><input id="post-cover" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div id="post-video-field"><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Video Embed URL</label><input id="post-video" placeholder="https://www.youtube.com/embed/..." class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Content</label><textarea id="post-content-field" rows="5" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm"></textarea></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Author</label><input id="post-author" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <label class="flex items-center gap-2 text-sm font-semibold text-gray-600"><input type="checkbox" id="post-published" checked class="size-4" /> Published (visible on site)</label>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="post-cancel" class="flex-1 h-11 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm">Cancel</button>
+                    <button type="submit" class="flex-1 h-11 rounded-xl bg-primary text-white font-semibold text-sm">Save Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- University modal -->
+    <div id="uni-modal-admin" class="hidden fixed inset-0 bg-black/50 z-[60] items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-7 my-8">
+            <h3 id="uni-modal-title" class="font-display text-xl font-semibold mb-5">Add University</h3>
+            <form id="uni-form" class="space-y-4">
+                <input type="hidden" id="uni-id" />
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">University Name</label><input required id="uni-name" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Country</label>
+                        <select id="uni-country" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm bg-white">
+                            <option>UK</option><option>USA</option><option>Canada</option><option>Australia</option><option>New Zealand</option><option>Europe</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">City</label><input id="uni-city" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Ranking Label</label><input id="uni-ranking" placeholder="e.g. QS #32" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Cover Image URL</label><input id="uni-image" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Min Age</label><input id="uni-min-age" type="number" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Max Age</label><input id="uni-max-age" type="number" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Min IELTS</label><input id="uni-ielts" type="number" step="0.5" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Min Budget (BDT/yr)</label><input id="uni-budget" type="number" step="10000" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                    <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Tuition Label (display text)</label><input id="uni-tuition" placeholder="৳15,00,000 - ৳24,00,000 / year" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Program Levels Offered</label>
+                    <div class="flex flex-wrap gap-4 px-1 py-1">
+                        <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="uni-level-check size-4" value="Honors"> Honors / Bachelor</label>
+                        <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="uni-level-check size-4" value="Masters"> Masters</label>
+                        <label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="uni-level-check size-4" value="PhD"> PhD</label>
+                    </div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Qualification Required</label><textarea id="uni-qualification" rows="2" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm"></textarea></div>
+                <div><label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Subjects Offered (comma separated)</label><input id="uni-subjects" placeholder="Computer Science, Business, Law" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" /></div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-1.5">Documents Required</label>
+                    <div id="uni-documents" class="grid grid-cols-2 gap-2"></div>
+                </div>
+                <label class="flex items-center gap-2 text-sm font-semibold text-gray-600"><input type="checkbox" id="uni-popular" class="size-4" /> Mark as Popular (shown first in results)</label>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="uni-cancel" class="flex-1 h-11 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm">Cancel</button>
+                    <button type="submit" class="flex-1 h-11 rounded-xl bg-primary text-white font-semibold text-sm">Save University</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <script>
+        (function () {
+            var admin = EduAuth.requireRole('admin', 'login.html');
+            if (!admin) return;
+
+            var STAGES = EduAuth.APPLICATION_STAGES;
+            var DOC_TYPES = EduAuth.DOCUMENT_TYPES;
+            var docFilter = 'pending';
+
+            function fmtMoney(n) { return '৳' + n.toLocaleString('en-US'); }
+            function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }); }
+
+            function render() {
+                var clients = EduAuth.allClients();
+
+                // KPIs
+                var pendingDocs = 0, premiumCount = 0;
+                clients.forEach(function (c) {
+                    pendingDocs += c.documents.filter(function (d) { return d.status === 'pending'; }).length;
+                    if (c.plan === 'premium') premiumCount++;
+                });
+                document.getElementById('kpi-clients').textContent = clients.length;
+                document.getElementById('kpi-pending').textContent = pendingDocs;
+                document.getElementById('kpi-premium').textContent = premiumCount;
+                document.getElementById('kpi-revenue').textContent = fmtMoney(premiumCount * EduAuth.PLANS.premium.price);
+                document.getElementById('doc-queue-badge').classList.toggle('hidden', pendingDocs === 0);
+                document.getElementById('doc-queue-badge').textContent = pendingDocs;
+
+                // Stage breakdown
+                var breakdown = document.getElementById('stage-breakdown');
+                breakdown.innerHTML = STAGES.map(function (label, i) {
+                    var count = clients.filter(function (c) { return c.stageIndex === i; }).length;
+                    var pct = clients.length ? Math.round((count / clients.length) * 100) : 0;
+                    return '<div>' +
+                        '<div class="flex justify-between text-sm mb-1.5"><span class="font-semibold text-gray-700">' + label + '</span><span class="text-gray-400">' + count + ' client(s)</span></div>' +
+                        '<div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full" style="width:' + pct + '%"></div></div>' +
+                        '</div>';
+                }).join('');
+
+                // Activity feed (short + full)
+                var log = EduAuth.activityLog();
+                var shortHtml = log.slice(0, 8).map(activityRow).join('') || '<p class="text-gray-400">No activity yet.</p>';
+                document.getElementById('overview-activity').innerHTML = shortHtml;
+                document.getElementById('full-activity-list').innerHTML = log.length ? log.map(function (l) {
+                    return '<div class="px-5 py-4 flex justify-between items-center text-sm"><span class="text-gray-700">' + l.text + '</span><span class="text-gray-400 text-xs">' + new Date(l.at).toLocaleString() + '</span></div>';
+                }).join('') : '<p class="p-5 text-gray-400 text-sm">No activity yet.</p>';
+
+                // Clients table
+                renderClientsTable();
+                renderDocQueue();
+                renderAppointments();
+                renderDocCheckResults();
+            }
+
+            function activityRow(l) {
+                return '<div class="flex gap-3"><span class="size-1.5 rounded-full bg-secondary mt-2 shrink-0"></span><p class="text-gray-600">' + l.text + '</p></div>';
+            }
+
+            function initials(name) { return name.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase(); }
+
+            function renderClientsTable(filterText) {
+                var clients = EduAuth.allClients();
+                filterText = (filterText || document.getElementById('client-search').value || '').toLowerCase();
+                if (filterText) {
+                    clients = clients.filter(function (c) { return c.name.toLowerCase().indexOf(filterText) > -1 || c.email.toLowerCase().indexOf(filterText) > -1; });
+                }
+                var tbody = document.getElementById('clients-table');
+                tbody.innerHTML = clients.length ? clients.map(function (c) {
+                    var verified = c.documents.filter(function (d) { return d.status === 'verified'; }).length;
+                    return '<tr class="border-b border-gray-50 hover:bg-gray-50/60 cursor-pointer client-row" data-id="' + c.id + '">' +
+                        '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="size-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">' + initials(c.name) + '</div><div><p class="font-semibold text-gray-900">' + c.name + '</p><p class="text-xs text-gray-400">' + c.email + '</p></div></div></td>' +
+                        '<td class="px-5 py-4 text-gray-600">' + (c.destination || '—') + '</td>' +
+                        '<td class="px-5 py-4"><span class="status-chip plan-badge-' + c.plan + '">' + (c.plan === 'premium' ? 'Premium' : 'Free Trial') + '</span></td>' +
+                        '<td class="px-5 py-4 text-gray-600">' + STAGES[c.stageIndex] + '</td>' +
+                        '<td class="px-5 py-4 text-gray-600">' + verified + ' / ' + c.documents.length + '</td>' +
+                        '<td class="px-5 py-4 text-gray-400 text-xs">' + fmtDate(c.createdAt) + '</td>' +
+                        '<td class="px-5 py-4 text-right"><button class="view-client-btn text-primary font-bold text-xs hover:underline" data-id="' + c.id + '">View →</button></td>' +
+                        '</tr>';
+                }).join('') : '<tr><td colspan="7" class="text-center py-10 text-gray-400">No clients found.</td></tr>';
+
+                document.querySelectorAll('.client-row, .view-client-btn').forEach(function (el) {
+                    el.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        openClientDrawer(el.getAttribute('data-id'));
+                    });
+                });
+            }
+
+            document.getElementById('client-search').addEventListener('input', function () { renderClientsTable(); });
+
+            function openClientDrawer(clientId) {
+                var c = EduAuth.allClients().find(function (u) { return u.id === clientId; });
+                if (!c) return;
+                var content = document.getElementById('client-drawer-content');
+                content.innerHTML =
+                    '<div class="flex justify-between items-start mb-6">' +
+                        '<div class="flex items-center gap-3">' +
+                            '<div class="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">' + initials(c.name) + '</div>' +
+                            '<div><p class="font-display text-xl font-semibold">' + c.name + '</p><p class="text-xs text-gray-400">' + c.email + '</p></div>' +
+                        '</div>' +
+                        '<button id="drawer-close" class="text-gray-400 hover:text-gray-700"><span class="material-symbols-outlined">close</span></button>' +
+                    '</div>' +
+                    '<div class="grid grid-cols-2 gap-4 mb-6 text-sm">' +
+                        '<div><p class="text-[11px] uppercase text-gray-400 font-bold mb-1">Phone</p><p class="text-gray-800">' + (c.phone || '—') + '</p></div>' +
+                        '<div><p class="text-[11px] uppercase text-gray-400 font-bold mb-1">Country</p><p class="text-gray-800">' + (c.country || '—') + '</p></div>' +
+                        '<div><p class="text-[11px] uppercase text-gray-400 font-bold mb-1">Destination</p><p class="text-gray-800">' + (c.destination || '—') + '</p></div>' +
+                        '<div><p class="text-[11px] uppercase text-gray-400 font-bold mb-1">Plan</p><span class="status-chip plan-badge-' + c.plan + '">' + (c.plan === 'premium' ? 'Premium' : 'Free Trial') + '</span></div>' +
+                    '</div>' +
+                    '<div class="mb-6">' +
+                        '<p class="text-[11px] uppercase text-gray-400 font-bold mb-2">Application Stage</p>' +
+                        '<select id="drawer-stage-select" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm bg-white">' +
+                        STAGES.map(function (s, i) { return '<option value="' + i + '" ' + (i === c.stageIndex ? 'selected' : '') + '>' + s + '</option>'; }).join('') +
+                        '</select>' +
+                    '</div>' +
+                    '<div class="mb-6">' +
+                        '<p class="text-[11px] uppercase text-gray-400 font-bold mb-2">Change Plan</p>' +
+                        '<div class="flex gap-2">' +
+                        '<button data-plan="free" class="drawer-plan-btn flex-1 h-10 rounded-lg text-xs font-bold border ' + (c.plan === 'free' ? 'bg-primary text-white border-primary' : 'border-gray-200 text-gray-600') + '">Free Trial</button>' +
+                        '<button data-plan="premium" class="drawer-plan-btn flex-1 h-10 rounded-lg text-xs font-bold border ' + (c.plan === 'premium' ? 'bg-primary text-white border-primary' : 'border-gray-200 text-gray-600') + '">Premium</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div>' +
+                        '<p class="text-[11px] uppercase text-gray-400 font-bold mb-2">Documents</p>' +
+                        '<div class="space-y-2">' +
+                        c.documents.map(function (d) {
+                            var typeDef = DOC_TYPES.find(function (t) { return t.id === d.typeId; });
+                            return '<div class="flex justify-between items-center text-sm py-2 border-b border-gray-50 last:border-0"><span class="text-gray-700">' + typeDef.label + '</span><span class="status-chip status-' + d.status + '">' + d.status.replace('_', ' ') + '</span></div>';
+                        }).join('') +
+                        '</div>' +
+                    '</div>';
+
+                document.getElementById('drawer-close').addEventListener('click', closeClientDrawer);
+                document.getElementById('drawer-stage-select').addEventListener('change', function () {
+                    EduAuth.setStage(c.id, parseInt(this.value, 10));
+                    render();
+                });
+                content.querySelectorAll('.drawer-plan-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        EduAuth.upgradePlan(c.id, btn.getAttribute('data-plan'));
+                        render();
+                        openClientDrawer(c.id);
+                    });
+                });
+
+                document.getElementById('client-drawer-overlay').classList.remove('hidden');
+                var drawer = document.getElementById('client-drawer');
+                drawer.classList.remove('hidden');
+                requestAnimationFrame(function () { drawer.classList.remove('translate-x-full'); });
+            }
+            function closeClientDrawer() {
+                document.getElementById('client-drawer-overlay').classList.add('hidden');
+                document.getElementById('client-drawer').classList.add('hidden');
+            }
+            document.getElementById('client-drawer-overlay').addEventListener('click', closeClientDrawer);
+
+            // Document review queue
+            var pendingReview = null; // {userId, typeId}
+            function renderDocQueue() {
+                var clients = EduAuth.allClients();
+                var rows = [];
+                clients.forEach(function (c) {
+                    c.documents.forEach(function (d) {
+                        if (d.status === 'not_uploaded') return;
+                        if (docFilter !== 'all' && d.status !== docFilter) return;
+                        rows.push({ client: c, doc: d });
+                    });
+                });
+                var list = document.getElementById('doc-queue-list');
+                list.innerHTML = rows.length ? rows.map(function (r) {
+                    var typeDef = DOC_TYPES.find(function (t) { return t.id === r.doc.typeId; });
+                    return '<div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] flex flex-wrap items-center justify-between gap-4">' +
+                        '<div class="flex items-center gap-4">' +
+                        '<div class="size-11 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs shrink-0">' + initials(r.client.name) + '</div>' +
+                        '<div>' +
+                        '<p class="font-semibold text-gray-900">' + r.client.name + ' <span class="text-gray-400 font-normal">— ' + typeDef.label + '</span></p>' +
+                        '<p class="text-xs text-gray-400">' + (r.doc.fileName || '') + (r.doc.sizeLabel ? ' · ' + r.doc.sizeLabel : '') + ' · uploaded ' + (r.doc.uploadedAt ? fmtDate(r.doc.uploadedAt) : '') + '</p>' +
+                        (r.doc.status === 'rejected' && r.doc.note ? '<p class="text-xs text-red-500 mt-1">Note: ' + r.doc.note + '</p>' : '') +
+                        '</div></div>' +
+                        '<div class="flex items-center gap-2">' +
+                        '<span class="status-chip status-' + r.doc.status + '">' + r.doc.status.replace('_', ' ') + '</span>' +
+                        (r.doc.status === 'pending' ? (
+                            '<button class="approve-btn h-9 px-4 rounded-lg bg-brand-green/10 text-brand-green text-xs font-bold hover:bg-brand-green/20" data-uid="' + r.client.id + '" data-tid="' + r.doc.typeId + '">Approve</button>' +
+                            '<button class="reject-btn h-9 px-4 rounded-lg bg-red-50 text-red-600 text-xs font-bold hover:bg-red-100" data-uid="' + r.client.id + '" data-tid="' + r.doc.typeId + '">Reject</button>'
+                        ) : '') +
+                        '</div></div>';
+                }).join('') : '<p class="text-gray-400 text-sm bg-white rounded-2xl p-8 text-center border border-gray-100">No documents in this view.</p>';
+
+                list.querySelectorAll('.approve-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        EduAuth.reviewDocument(btn.getAttribute('data-uid'), btn.getAttribute('data-tid'), 'verified', '');
+                        render();
+                    });
+                });
+                list.querySelectorAll('.reject-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        pendingReview = { userId: btn.getAttribute('data-uid'), typeId: btn.getAttribute('data-tid') };
+                        document.getElementById('reject-note').value = '';
+                        var modal = document.getElementById('review-modal');
+                        modal.classList.remove('hidden'); modal.classList.add('flex');
+                    });
+                });
+            }
+
+            document.querySelectorAll('.doc-filter-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    docFilter = btn.getAttribute('data-filter');
+                    document.querySelectorAll('.doc-filter-btn').forEach(function (b) {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('bg-gray-100', 'text-gray-600');
+                    });
+                    btn.classList.add('active', 'bg-primary', 'text-white');
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                    renderDocQueue();
+                });
+            });
+
+            document.getElementById('reject-cancel').addEventListener('click', function () {
+                var modal = document.getElementById('review-modal');
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+            });
+            document.getElementById('reject-confirm').addEventListener('click', function () {
+                if (!pendingReview) return;
+                EduAuth.reviewDocument(pendingReview.userId, pendingReview.typeId, 'rejected', document.getElementById('reject-note').value || 'Please re-upload a clearer document.');
+                var modal = document.getElementById('review-modal');
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+                render();
+            });
+
+            function renderAppointments() {
+                var appts = EduAuth.allAppointments();
+                var list = document.getElementById('admin-appt-list');
+                list.innerHTML = appts.length ? appts.map(function (a) {
+                    return '<div class="px-5 py-4 flex flex-wrap items-center justify-between gap-3">' +
+                        '<div><p class="font-semibold text-gray-900 text-sm">' + a.name + ' <span class="text-gray-400 font-normal">— ' + a.topic + '</span></p><p class="text-xs text-gray-400">' + a.email + ' · ' + a.date + ' at ' + a.time + '</p></div>' +
+                        '<span class="status-chip status-new">' + a.status + '</span>' +
+                        '</div>';
+                }).join('') : '<p class="p-6 text-gray-400 text-sm">No appointment requests yet.</p>';
+            }
+
+            /* ---------------- Document Check Results (client-run cross-checks) ---------------- */
+            var dcrFilter = 'all';
+            var dcrAllEntries = [];
+
+            function dcrEscape(s) {
+                return (s || '').toString().replace(/[&<>"']/g, function (c) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                });
+            }
+
+            function collectDocCheckEntries() {
+                // Use allUsers() (not allClients()) so the admin's OWN cross-checks —
+                // run from this same Document Check tool with unlimited access — also
+                // show up here, alongside every client's results.
+                var users = (typeof EduAuth.allUsers === 'function') ? EduAuth.allUsers() : EduAuth.allClients();
+                var entries = [];
+                users.forEach(function (c) {
+                    var history = (typeof EduAuth.docCheckHistory === 'function') ? EduAuth.docCheckHistory(c.id) : [];
+                    history.forEach(function (item) {
+                        entries.push(Object.assign({}, item, {
+                            clientId: c.id,
+                            clientName: c.name + (c.role === 'admin' ? ' (You — Admin)' : ''),
+                            clientEmail: c.email
+                        }));
+                    });
+                });
+                entries.sort(function (a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+                return entries;
+            }
+
+            function renderDocCheckResults() {
+                dcrAllEntries = collectDocCheckEntries();
+                var grid = document.getElementById('admin-dcr-grid');
+                var empty = document.getElementById('admin-dcr-empty');
+                var list = dcrFilter === 'all' ? dcrAllEntries : dcrAllEntries.filter(function (e) { return e.status === dcrFilter; });
+
+                if (!list.length) {
+                    grid.innerHTML = '';
+                    empty.classList.remove('hidden');
+                    return;
+                }
+                empty.classList.add('hidden');
+
+                grid.innerHTML = list.map(function (item) {
+                    var isMatch = item.status === 'match';
+                    var dateLabel = new Date(item.timestamp).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                    return '<div class="dcr-card bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] p-5 cursor-pointer hover:shadow-md transition" data-id="' + item.id + '">' +
+                        '<div class="flex items-center justify-between mb-3">' +
+                        '<span class="status-chip ' + (isMatch ? 'status-verified' : 'status-rejected') + '">' + (isMatch ? '✓ Match' : '! Mismatch') + '</span>' +
+                        '<span class="text-[11px] text-gray-400 font-semibold">' + dateLabel + '</span>' +
+                        '</div>' +
+                        '<p class="font-display text-lg font-semibold text-gray-900 truncate">' + dcrEscape(item.clientName) + '</p>' +
+                        '<p class="text-xs text-gray-400 mb-3">' + dcrEscape(item.clientEmail) + '</p>' +
+                        '<p class="text-xs text-gray-500 mb-4 truncate">Reference: ' + dcrEscape(item.refFile) + ' · ' + item.fileCount + ' file(s)</p>' +
+                        '<div class="flex items-center gap-4 text-xs text-gray-500">' +
+                        '<span>✓ ' + item.matched + ' matched</span>' +
+                        (item.mismatched ? '<span class="text-red-500">✗ ' + item.mismatched + ' mismatched</span>' : '') +
+                        '</div>' +
+                        '</div>';
+                }).join('');
+
+                document.querySelectorAll('.dcr-card').forEach(function (card) {
+                    card.addEventListener('click', function () {
+                        openDcrModal(card.getAttribute('data-id'));
+                    });
+                });
+            }
+
+            function dcrFieldStamp(status) {
+                if (status === 'match') return { cls: 'ok', label: 'Match' };
+                if (status === 'missing') return { cls: 'missing', label: 'Missing' };
+                return { cls: 'diff', label: 'Mismatch' };
+            }
+
+            function dcrFieldRowsHtml(item) {
+                if (!item.fields || !item.fields.length) return '<p class="text-sm text-gray-400">No field-level detail was saved for this check.</p>';
+                return item.fields.map(function (f) {
+                    var stamp = dcrFieldStamp(f.status);
+                    var rows = (f.values || []).map(function (v) {
+                        return '<div class="flex justify-between gap-3 text-xs py-1">' +
+                            '<span class="text-gray-400 truncate max-w-[55%]">' + dcrEscape(v.name) + (v.isRef ? ' <b class="text-primary">(ref)</b>' : '') + '</span>' +
+                            '<span class="' + (v.isDiff ? 'text-red-600 font-semibold' : 'text-gray-700') + ' truncate text-right">' + (v.raw ? dcrEscape(v.raw) : '—') + '</span>' +
+                            '</div>';
+                    }).join('');
+                    return '<div class="mb-3">' +
+                        '<div class="dcr-field-row"><span class="font-semibold text-gray-800 text-sm">' + dcrEscape(f.label) + '</span><span class="dcr-stamp ' + stamp.cls + '">' + stamp.label + '</span></div>' +
+                        '<div class="pl-1 mt-1">' + rows + '</div>' +
+                        '</div>';
+                }).join('');
+            }
+
+            function openDcrModal(resultId) {
+                var item = dcrAllEntries.find(function (e) { return e.id === resultId; });
+                if (!item) return;
+                var overlay = document.getElementById('admin-dcr-modal-overlay');
+                var modal = document.getElementById('admin-dcr-modal');
+                var dateLabel = new Date(item.timestamp).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                var isMatch = item.status === 'match';
+
+                modal.innerHTML =
+                    '<div class="p-6 border-b border-gray-100 flex items-start justify-between gap-3">' +
+                    '<div>' +
+                    '<p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-1">' + dateLabel + ' · ' + dcrEscape(item.clientName) + '</p>' +
+                    '<h3 class="font-display text-2xl font-semibold text-gray-900">' + dcrEscape(item.refFile) + '</h3>' +
+                    '<span class="status-chip ' + (isMatch ? 'status-verified' : 'status-rejected') + ' mt-2 inline-flex">' + (isMatch ? '✓ Match' : '! Mismatch') + '</span>' +
+                    '</div>' +
+                    '<button id="admin-dcr-modal-close" class="size-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-lg">close</span></button>' +
+                    '</div>' +
+                    '<div class="p-6">' +
+                    '<div class="grid grid-cols-3 gap-3 mb-6">' +
+                    '<div class="bg-green-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-green-700">' + item.matched + '</p><p class="text-[10px] uppercase tracking-wide text-green-600 font-bold mt-1">Matched</p></div>' +
+                    '<div class="bg-red-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-red-600">' + item.mismatched + '</p><p class="text-[10px] uppercase tracking-wide text-red-500 font-bold mt-1">Mismatched</p></div>' +
+                    '<div class="bg-amber-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-amber-600">' + (item.refMissing || 0) + '</p><p class="text-[10px] uppercase tracking-wide text-amber-600 font-bold mt-1">Missing on Ref</p></div>' +
+                    '</div>' +
+                    dcrFieldRowsHtml(item) +
+                    '</div>';
+
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                function closeDcrModal() {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                document.getElementById('admin-dcr-modal-close').addEventListener('click', closeDcrModal);
+                overlay.addEventListener('click', function (e) { if (e.target === overlay) closeDcrModal(); }, { once: true });
+            }
+
+            document.querySelectorAll('.dcr-filter-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    dcrFilter = btn.getAttribute('data-dcr-filter');
+                    document.querySelectorAll('.dcr-filter-btn').forEach(function (b) {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('bg-gray-100', 'text-gray-600');
+                    });
+                    btn.classList.add('active', 'bg-primary', 'text-white');
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                    renderDocCheckResults();
+                });
+            });
+
+            // Nav
+            function setPanel(name) {
+                document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+                document.getElementById('panel-' + name).classList.add('active');
+                document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.toggle('active', n.getAttribute('data-panel') === name); });
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+                document.getElementById('mobile-sidebar-overlay').classList.remove('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            document.querySelectorAll('.nav-item[data-panel]').forEach(function (item) {
+                item.addEventListener('click', function (e) { e.preventDefault(); setPanel(item.getAttribute('data-panel')); });
+            });
+
+            document.getElementById('menu-toggle').addEventListener('click', function () {
+                document.getElementById('sidebar').classList.toggle('-translate-x-full');
+                document.getElementById('mobile-sidebar-overlay').classList.toggle('show');
+            });
+            document.getElementById('mobile-sidebar-overlay').addEventListener('click', function () {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+                document.getElementById('mobile-sidebar-overlay').classList.remove('show');
+            });
+
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                EduAuth.logout();
+                window.location.href = 'login.html';
+            });
+
+            document.getElementById('reset-demo-btn').addEventListener('click', function () {
+                if (confirm('Reset all demo data (users, documents, appointments)? This cannot be undone.')) {
+                    EduAuth.resetDemoData();
+                    window.location.href = 'login.html';
+                }
+            });
+
+            /* ---------------------------- ALL USERS & STATS ---------------------------- */
+            function renderAllUsers() {
+                var users = EduAuth.allUsers();
+                var stats = EduAuth.dailyStats(14);
+                var today = stats[stats.length - 1];
+
+                document.getElementById('au-kpi-total').textContent = users.length;
+                document.getElementById('au-kpi-today').textContent = today.newUsers;
+                document.getElementById('au-kpi-rev-today').textContent = fmtMoney(today.revenue);
+                document.getElementById('au-kpi-rev-total').textContent = fmtMoney(EduAuth.totalRevenue());
+
+                document.getElementById('daily-stats-table').innerHTML = stats.slice().reverse().map(function (s) {
+                    return '<tr class="border-b border-gray-50"><td class="px-3 py-2 text-gray-700">' + s.label + '</td><td class="px-3 py-2 text-gray-700">' + s.newUsers + '</td><td class="px-3 py-2 text-brand-green font-semibold">' + fmtMoney(s.revenue) + '</td></tr>';
+                }).join('');
+
+                document.getElementById('all-users-table').innerHTML = users.map(function (u) {
+                    return '<tr class="border-b border-gray-50">' +
+                        '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="size-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">' + initials(u.name) + '</div><div><p class="font-semibold text-gray-900">' + u.name + '</p><p class="text-xs text-gray-400">' + u.email + '</p></div></div></td>' +
+                        '<td class="px-5 py-4 text-gray-600 capitalize">' + u.role + '</td>' +
+                        '<td class="px-5 py-4"><span class="status-chip plan-badge-' + u.plan + '">' + (u.plan === 'premium' ? 'Premium' : 'Free Trial') + '</span></td>' +
+                        '<td class="px-5 py-4 text-gray-400 text-xs">' + fmtDate(u.createdAt) + '</td>' +
+                        '<td class="px-5 py-4 text-right">' + (u.role !== 'admin' ? '<button class="delete-user-btn text-red-500 font-bold text-xs hover:underline" data-id="' + u.id + '">Delete</button>' : '<span class="text-gray-300 text-xs">—</span>') + '</td>' +
+                        '</tr>';
+                }).join('');
+
+                document.querySelectorAll('.delete-user-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        if (confirm('Delete this user permanently?')) {
+                            EduAuth.deleteUser(btn.getAttribute('data-id'));
+                            renderAllUsers();
+                            render();
+                        }
+                    });
+                });
+            }
+
+            /* -------------------------------- EMPLOYEES -------------------------------- */
+            function renderEmployees() {
+                var team = EduAuth.allTeam();
+                document.getElementById('employees-grid').innerHTML = team.length ? team.map(function (m) {
+                    return '<div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">' +
+                        '<div class="flex items-start justify-between gap-3 mb-3">' +
+                            '<div class="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0">' + initials(m.name) + '</div>' +
+                            '<div class="flex gap-1">' +
+                                '<button class="edit-emp-btn p-2 text-gray-400 hover:text-primary" data-id="' + m.id + '"><span class="material-symbols-outlined text-lg">edit</span></button>' +
+                                '<button class="del-emp-btn p-2 text-gray-400 hover:text-red-500" data-id="' + m.id + '"><span class="material-symbols-outlined text-lg">delete</span></button>' +
+                            '</div>' +
+                        '</div>' +
+                        '<p class="font-semibold text-gray-900">' + m.name + (m.isPartner ? ' <span class="text-[9px] align-middle bg-brand-green/10 text-brand-green px-2 py-0.5 rounded-full font-bold uppercase">Partner</span>' : '') + '</p>' +
+                        '<p class="text-xs text-secondary font-semibold mt-0.5">' + m.designation + '</p>' +
+                        '<p class="text-xs text-gray-400 mt-2">' + (m.department || '—') + ' · Since ' + m.since + '</p>' +
+                        '</div>';
+                }).join('') : '<p class="text-gray-400 text-sm col-span-full">No employees added yet.</p>';
+
+                document.querySelectorAll('.edit-emp-btn').forEach(function (btn) { btn.addEventListener('click', function () { openEmployeeModal(btn.getAttribute('data-id')); }); });
+                document.querySelectorAll('.del-emp-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        if (confirm('Remove this employee?')) { EduAuth.deleteTeamMember(btn.getAttribute('data-id')); renderEmployees(); }
+                    });
+                });
+            }
+
+            function openEmployeeModal(id) {
+                var m = id ? EduAuth.getTeamMember(id) : null;
+                document.getElementById('employee-modal-title').textContent = m ? 'Edit Employee' : 'Add Employee';
+                document.getElementById('emp-id').value = m ? m.id : '';
+                document.getElementById('emp-name').value = m ? m.name : '';
+                document.getElementById('emp-designation').value = m ? m.designation : '';
+                document.getElementById('emp-department').value = m ? m.department : '';
+                document.getElementById('emp-since').value = m ? m.since : new Date().getFullYear();
+                document.getElementById('emp-photo').value = m ? m.photo : 'images/Edu-Abroad-Logo.png';
+                document.getElementById('emp-bio').value = m ? m.bio : '';
+                document.getElementById('emp-partner').checked = m ? !!m.isPartner : false;
+                var modal = document.getElementById('employee-modal');
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeEmployeeModal() {
+                var modal = document.getElementById('employee-modal');
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+            }
+            document.getElementById('add-employee-btn').addEventListener('click', function () { openEmployeeModal(null); });
+            document.getElementById('employee-cancel').addEventListener('click', closeEmployeeModal);
+            document.getElementById('employee-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var id = document.getElementById('emp-id').value;
+                var payload = {
+                    name: document.getElementById('emp-name').value,
+                    designation: document.getElementById('emp-designation').value,
+                    department: document.getElementById('emp-department').value,
+                    since: parseInt(document.getElementById('emp-since').value, 10) || new Date().getFullYear(),
+                    photo: document.getElementById('emp-photo').value || 'images/Edu-Abroad-Logo.png',
+                    bio: document.getElementById('emp-bio').value,
+                    isPartner: document.getElementById('emp-partner').checked
+                };
+                if (id) EduAuth.updateTeamMember(id, payload); else EduAuth.addTeamMember(payload);
+                closeEmployeeModal();
+                renderEmployees();
+                render();
+            });
+
+            /* -------------------------------- BLOG POSTS -------------------------------- */
+            function renderPosts() {
+                var posts = EduAuth.allBlogPosts(false);
+                document.getElementById('posts-list').innerHTML = posts.length ? posts.map(function (p) {
+                    return '<div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] flex flex-wrap items-center justify-between gap-4">' +
+                        '<div class="flex items-center gap-4 min-w-0">' +
+                            '<img src="' + p.coverImage + '" class="size-14 rounded-xl object-cover shrink-0" onerror="this.style.visibility=\'hidden\'" />' +
+                            '<div class="min-w-0">' +
+                                '<p class="font-semibold text-gray-900 truncate">' + p.title + '</p>' +
+                                '<p class="text-xs text-gray-400">' + p.type.charAt(0).toUpperCase() + p.type.slice(1) + ' · ' + (p.author || '—') + ' · ' + fmtDate(p.createdAt) + ' · ' + (p.views || 0) + ' views</p>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="flex items-center gap-2 shrink-0">' +
+                            '<span class="status-chip ' + (p.published ? 'status-verified' : 'status-not_uploaded') + '">' + (p.published ? 'Published' : 'Draft') + '</span>' +
+                            '<button class="edit-post-btn p-2 text-gray-400 hover:text-primary" data-id="' + p.id + '"><span class="material-symbols-outlined text-lg">edit</span></button>' +
+                            '<button class="del-post-btn p-2 text-gray-400 hover:text-red-500" data-id="' + p.id + '"><span class="material-symbols-outlined text-lg">delete</span></button>' +
+                        '</div></div>';
+                }).join('') : '<p class="text-gray-400 text-sm bg-white rounded-2xl p-8 text-center border border-gray-100">No blog posts yet.</p>';
+
+                document.querySelectorAll('.edit-post-btn').forEach(function (btn) { btn.addEventListener('click', function () { openPostModal(btn.getAttribute('data-id')); }); });
+                document.querySelectorAll('.del-post-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        if (confirm('Delete this post?')) { EduAuth.deleteBlogPost(btn.getAttribute('data-id')); renderPosts(); }
+                    });
+                });
+            }
+
+            function openPostModal(id) {
+                var p = id ? EduAuth.getBlogPost(id) : null;
+                document.getElementById('post-modal-title').textContent = p ? 'Edit Post' : 'Add Post';
+                document.getElementById('post-id').value = p ? p.id : '';
+                document.getElementById('post-type').value = p ? p.type : 'article';
+                document.getElementById('post-category').value = p ? p.category : '';
+                document.getElementById('post-title').value = p ? p.title : '';
+                document.getElementById('post-excerpt').value = p ? p.excerpt : '';
+                document.getElementById('post-cover').value = p ? p.coverImage : 'images/hero_student_campus.png';
+                document.getElementById('post-video').value = p ? p.videoUrl : '';
+                document.getElementById('post-content-field').value = p ? p.content : '';
+                document.getElementById('post-author').value = p ? p.author : '';
+                document.getElementById('post-published').checked = p ? !!p.published : true;
+                var modal = document.getElementById('post-modal');
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closePostModal() {
+                var modal = document.getElementById('post-modal');
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+            }
+            document.getElementById('add-post-btn').addEventListener('click', function () { openPostModal(null); });
+            document.getElementById('post-cancel').addEventListener('click', closePostModal);
+            document.getElementById('post-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var id = document.getElementById('post-id').value;
+                var payload = {
+                    type: document.getElementById('post-type').value,
+                    category: document.getElementById('post-category').value || 'General',
+                    title: document.getElementById('post-title').value,
+                    excerpt: document.getElementById('post-excerpt').value,
+                    coverImage: document.getElementById('post-cover').value || 'images/hero_student_campus.png',
+                    videoUrl: document.getElementById('post-video').value,
+                    content: document.getElementById('post-content-field').value,
+                    author: document.getElementById('post-author').value || 'Edu Abroad Team',
+                    published: document.getElementById('post-published').checked
+                };
+                if (id) EduAuth.updateBlogPost(id, payload); else EduAuth.addBlogPost(payload);
+                closePostModal();
+                renderPosts();
+                render();
+            });
+
+            /* ------------------------------- MESSAGES ------------------------------- */
+            function renderMessages() {
+                var msgs = EduAuth.allContactMessages();
+                document.getElementById('messages-list').innerHTML = msgs.length ? msgs.map(function (m) {
+                    return '<div class="px-5 py-4"><div class="flex justify-between items-start gap-3"><div><p class="font-semibold text-gray-900 text-sm">' + m.name + ' <span class="text-gray-400 font-normal">— ' + (m.email || '') + '</span></p><p class="text-xs text-gray-400 mt-0.5">' + (m.phone || '') + (m.destination ? ' · ' + m.destination : '') + '</p></div><span class="text-gray-400 text-xs whitespace-nowrap">' + fmtDate(m.createdAt) + '</span></div><p class="text-sm text-gray-600 mt-2">' + (m.message || '') + '</p></div>';
+                }).join('') : '<p class="p-6 text-gray-400 text-sm">No messages yet.</p>';
+            }
+
+            /* ------------------------------ UNIVERSITIES ------------------------------ */
+            function renderUniversities() {
+                var unis = EduAuth.allUniversities();
+                document.getElementById('uni-list').innerHTML = unis.length ? unis.map(function (u) {
+                    return '<div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] flex gap-4">' +
+                        '<img src="' + u.image + '" class="size-16 rounded-xl object-cover shrink-0" onerror="this.style.visibility=\'hidden\'" />' +
+                        '<div class="min-w-0 flex-1">' +
+                        '<div class="flex items-start justify-between gap-2">' +
+                        '<div class="min-w-0"><p class="font-semibold text-gray-900 truncate">' + u.name + (u.popular ? ' <span class="status-chip status-verified">Popular</span>' : '') + '</p>' +
+                        '<p class="text-xs text-gray-400 mt-0.5">' + u.city + ', ' + u.country + ' · IELTS ' + u.minIELTS + '+ · Age ' + u.minAge + '-' + u.maxAge + '</p>' +
+                        '<div class="flex flex-wrap gap-1 mt-1.5">' + (u.levels || []).map(function (lv) { return '<span class="text-[10px] font-bold uppercase tracking-wide bg-brand-100 text-primary px-2 py-0.5 rounded-full">' + (lv === 'Honors' ? 'Honors/Bachelor' : lv) + '</span>'; }).join('') + '</div></div>' +
+                        '<div class="flex items-center gap-1 shrink-0">' +
+                        '<button class="edit-uni-btn p-2 text-gray-400 hover:text-primary" data-id="' + u.id + '"><span class="material-symbols-outlined text-lg">edit</span></button>' +
+                        '<button class="del-uni-btn p-2 text-gray-400 hover:text-red-500" data-id="' + u.id + '"><span class="material-symbols-outlined text-lg">delete</span></button>' +
+                        '</div></div>' +
+                        '<p class="text-xs text-gray-500 mt-2">' + u.tuitionLabel + '</p>' +
+                        '</div></div>';
+                }).join('') : '<p class="text-gray-400 text-sm bg-white rounded-2xl p-8 text-center border border-gray-100 md:col-span-2">No universities yet.</p>';
+
+                document.querySelectorAll('.edit-uni-btn').forEach(function (btn) { btn.addEventListener('click', function () { openUniModal(btn.getAttribute('data-id')); }); });
+                document.querySelectorAll('.del-uni-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        if (confirm('Remove this university?')) { EduAuth.deleteUniversity(btn.getAttribute('data-id')); renderUniversities(); }
+                    });
+                });
+            }
+
+            function renderDocCheckboxes(selected) {
+                selected = selected || [];
+                document.getElementById('uni-documents').innerHTML = DOC_TYPES.map(function (t) {
+                    var checked = selected.indexOf(t.id) > -1 ? 'checked' : '';
+                    return '<label class="flex items-center gap-2 text-sm text-gray-600"><input type="checkbox" class="uni-doc-check size-4" value="' + t.id + '" ' + checked + '> ' + t.label + '</label>';
+                }).join('');
+            }
+
+            function openUniModal(id) {
+                var u = id ? EduAuth.getUniversity(id) : null;
+                document.getElementById('uni-modal-title').textContent = u ? 'Edit University' : 'Add University';
+                document.getElementById('uni-id').value = u ? u.id : '';
+                document.getElementById('uni-name').value = u ? u.name : '';
+                document.getElementById('uni-country').value = u ? u.country : 'UK';
+                document.getElementById('uni-city').value = u ? u.city : '';
+                document.getElementById('uni-ranking').value = u ? u.ranking : '';
+                document.getElementById('uni-image').value = u ? u.image : 'images/hero_student_campus.png';
+                document.getElementById('uni-min-age').value = u ? u.minAge : 17;
+                document.getElementById('uni-max-age').value = u ? u.maxAge : 40;
+                document.getElementById('uni-ielts').value = u ? u.minIELTS : 6.0;
+                document.getElementById('uni-budget').value = u ? u.minBudgetBDT : 1000000;
+                document.getElementById('uni-tuition').value = u ? u.tuitionLabel : '';
+                document.getElementById('uni-qualification').value = u ? u.qualification : '';
+                document.getElementById('uni-subjects').value = u ? (u.subjects || []).join(', ') : '';
+                document.getElementById('uni-popular').checked = u ? !!u.popular : false;
+                var selectedLevels = u ? (u.levels || []) : ['Honors', 'Masters'];
+                document.querySelectorAll('.uni-level-check').forEach(function (c) { c.checked = selectedLevels.indexOf(c.value) > -1; });
+                renderDocCheckboxes(u ? u.documents : ['passport', 'academic', 'english_test', 'bank_statement']);
+                var modal = document.getElementById('uni-modal-admin');
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeUniModal() {
+                var modal = document.getElementById('uni-modal-admin');
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+            }
+            document.getElementById('add-uni-btn').addEventListener('click', function () { openUniModal(null); });
+            document.getElementById('uni-cancel').addEventListener('click', closeUniModal);
+            document.getElementById('uni-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var id = document.getElementById('uni-id').value;
+                var docs = Array.prototype.slice.call(document.querySelectorAll('.uni-doc-check:checked')).map(function (c) { return c.value; });
+                var levels = Array.prototype.slice.call(document.querySelectorAll('.uni-level-check:checked')).map(function (c) { return c.value; });
+                var payload = {
+                    name: document.getElementById('uni-name').value,
+                    country: document.getElementById('uni-country').value,
+                    city: document.getElementById('uni-city').value,
+                    ranking: document.getElementById('uni-ranking').value,
+                    image: document.getElementById('uni-image').value || 'images/hero_student_campus.png',
+                    minAge: Number(document.getElementById('uni-min-age').value) || 17,
+                    maxAge: Number(document.getElementById('uni-max-age').value) || 40,
+                    minIELTS: Number(document.getElementById('uni-ielts').value) || 6.0,
+                    minBudgetBDT: Number(document.getElementById('uni-budget').value) || 0,
+                    tuitionLabel: document.getElementById('uni-tuition').value,
+                    qualification: document.getElementById('uni-qualification').value,
+                    subjects: document.getElementById('uni-subjects').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+                    documents: docs,
+                    levels: levels,
+                    popular: document.getElementById('uni-popular').checked
+                };
+                if (id) EduAuth.updateUniversity(id, payload); else EduAuth.addUniversity(payload);
+                closeUniModal();
+                renderUniversities();
+            });
+
+            renderAllUsers();
+            renderEmployees();
+            renderPosts();
+            renderMessages();
+            renderUniversities();
+
+            render();
+        })();
+    </script>
+</body>
+
+</html>

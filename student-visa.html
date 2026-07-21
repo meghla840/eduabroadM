@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad with a Student Visa | Edu Abroad — Expert Guidance</title>
+    <meta name="description" content="Get expert student visa guidance from Edu Abroad. 98% success rate. UK, USA, Canada, Australia, Europe. Book a free consultation today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], serif: ['Cormorant Garamond', 'serif'] },
+                    colors: {
+                        primary: '#1b3168',
+                        secondary: '#00a2e8',
+                        brand: { 50:'#f0f4ff', 100:'#e0e8ff', 500:'#1b3168', 600:'#152654', 700:'#0f1b3b', 900:'#090f23' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; overflow-x: hidden; }
+
+        /* === HERO === */
+        .hero-bg {
+            background: linear-gradient(135deg, #090f23 0%, #1b3168 50%, #0a2a5c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content:'';
+            position:absolute; inset:0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(0,162,232,0.18) 0%, transparent 60%),
+                        radial-gradient(ellipse at 20% 80%, rgba(27,49,104,0.4) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .hero-grid {
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+        @keyframes pulse-ring { 0%,100% { box-shadow: 0 0 0 0 rgba(0,162,232,0.4); } 50% { box-shadow: 0 0 0 16px rgba(0,162,232,0); } }
+        @keyframes countUp { from { opacity:0; } to { opacity:1; } }
+
+        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(.16,1,.3,1) forwards; }
+        .delay-100 { animation-delay: .1s; opacity:0; }
+        .delay-200 { animation-delay: .2s; opacity:0; }
+        .delay-300 { animation-delay: .3s; opacity:0; }
+        .delay-400 { animation-delay: .4s; opacity:0; }
+        .delay-500 { animation-delay: .5s; opacity:0; }
+        .float-card { animation: float 4s ease-in-out infinite; }
+        .pulse-cta { animation: pulse-ring 2s ease-in-out infinite; }
+
+        /* === GLASSMORPHISM === */
+        .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-dark { background: rgba(9,15,35,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+
+        /* === HEADER === */
+        .glass-header { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+        /* === STEP CONNECTOR === */
+        .step-line::after { content:''; position:absolute; top:50%; left:100%; width:100%; height:2px; background: linear-gradient(90deg, #1b3168, transparent); transform:translateY(-50%); }
+
+        /* === DESTINATION CARD === */
+        .dest-card { transition: transform 0.4s cubic-bezier(.16,1,.3,1), box-shadow 0.4s; }
+        .dest-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px -16px rgba(27,49,104,0.3); }
+        .dest-card .overlay { background: linear-gradient(to top, rgba(9,15,35,0.92) 0%, rgba(9,15,35,0.2) 60%, transparent 100%); transition: background 0.4s; }
+        .dest-card:hover .overlay { background: linear-gradient(to top, rgba(9,15,35,0.96) 0%, rgba(27,49,104,0.5) 70%, rgba(0,162,232,0.1) 100%); }
+
+        /* === FAQ === */
+        .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+        .faq-answer.open { grid-template-rows: 1fr; }
+        .faq-answer > div { overflow: hidden; }
+        .faq-icon { transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* === PROCESS CARD === */
+        .process-card { transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s; }
+        .process-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -12px rgba(27,49,104,0.2); }
+
+        /* === CTA GLOW === */
+        .cta-glow { background: linear-gradient(135deg, #1b3168, #00a2e8 80%); box-shadow: 0 20px 60px -10px rgba(0,162,232,0.5); }
+        .cta-glow:hover { box-shadow: 0 28px 80px -10px rgba(0,162,232,0.7); transform: translateY(-2px); }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.16,1,.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+        #mobile-menu-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(400px, 88vw); background: #ffffff; z-index: 1001; transform: translateX(100%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -18px 0 50px rgba(0,0,0,.12); overflow-y: auto; }
+        #mobile-menu-drawer.active { transform: translateX(0); }
+        #mobile-menu-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+        #mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .hamburger-line { transition: all .3s ease; transform-origin: center; }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+        .sidebar-link { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .85rem 1rem; border-radius: .75rem; color: #374151; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; transition: background-color .2s ease, color .2s ease; text-align: left; }
+        .sidebar-link:hover { background: #f3f4f6; color: #1b3168; }
+        .sidebar-link.active-page { background: rgba(27,49,104,0.08); color: #1b3168; }
+        .sidebar-link svg { flex-shrink: 0; color: #9ca3af; transition: color .2s ease; }
+        .sidebar-link:hover svg, .sidebar-link.active-page svg { color: #1b3168; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #1b3168, #00a2e8); z-index: 1000; width: 0%; transition: width .1s ease; }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4144669152460134');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'Service: Student Visa' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4144669152460134&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body class="bg-white text-gray-900">
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <div id="scroll-progress"></div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="w-10 flex items-center text-gray-700 hover:text-primary transition-colors" aria-label="Back to Home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+<!-- ===================== HERO ===================== -->
+<section class="min-h-screen flex items-center relative pt-24 overflow-hidden" style="background-image: url('images/hero_student_campus.png'); background-size: cover; background-position: center top;">
+    <!-- 60% Black Overlay -->
+    <div class="absolute inset-0 bg-black/60 z-0"></div>
+    <!-- Dark gradient at bottom for depth -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-0"></div>
+    <!-- Floating Decoration Blobs -->
+    <div class="absolute top-1/4 right-10 w-72 h-72 rounded-full bg-secondary/10 blur-3xl pointer-events-none z-0"></div>
+    <div class="absolute bottom-20 left-10 w-56 h-56 rounded-full bg-brand-500/20 blur-3xl pointer-events-none z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-16 w-full grid md:grid-cols-2 gap-16 items-center py-20 relative z-10">
+        <!-- Text -->
+        <div>
+            <div class="animate-fade-up delay-100 inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span class="text-white/80 text-xs uppercase tracking-[0.25em] font-bold">98% Visa Success Rate</span>
+            </div>
+            <h1 class="animate-fade-up delay-200 text-[3rem] md:text-[4.5rem] font-black text-white leading-[1.0] uppercase tracking-tight mb-6">
+                Your Dream<br>University<br><span class="text-secondary">Awaits You.</span>
+            </h1>
+            <p class="animate-fade-up delay-300 text-white/70 text-lg leading-relaxed mb-10 max-w-lg font-light">
+                Stop dreaming. Start applying. Edu Abroad's expert consultants have guided <strong class="text-white font-semibold">thousands of students</strong> to world-class universities across the UK, USA, Canada, Australia, and Europe.
+            </p>
+            <div class="animate-fade-up delay-400 flex flex-col sm:flex-row gap-4">
+                <a href="Appointment-form.html" class="cta-glow inline-flex items-center justify-center gap-3 text-white font-black uppercase tracking-widest text-sm py-5 px-10 rounded-full transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Book Free Consultation
+                </a>
+                <a href="#how-it-works" class="inline-flex items-center justify-center gap-2 glass text-white font-bold uppercase tracking-widest text-sm py-5 px-8 rounded-full hover:bg-white/10 transition-all duration-300">
+                    How It Works
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Stats Card -->
+        <div class="animate-fade-up delay-500 relative">
+            <div class="float-card glass rounded-3xl p-8 max-w-sm mx-auto">
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-white/10">
+                    <div class="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00a2e8" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-black text-2xl">98%</p>
+                        <p class="text-white/60 text-xs uppercase tracking-wider">Visa Approval Rate</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70 text-sm">Applications Processed</span>
+                        <span class="text-white font-black text-lg">5,000+</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70 text-sm">Partner Universities</span>
+                        <span class="text-white font-black text-lg">200+</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70 text-sm">Countries Covered</span>
+                        <span class="text-white font-black text-lg">15+</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70 text-sm">Years of Experience</span>
+                        <span class="text-white font-black text-lg">10+</span>
+                    </div>
+                </div>
+                <a href="Appointment-form.html" class="mt-6 block text-center bg-secondary hover:bg-cyan-400 text-white font-black uppercase tracking-widest text-xs py-4 rounded-2xl transition-all duration-300">
+                    Start Your Application →
+                </a>
+            </div>
+            <!-- Badge -->
+            <div class="absolute -bottom-6 -left-6 glass-dark rounded-2xl p-4 hidden md:flex items-center gap-3">
+                <div class="text-2xl">🎓</div>
+                <div>
+                    <p class="text-white font-bold text-sm">Top Ranked</p>
+                    <p class="text-white/60 text-xs">Universities Worldwide</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 z-10">
+        <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+        <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"></div>
+    </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<section class="bg-brand-900 py-6 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 text-white/60">
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> UK Student Visa
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> USA Student Visa (F-1)
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> Canada Study Permit
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> Australia Student Visa
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> Europe & Schengen
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold">
+            <span class="text-secondary">✓</span> New Zealand Visa
+        </div>
+    </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="py-20 bg-white reveal-section">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="reveal p-6">
+            <div class="text-[3rem] md:text-[4rem] font-black text-brand-500 leading-none">98%</div>
+            <div class="text-gray-500 text-sm uppercase tracking-wider mt-2 font-medium">Visa Success Rate</div>
+        </div>
+        <div class="reveal p-6">
+            <div class="text-[3rem] md:text-[4rem] font-black text-brand-500 leading-none">5K+</div>
+            <div class="text-gray-500 text-sm uppercase tracking-wider mt-2 font-medium">Students Placed</div>
+        </div>
+        <div class="reveal p-6">
+            <div class="text-[3rem] md:text-[4rem] font-black text-brand-500 leading-none">200+</div>
+            <div class="text-gray-500 text-sm uppercase tracking-wider mt-2 font-medium">Partner Universities</div>
+        </div>
+        <div class="reveal p-6">
+            <div class="text-[3rem] md:text-[4rem] font-black text-brand-500 leading-none">10+</div>
+            <div class="text-gray-500 text-sm uppercase tracking-wider mt-2 font-medium">Years of Excellence</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how-it-works" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Simple & Transparent</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-brand-900 uppercase tracking-tight leading-none">Your Path to<br><span class="text-brand-500">Studying Abroad</span></h2>
+        </div>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="reveal process-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm text-center">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-6 text-brand-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div class="text-[11px] font-black text-gray-300 uppercase tracking-[0.3em] mb-2">Step 01</div>
+                <h3 class="font-black text-gray-900 text-lg mb-3 uppercase tracking-tight">Book a Consultation</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Schedule a free one-on-one session with our expert visa consultants. No obligation.</p>
+            </div>
+            <div class="reveal process-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm text-center">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-6 text-brand-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </div>
+                <div class="text-[11px] font-black text-gray-300 uppercase tracking-[0.3em] mb-2">Step 02</div>
+                <h3 class="font-black text-gray-900 text-lg mb-3 uppercase tracking-tight">Profile Assessment</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">We evaluate your academic profile, goals, and finances to find the best-fit university and country.</p>
+            </div>
+            <div class="reveal process-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm text-center">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-6 text-brand-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+                </div>
+                <div class="text-[11px] font-black text-gray-300 uppercase tracking-[0.3em] mb-2">Step 03</div>
+                <h3 class="font-black text-gray-900 text-lg mb-3 uppercase tracking-tight">Document Preparation</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">We guide you through every document — from SOP writing to financial proof — so nothing is missed.</p>
+            </div>
+            <div class="reveal process-card bg-brand-500 rounded-3xl p-8 text-center">
+                <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-6 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="text-[11px] font-black text-white/40 uppercase tracking-[0.3em] mb-2">Step 04</div>
+                <h3 class="font-black text-white text-lg mb-3 uppercase tracking-tight">Visa Approval 🎉</h3>
+                <p class="text-white/70 text-sm leading-relaxed">We submit your application and track it. You get your visa — and we celebrate together!</p>
+            </div>
+        </div>
+        <div class="text-center mt-12 reveal">
+            <a href="Appointment-form.html" class="inline-flex items-center gap-3 bg-brand-500 hover:bg-brand-600 text-white font-black uppercase tracking-widest text-sm py-5 px-12 rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/30">
+                Begin Your Journey Today
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== DESTINATIONS ===================== -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Top Destinations</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-brand-900 uppercase tracking-tight leading-none">Where Will You <span class="text-brand-500">Study?</span></h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- UK -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group">
+                <img src="images/uk/uk_sec_0.jpg" alt="Study in UK" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 p-7">
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-1">Study in</div>
+                    <div class="text-white font-black text-2xl uppercase">United Kingdom</div>
+                    <div class="text-white/60 text-sm mt-1">Student Visa (Tier 4)</div>
+                </div>
+            </div>
+            <!-- USA -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group">
+                <img src="images/usa_university_campus.png" alt="Study in USA" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 p-7">
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-1">Study in</div>
+                    <div class="text-white font-black text-2xl uppercase">United States</div>
+                    <div class="text-white/60 text-sm mt-1">F-1 Student Visa</div>
+                </div>
+            </div>
+            <!-- Canada -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group">
+                <img src="images/canada/canada_sec_1.jpg" alt="Study in Canada" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 p-7">
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-1">Study in</div>
+                    <div class="text-white font-black text-2xl uppercase">Canada</div>
+                    <div class="text-white/60 text-sm mt-1">Study Permit</div>
+                </div>
+            </div>
+            <!-- Australia -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group">
+                <img src="images/australia/australia_sec_0.jpg" alt="Study in Australia" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 p-7">
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-1">Study in</div>
+                    <div class="text-white font-black text-2xl uppercase">Australia</div>
+                    <div class="text-white/60 text-sm mt-1">Subclass 500</div>
+                </div>
+            </div>
+            <!-- New Zealand -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group">
+                <img src="images/new-zealand/nz_sec_0.jpg" alt="Study in New Zealand" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="overlay absolute inset-0"></div>
+                <div class="absolute bottom-0 left-0 p-7">
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-1">Study in</div>
+                    <div class="text-white font-black text-2xl uppercase">New Zealand</div>
+                    <div class="text-white/60 text-sm mt-1">Student Visa</div>
+                </div>
+            </div>
+            <!-- Europe -->
+            <div class="reveal dest-card rounded-3xl overflow-hidden relative h-72 cursor-pointer group bg-brand-900">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                    <div class="text-5xl mb-4">🌍</div>
+                    <div class="text-white/70 text-xs uppercase tracking-widest font-bold mb-2">Also covering</div>
+                    <div class="text-white font-black text-2xl uppercase">Europe & More</div>
+                    <div class="text-white/50 text-sm mt-2">Germany, France, Netherlands & beyond</div>
+                    <a href="Appointment-form.html" class="mt-6 bg-white text-brand-900 font-black text-xs uppercase tracking-widest px-6 py-3 rounded-full hover:bg-secondary hover:text-white transition-all">Ask About Options</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== WHY CHOOSE US ===================== -->
+<section class="py-24 bg-brand-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Why Trust Us</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-white uppercase tracking-tight leading-none">What Makes Us<br><span class="text-secondary">Different</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">🏆</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">98% Success Rate</h3>
+                <p class="text-white/60 text-sm leading-relaxed">One of the highest visa approval rates in Bangladesh. We don't just apply — we prepare you to win.</p>
+            </div>
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">End-to-End Support</h3>
+                <p class="text-white/60 text-sm leading-relaxed">From university selection to visa stamping — we hold your hand through every single step.</p>
+            </div>
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">🌐</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">Global Network</h3>
+                <p class="text-white/60 text-sm leading-relaxed">200+ partner universities across 15+ countries. We find the best match for your profile and budget.</p>
+            </div>
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">📋</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">SOP & Documentation</h3>
+                <p class="text-white/60 text-sm leading-relaxed">Our expert writers craft compelling Statements of Purpose that visa officers remember.</p>
+            </div>
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">💰</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">Scholarship Guidance</h3>
+                <p class="text-white/60 text-sm leading-relaxed">We identify and help you apply for scholarships to reduce your financial burden significantly.</p>
+            </div>
+            <div class="reveal glass rounded-3xl p-8">
+                <div class="text-4xl mb-4">📞</div>
+                <h3 class="text-white font-black text-xl uppercase tracking-tight mb-3">Post-Visa Support</h3>
+                <p class="text-white/60 text-sm leading-relaxed">Accommodation, pre-departure briefing, and airport guidance — we're with you even after approval.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== REQUIREMENTS ===================== -->
+<section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Be Prepared</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-brand-900 uppercase tracking-tight leading-none">General Student<br><span class="text-brand-500">Visa Requirements</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">University Offer Letter</h4>
+                    <p class="text-gray-500 text-sm">Conditional or unconditional admission letter from a recognized institution.</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">English Proficiency</h4>
+                    <p class="text-gray-500 text-sm">IELTS, TOEFL, or PTE scores as required by the university and country.</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">Proof of Funds</h4>
+                    <p class="text-gray-500 text-sm">Bank statements showing sufficient funds for tuition + living expenses.</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-5 9 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">Valid Passport</h4>
+                    <p class="text-gray-500 text-sm">A machine-readable passport valid for at least 6 months beyond your intended study period.</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">Academic Transcripts</h4>
+                    <p class="text-gray-500 text-sm">Certified copies of all academic records from SSC, HSC, or Bachelor's degree.</p>
+                </div>
+            </div>
+            <div class="reveal flex gap-5 p-6 border border-gray-100 rounded-2xl hover:border-brand-100 hover:shadow-md transition-all duration-300 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-50 group-hover:bg-brand-100 flex items-center justify-center text-brand-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-black text-gray-900 uppercase tracking-tight mb-1">Statement of Purpose</h4>
+                    <p class="text-gray-500 text-sm">A compelling essay explaining your academic goals and reasons for choosing the institution.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="py-24 bg-gray-50">
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Got Questions?</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-brand-900 uppercase tracking-tight leading-none">Frequently Asked<br><span class="text-brand-500">Questions</span></h2>
+        </div>
+        <div class="space-y-3" id="faq-container">
+            <div class="faq-item reveal bg-white border border-gray-100 rounded-2xl overflow-hidden">
+                <button class="faq-trigger w-full flex justify-between items-center p-6 text-left gap-4">
+                    <span class="font-black text-gray-900 text-base uppercase tracking-tight">How much money do I need to show for a student visa?</span>
+                    <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-xl font-light">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">The required amount varies by country. Generally, you need to show funds covering your first year of tuition plus living expenses. For the UK, this is typically £9,207–£15,000+. For Canada, CAD 10,000–25,000. We provide a detailed breakdown based on your specific destination during your consultation.</div>
+                </div>
+            </div>
+            <div class="faq-item reveal bg-white border border-gray-100 rounded-2xl overflow-hidden">
+                <button class="faq-trigger w-full flex justify-between items-center p-6 text-left gap-4">
+                    <span class="font-black text-gray-900 text-base uppercase tracking-tight">Can I work while studying abroad?</span>
+                    <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-xl font-light">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">Yes! Most countries allow up to 20 hours per week during the semester and full-time during holidays. The UK, Canada, and Australia are especially student-work-friendly. This is a great way to gain international experience and supplement your finances.</div>
+                </div>
+            </div>
+            <div class="faq-item reveal bg-white border border-gray-100 rounded-2xl overflow-hidden">
+                <button class="faq-trigger w-full flex justify-between items-center p-6 text-left gap-4">
+                    <span class="font-black text-gray-900 text-base uppercase tracking-tight">What IELTS score do I need?</span>
+                    <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-xl font-light">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">Requirements vary by university and program. Most UK universities require IELTS 6.0–6.5 overall, while top universities may require 7.0+. Canada and Australia typically accept 6.0–6.5. We help you identify programs that match your current score or guide you toward the right preparation.</div>
+                </div>
+            </div>
+            <div class="faq-item reveal bg-white border border-gray-100 rounded-2xl overflow-hidden">
+                <button class="faq-trigger w-full flex justify-between items-center p-6 text-left gap-4">
+                    <span class="font-black text-gray-900 text-base uppercase tracking-tight">How long does the visa process take?</span>
+                    <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-xl font-light">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">Processing times vary: UK takes approximately 3–6 weeks, Canada 8–12 weeks, Australia 4–8 weeks, and the USA 2–6 months. We advise you to start the process at least 3–6 months before your intended start date to avoid any delays.</div>
+                </div>
+            </div>
+            <div class="faq-item reveal bg-white border border-gray-100 rounded-2xl overflow-hidden">
+                <button class="faq-trigger w-full flex justify-between items-center p-6 text-left gap-4">
+                    <span class="font-black text-gray-900 text-base uppercase tracking-tight">What is Edu Abroad's consultation fee?</span>
+                    <span class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-xl font-light">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="px-6 pb-6 text-gray-500 text-sm leading-relaxed">Your <strong>first consultation is completely free</strong> — no commitment required. Book an appointment, visit our office, and we'll discuss your profile and goals in detail. Service fees are discussed transparently after we design your personalized roadmap.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <p class="text-secondary text-xs uppercase tracking-[0.3em] font-black mb-4">Real Students, Real Success</p>
+            <h2 class="text-[2.5rem] md:text-[3.5rem] font-black text-brand-900 uppercase tracking-tight leading-none">They Made It.<br><span class="text-brand-500">So Can You.</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="reveal bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                <div class="flex gap-1 mb-4">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">"Edu Abroad made the entire UK visa process feel effortless. From my IELTS preparation advice to the final SOP, they were exceptional. I'm now studying at the University of Manchester!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-black text-sm">RH</div>
+                    <div>
+                        <div class="font-black text-gray-900 text-sm">Rahim Hossain</div>
+                        <div class="text-gray-400 text-xs">University of Manchester, UK</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal bg-brand-500 rounded-3xl p-8">
+                <div class="flex gap-1 mb-4 text-yellow-300">⭐⭐⭐⭐⭐</div>
+                <p class="text-white/90 text-sm leading-relaxed mb-6 italic">"I was rejected once before finding Edu Abroad. They completely rebuilt my application. Second attempt — approved in 3 weeks! Now in Canada completing my Masters."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-black text-sm">TA</div>
+                    <div>
+                        <div class="font-black text-white text-sm">Tasnia Akter</div>
+                        <div class="text-white/60 text-xs">University of Toronto, Canada</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal bg-gray-50 rounded-3xl p-8 border border-gray-100">
+                <div class="flex gap-1 mb-4">⭐⭐⭐⭐⭐</div>
+                <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">"The team at Edu Abroad is genuinely caring. They helped me find a scholarship that reduced my tuition by 40%. I'm now at Monash University in Melbourne. Highly recommend!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-black text-sm">MR</div>
+                    <div>
+                        <div class="font-black text-gray-900 text-sm">Mahidul Rahman</div>
+                        <div class="text-gray-400 text-xs">Monash University, Australia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="py-28 bg-[#fafafa] relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-gray-200 rounded-full -z-0 opacity-50"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <div class="reveal inline-flex items-center gap-3 bg-red-50 rounded-full px-6 py-2 mb-8 border border-red-100 shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span>
+            <span class="text-red-600 text-xs uppercase tracking-[0.25em] font-bold">Free Consultation — No Commitment</span>
+        </div>
+        <h2 class="reveal text-[3rem] md:text-[5rem] font-black text-black uppercase tracking-tight leading-none mb-6">
+            Your Future<br>Starts With<br><span class="text-brand-500">One Meeting.</span>
+        </h2>
+        <p class="reveal text-brand-600 text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+            Join thousands of students who trusted Edu Abroad to get their visa approved. Book your free consultation today — visit our office in Dhaka and let's build your roadmap together.
+        </p>
+        <div class="reveal flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="Appointment-form.html" class="inline-flex items-center justify-center gap-3 bg-brand-500 hover:bg-brand-600 text-white font-black uppercase tracking-widest text-sm py-6 px-14 rounded-full transition-all duration-300 shadow-xl shadow-brand-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Book Your Free Consultation
+            </a>
+        </div>
+        <div class="reveal mt-12 flex flex-wrap justify-center gap-8 text-black text-sm uppercase tracking-wider font-bold">
+            <span class="flex items-center gap-2"><div class="text-xl">📍</div> Gulshan, Dhaka</span>
+            <span class="flex items-center gap-2"><div class="text-xl">📞</div> 01401164949</span>
+            <span class="flex items-center gap-2"><div class="text-xl">🕐</div> Sat–Thu: 10:30am–5:00pm</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-gray-900 text-gray-300 relative overflow-hidden">
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none"></div>
+    <div class="container mx-auto px-6 py-20 pb-12 grid md:grid-cols-4 gap-12 text-left relative z-10">
+        <div class="md:col-span-2 space-y-6">
+            <a href="index.html" class="inline-block"><img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-16 w-auto object-contain" /></a>
+            <p class="text-gray-400 text-sm leading-relaxed max-w-sm mt-6">We are a premier international education consultancy, dedicated to transforming student ambitions into global realities. Your future starts here.</p>
+            <div class="flex space-x-4 pt-2">
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
+            <div class="space-y-3">
+                <a href="index.html#about-section" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">About Us</a>
+                <a href="index.html#services-section" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Our Services</a>
+                <a href="index.html#destinations-section" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Top Destinations</a>
+                <a href="Appointment-form.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Book Appointment</a>
+                <a href="student-visa.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Student Visa</a>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Connect</h3>
+            <ul class="space-y-4 text-gray-400">
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1 flex-shrink-0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>info@eduabroad.com.bd</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>+880 1401-164949</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1 flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Flat 11/A,B,C, Level 11, Tower 2,<br>Confidence Centre, Gulshan, Dhaka</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="border-t border-gray-800 relative z-10 bg-black/20">
+        <div class="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>&copy; 2026 Edu Abroad Limited. Built with precision.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); }});
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const answer = item.querySelector('.faq-answer');
+            const isOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.faq-answer').classList.remove('open');
+                i.querySelector('.faq-icon').textContent = '+';
+            });
+            if (!isOpen) {
+                item.classList.add('active');
+                answer.classList.add('open');
+                item.querySelector('.faq-icon').textContent = '×';
+            }
+        });
+    });
+</script>
+
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu" class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar" class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0"></div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About
+            </a>
+            <a href="index.html#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Services
+            </a>
+            <a href="index.html#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Destinations
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path></svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Blog
+            </a>
+            <a href="company-profile.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line></svg>
+                Company Profile
+            </a>
+            <a href="Appointment-form.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Book Appointment
+            </a>
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html" class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">Login</a>
+                <a href="Appointment-form.html" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Get Started</a>
+            </div>
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Go to Portal</a>
+                <button type="button" id="mobile-logout-btn" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var windist = document.documentElement.scrollTop;
+            var winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = winheight ? (windist / winheight) * 100 : 0;
+            var progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        var menuClose = document.getElementById('mobile-menu-close');
+        var menuDrawer = document.getElementById('mobile-menu-drawer');
+        var menuOverlay = document.getElementById('mobile-menu-overlay');
+        var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) closeMenu(); else openMenu();
+        }
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(function (link) {
+                link.addEventListener('click', function () { if (menuDrawer.classList.contains('active')) closeMenu(); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) closeMenu();
+            });
+        }
+
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+            var user = EduAuth.currentUser();
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+            if (!user) return;
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) { authedActions.classList.remove('hidden'); authedActions.classList.add('flex'); }
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+            if (logoutBtn) logoutBtn.addEventListener('click', function () { EduAuth.logout(); window.location.href = 'index.html'; });
+        })();
+    </script>
+
+</body>
+</html>

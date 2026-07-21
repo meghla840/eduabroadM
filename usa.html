@@ -1,0 +1,2374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA for Bangladeshis: Visit, Study & Immigrate</title>
+    <meta name="description"
+        content="A complete guide to exploring the United States of America for Bangladeshi citizens. Learn about visiting, studying, and immigrating with Edu Abroad Limited.">
+    <meta name="keywords"
+        content="the United States of America for Bangladeshi, study in the United States of America from Bangladesh, visit the United States of America from Bangladesh, immigrate to the United States of America from Bangladesh, the United States of America student visa for Bangladesh, the United States of America PR (Specially EB3 Unskilled) for Bangladeshi, the United States of America tourist visa from Bangladesh, the United States of America scholarship for Bangladeshi students, the United States of America work permit for Bangladeshi">
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1b3168',
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#e0e8ff',
+                            500: '#1b3168',
+                            600: '#152654',
+                            700: '#0f1b3b',
+                            900: '#090f23',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            font-size: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #1a202c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            font-weight: 900;
+        }
+
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+        }
+
+        .content-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Glassmorphism Header from index.html */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* For inner pages like USA, we want the text to be dark/visible since it might not be a dark background at the top */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        .elig-float { animation: floatSlow 6s ease-in-out infinite; }
+        .premium-card { border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid #eef0f4; box-shadow: 0 2px 12px rgba(17, 24, 39, 0.05); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease; }
+        .premium-card:hover { transform: translateY(-8px); box-shadow: 0 24px 40px -12px rgba(17, 24, 39, 0.18); }
+        .premium-card .pc-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+        .premium-card .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .premium-card:hover .pc-img-wrap img { transform: scale(1.09); }
+        .pc-ranking-badge { position: absolute; top: 14px; left: 14px; background: rgba(27,49,104,0.92); color: #fff; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+        .pc-price-badge { position: absolute; bottom: 14px; right: 14px; background: #fff; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); color: #1b3168; }
+        .reveal-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
+    
+        #mobile-menu-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(400px, 88vw); background: #ffffff; z-index: 1001; transform: translateX(100%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -18px 0 50px rgba(0,0,0,.12); overflow-y: auto; }
+        #mobile-menu-drawer.active { transform: translateX(0); }
+        #mobile-menu-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+        #mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .hamburger-line { transition: all .3s ease; transform-origin: center; }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+        .sidebar-link { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .85rem 1rem; border-radius: .75rem; color: #374151; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; transition: background-color .2s ease, color .2s ease; text-align: left; }
+        .sidebar-link:hover { background: #f3f4f6; color: #1b3168; }
+        .sidebar-link.active-page { background: rgba(27,49,104,0.08); color: #1b3168; }
+        .sidebar-link svg { flex-shrink: 0; color: #9ca3af; transition: color .2s ease; }
+        .sidebar-link:hover svg, .sidebar-link.active-page svg { color: #1b3168; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #1b3168, #00a2e8); z-index: 1000; width: 0%; transition: width .1s ease; }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4144669152460134');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'Destination: USA' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4144669152460134&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+    
+    <!-- Global Header -->
+    <header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="w-10 flex items-center text-gray-700 hover:text-primary transition-colors" aria-label="Back to Home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <img src="images/usa/usa_sec_0.jpg"
+            alt="USA" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-[2rem] md:text-[2.5rem] font-black text-white uppercase tracking-tighter mb-4">United States
+            </h1>
+            <p class="text-[1rem] md:text-[1.25rem] text-white/90 font-medium tracking-wide">A Land of Unrivaled
+                Opportunities</p>
+        </div>
+    </section>
+    <!-- Content Section -->
+    <main class="container mx-auto px-6 py-16 md:py-24">
+        <div class="max-w-4xl mx-auto">
+            <div class="content-card rounded-[2.5rem] p-8 md:p-16">
+                <div class="flex justify-end mb-6"><button id="langToggleBtn" onclick="toggleLanguage()"
+                        class="bg-brand-500 text-white font-bold py-2.5 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-600 transition-all transform hover:-translate-y-1">Bangla
+                    </button></div>
+                <h1 id="title-en"
+                    class="text-[1.5rem] md:text-[2.25rem] font-black text-brand-500 mb-8 border-b border-gray-100 pb-6 uppercase tracking-tight">
+                    Study,
+                    Visit & Immigrate: The Ultimate Guide to the United States for Bangladeshis </h1>
+                <h1 id="title-bn"
+                    class="hidden text-[1.5rem] md:text-[2.25rem] font-black text-brand-500 mb-8 border-b border-gray-100 pb-6 uppercase tracking-tight">
+                    Study,
+                    Visit & Immigrate: বাংলাদেশীদের জন্য United States এর সম্পূর্ণ গাইড </h1>
+                <article id="article-en" class="space-y-12 text-[1rem] md:text-[1.125rem] leading-[1.75] text-gray-700">
+                    <!-- 1. INTRODUCTION -->
+                    <section id="introduction" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_1.jpg"
+                                alt="Old Times Square"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The
+                                historic, dazzling lights of Times Square</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌟
+                            Introduction </h2>
+                        <p class="mb-4">From the glittering skyline of New York City to the tech-driven hubs of
+                            Silicon Valley,
+                            the United States of America has always symbolised ambition,
+                            innovation,
+                            and limitless possibilities. For generations,
+                            people from all over the world have looked towards the USA to build a better life,
+                            gain world-class education,
+                            or simply experience the iconic culture they’ve grown up seeing in films and media.
+                            But what does it really mean to explore <strong>the United States of America for
+                                Bangladeshi</strong>citizens today? </p>
+                        <p class="mb-4">You might be a student dreaming of an Ivy League degree,
+                            an ambitious professional seeking global exposure,
+                            or an avid traveller wanting to road-trip across Route 66. Whatever your aspiration,
+                            the USA is increasingly popular among Bangladeshis because it truly offers a pathway
+                            for everyone. The community of Bangladeshis in the US is thriving,
+                            creating a welcoming bridge for newcomers.</p>
+                        <p>In this comprehensive guide,
+                            we will walk you through everything you need to know about the United States,
+                            from its rich history and powerhouse economy to the practical steps of how you can
+                            visit,
+                            study,
+                            or immigrate there from Bangladesh. Let’s dive into what makes this country a
+                            premier destination for your global journey.</p>
+                    </section>
+                    <!-- 2. COUNTRY OVERVIEW -->
+                    <section id="overview" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_2.jpg"
+                                alt="USA Flag"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The
+                                Star-Spangled Banner, a symbol of freedom and opportunity</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🗺️
+                            Country Overview</h2>
+                        <p class="mb-4">The United States of America is a vast,
+                            diverse nation comprised of 50 states and a federal district. With its capital
+                            situated in Washington,
+                            D.C.,
+                            the country spans across North America,
+                            bordered by Canada to the north and Mexico to the south. Because of its sheer
+                            size—ranking as the third-largest country globally by total area—the USA
+                            features incredibly varied geography,
+                            ranging from the sunny beaches of California and Florida to the snow-capped
+                            peaks of the Rocky Mountains and the expansive plains of the Midwest.</p>
+                        <p class="mb-4">While English is the de facto national language and the primary
+                            medium of communication,
+                            the USA is a melting pot of cultures. You will hear languages from all over the
+                            world,
+                            including Bengali,
+                            spoken in vibrant neighbourhoods in cities like New York,
+                            Dallas,
+                            and Detroit. The official currency is the US Dollar (USD),
+                            the backbone of the global economy.</p>
+                        <p class="mb-4">Given its massive landmass,
+                            the United States spans multiple time zones and experiences a multitude of
+                            climates. If you prefer a tropical,
+                            warm environment reminiscent of Bangladesh,
+                            the southern states might appeal to you. If you enjoy distinct,
+                            crisp seasons with snowy winters,
+                            the Northeast or Midwest will be a delightful change of pace.</p>
+                        <p>The national flag,
+                            affectionately known as the Stars and Stripes,
+                            represents the original 13 colonies and the current 50 states,
+                            symbolising unity and freedom. The cultural identity of the USA is heavily
+                            rooted in individualism,
+                            freedom of expression,
+                            and the "American
+                            Dream"—the belief that anyone, regardless of where they were born, can achieve
+                            their own
+                            version of success through hard work. Respect for diverse religions and cultural
+                            backgrounds is a cornerstone of American society,
+                            which provides a comforting environment for Bangladeshis holding onto their rich
+                            heritage while embracing new horizons.</p>
+                    </section>
+                    <!-- 3. HISTORY OF THE USA -->
+                    <section id="history" class="relative group mt-8">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <img src="images/usa/usa_sec_3.jpg"
+                                alt="Historical USA - Washington Monument"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The
+                                iconic Washington Monument, symbol of American history</figcaption>
+                        </figure>
+
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📜
+                            History of the
+                            United States of America</h2>
+                        <p class="mb-4">The story of the United States of America is one of dramatic
+                            change,
+                            resilience,
+                            and unyielding progress. Long before European settlers arrived,
+                            the land was inhabited by diverse Indigenous civilisations,
+                            each with their own rich cultures,
+                            languages,
+                            and deep connections to the land. The turning point in global history
+                            occurred in the late 15th and 16th centuries when European powers,
+                            primarily the British,
+                            Spanish,
+                            and French,
+                            began colonising the continent.</p>
+                        <p class="mb-4">By the 1700s,
+                            thirteen British colonies had established themselves along the eastern
+                            coast. High taxes,
+                            lack of representation,
+                            and a growing desire for self-governance culminated in the American
+                            Revolutionary War. On July 4,
+                            1776,
+                            the colonies adopted the Declaration of Independence,
+                            officially severing ties with Great Britain and birthing a new nation built
+                            on democratic ideals.</p>
+                        <p class="mb-4">The 19th century was marked by immense territorial
+                            expansion—often referred to as 'Manifest Destiny' —which saw the country
+                            stretch from the Atlantic to the Pacific Ocean. This period of growth was
+                            unfortunately also scarred by the forced displacement of Native Americans
+                            and the deeply tragic institution of slavery,
+                            leading to the American Civil War (1861–1865). The victory of the Union
+                            forces led to the abolition of slavery and set the stage for rapid
+                            industrialisation.</p>
+                        <p class="mb-4">In the 20th century,
+                            the United States emerged as a global superpower following its crucial roles
+                            in World War I and World War II. The post-war era ushered in a booming
+                            economy,
+                            the Civil Rights Movement which championed equality for all races,
+                            and a technological revolution that continues to this day.</p>
+                        <p>For South Asians and Bangladeshis,
+                            the relationship with the US significantly evolved after the landmark
+                            Immigration and Nationality Act of 1965,
+                            which abolished national-origin quotas. This opened the doors for skilled
+                            workers,
+                            students,
+                            and families from Bangladesh to settle in the US,
+                            forging a strong diaspora that contributes immensely to both nations today.
+                        </p>
+                    </section>
+                    <!-- 4. ECONOMY & ECONOMIC GROWTH -->
+                    <section id="economy" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_4.jpg"
+                                alt="Dollars and Economy"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The robust
+                                US economy, an engine for global growth</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📊 Economy & Economic Growth</h2>
+                        <p class="mb-4">The United States of America boasts the largest economy in
+                            the world by nominal GDP,
+                            accounting for roughly a quarter of the global economy. With a highly
+                            diversified and technologically advanced economic structure,
+                            the US GDP stands at over $25 trillion,
+                            providing an exceptionally high standard of living and a high GDP per
+                            capita.</p>
+                        <p class="mb-4">Several major industries drive this colossal economic
+                            engine. The technology sector,
+                            anchored by giants in Silicon Valley,
+                            leads global innovation. Furthermore,
+                            the US is a powerhouse in healthcare,
+                            finance (centred around Wall Street),
+                            advanced manufacturing,
+                            and agriculture. Over the last decade,
+                            despite global fluctuations,
+                            the U.S. economy has shown remarkable resilience,
+                            characterised by steady growth,
+                            dynamic entrepreneurship,
+                            and a fiercely competitive job market.</p>
+                        <p class="mb-4">For professionals looking to <strong>immigrate to the United
+                                States of America from Bangladesh</strong>,
+                            the employment market is incredibly promising. There is an ongoing,
+                            massive demand for skilled workers in IT,
+                            healthcare (especially nursing and medicine),
+                            engineering,
+                            business analytics,
+                            and even in unskilled labour sectors. Because of this high demand,
+                            opportunities like <strong>the United States of America work permit for
+                                Bangladeshi</strong>professionals can be highly rewarding,
+                            offering competitive salaries that far exceed global averages.</p>
+                        <p class="mb-4">The cost of living varies significantly depending on the
+                            state and city. Metropolises like New York and San Francisco are
+                            notoriously expensive,
+                            but many incredibly prosperous cities in Texas,
+                            the Midwest,
+                            and the South offer a highly affordable lifestyle. Compared to
+                            Bangladesh,
+                            the cost of living is notably higher,
+                            but the earning potential is proportionally much larger,
+                            allowing families to save,
+                            remit money back home,
+                            and enjoy a premium lifestyle.</p>
+                        <p>Finally,
+                            the strength of the US Dollar (USD) means that earning in America
+                            provides immense financial leverage when converted to Bangladeshi Taka
+                            (BDT),
+                            making it an attractive prospect for ambitious workers looking to secure
+                            cross-generational wealth.</p>
+                    </section>
+                    <!-- 5. POLITICAL STATUS & GOVERNMENT -->
+                    <section id="politics" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_5.jpg"
+                                alt="US Capitol Building"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The United
+                                States Capitol, the seat of the US Congress</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🏛️ Political Status & Government</h2>
+                        <p class="mb-4">The US operates as a federal democratic republic,
+                            meaning power is shared between the national (federal) government
+                            and the individual state governments. The federal government is
+                            divided into three distinct branches: the Executive (led by the
+                            President),
+                            the Legislative (Congress),
+                            and the Judicial (Supreme Court). This system of checks and balances
+                            is designed to prevent any single entity from gaining absolute
+                            power.</p>
+                        <p class="mb-4">Political stability is a hallmark of the United States.
+                            Despite passionate political debates and a vocal two-party system
+                            (Democrats and Republicans),
+                            the democratic institutions are robust,
+                            and the transfer of power is dictated strictly by the US
+                            Constitution. For foreigners,
+                            the United States is a nation of laws;
+                            safety,
+                            legal rights,
+                            and due process are fiercely protected,
+                            providing a secure environment for immigrants and international
+                            students.</p>
+                        <p class="mb-4">Internationally,
+                            the United States holds pivotal roles in global organisations like
+                            the UN,
+                            NATO,
+                            and the World Bank. The diplomatic relationship between the US and
+                            Bangladesh is strong and multi-faceted,
+                            heavily focused on trade,
+                            counterterrorism,
+                            and climate change initiatives. As a result,
+                            navigating the visa and immigration policies,
+                            while rigorous,
+                            follows a well-defined legal process with clear guidelines for
+                            student visas,
+                            tourist permits,
+                            and employment-based green cards.</p>
+                    </section>
+                    <!-- 6. POPULATION & DEMOGRAPHICS -->
+                    <section id="demographics" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_6.jpg"
+                                alt="Diverse Population"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A diverse
+                                and vibrant population making up the cultural melting pot</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            👨‍👩‍👧‍👦 Population & Demographics</h2>
+                        <p class="mb-4">With a population surpassing 330 million,
+                            the United States is the third most populous country in the
+                            world. It is famously a "nation of immigrants," making it one of
+                            the most ethnically and culturally diverse countries on the
+                            globe. While the majority of the population is of European
+                            descent,
+                            there are massive communities of Hispanic,
+                            African American,
+                            and Asian descent.</p>
+                        <p class="mb-4">The Bangladeshi diaspora in the United States is an
+                            integral part of this diverse tapestry. While exact figures
+                            vary,
+                            there are well over 200,
+                            000 Bangladeshis living in the US,
+                            predominantly clustered in metropolitan areas like New York,
+                            New Jersey,
+                            Texas,
+                            Michigan,
+                            and California. This established community means new arrivals
+                            will find a sense of home,
+                            with access to authentic groceries,
+                            restaurants,
+                            and cultural networks.</p>
+                        <p>English is predominantly spoken everywhere,
+                            though Spanish is highly prevalent in the southern and western
+                            states. The US has no official religion,
+                            upholding the freedom to practice any faith. You will find
+                            thousands of mosques,
+                            Islamic centres,
+                            and community halls spread across the country,
+                            ensuring that Bangladeshi Muslims have robust,
+                            supportive environments for religious and cultural practices.
+                            With over 82% of the population living in vibrant urban and
+                            suburban areas,
+                            the infrastructure supports a modern and fast-paced lifestyle.
+                        </p>
+                    </section>
+                    <!-- 7. EDUCATION SYSTEM -->
+                    <section id="education">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🎓 Education System</h2>
+                        <p class="mb-4">If you intend to <strong>study in the United
+                                States of America from Bangladesh</strong>,
+                            you are targeting the absolute pinnacle of global education.
+                            The US higher education system is universally recognised for
+                            its unparalleled quality,
+                            monumental research budgets,
+                            and flexibility. The academic environment focuses not merely
+                            on exams,
+                            but on critical thinking,
+                            practical application,
+                            and holistic development.</p>
+                        <p class="mb-4">The US hosts a disproportionately high number of
+                            the world’s leading higher education institutions. Elite
+                            universities like Harvard,
+                            MIT,
+                            Stanford,
+                            and Caltech consistently dominate QS and THE global
+                            rankings. However,
+                            excellence isn't limited to the
+                            Ivy League;
+                            hundreds of robust state universities and private colleges
+                            offer phenomenal education across every conceivable
+                            discipline,
+                            from STEM (Science, Technology, Engineering,
+                            Mathematics) to the liberal arts and humanities.</p>
+                        <p class="mb-4">For Bangladeshi students,
+                            the medium of instruction is English. The US academic
+                            calendar operates primarily on a semester system—typically a
+                            Fall semester starting in August/September and a Spring
+                            semester starting in January. This allows significant
+                            flexibility in course selection and declaring a major. Many
+                            universities actively cultivate global diversity,
+                            making them incredibly welcoming to international students.
+                            Consequently,
+                            degrees obtained in the US are highly prestigious and
+                            instantly recognised by employers worldwide,
+                            drastically boosting a graduate's career trajectory and
+                            earning potential.</p>
+                        <p>One primary concern for students is funding,
+                            but rest assured,
+                            the financial support ecosystem is vast. To get a
+                            <strong>the United States of America scholarship for
+                                Bangladeshi students</strong>,
+                            one can explore university-specific merit scholarships,
+                            teaching assistantships (TA),
+                            graduate research assistantships (RA),
+                            and government-backed fellowships. These funding
+                            opportunities can drastically reduce or completely cover
+                            tuition costs,
+                            while providing a stipend for living expenses.
+                        </p>
+                    </section>
+                    <!-- 8. TOURISM & TRAVEL -->
+                    <section id="tourism">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            ✈️ Tourism & Travel</h2>
+                        <p class="mb-4">To <strong>visit the United States of
+                                America from Bangladesh</strong>is to embark on a
+                            journey of a lifetime. The sheer scale of the country
+                            means it offers every conceivable type of holiday. You
+                            can marvel at the neon lights of Times Square in New
+                            York City,
+                            hike the breathtaking trails of the Grand Canyon,
+                            experience the magic of Disney World in Orlando,
+                            or drive along the stunning Pacific Coast Highway in
+                            California.</p>
+                        <p class="mb-4">Because of its size,
+                            the best time to visit depends entirely on your
+                            destination. Summer (June to August) is popular for
+                            national parks and beaches,
+                            while Autumn offers spectacular foliage in New England.
+                            If you love winter sports,
+                            the slopes of Colorado are pristine between December and
+                            February.</p>
+                        <p class="mb-4">Food in the US is as diverse as its
+                            population. You can find everything from authentic
+                            deep-dish pizza in Chicago to incredible Tex-Mex in the
+                            south. For Bangladeshi Muslim travellers,
+                            finding Halal food is increasingly easy,
+                            particularly in major cities with sizable South Asian
+                            and Middle Eastern populations like New York,
+                            Dallas,
+                            and Los Angeles. There are numerous apps and directories
+                            dedicated to locating top-tier Halal dining.</p>
+                        <p>Transportation mostly relies on domestic flights for long
+                            distances and renting a car for local exploration,
+                            as the US is built for driving. The country is generally
+                            very safe for tourists,
+                            provided standard urban safety precautions are taken. A
+                            typical travel budget can range significantly depending
+                            on the city,
+                            but anticipating robust expenses for flights from Dhaka
+                            and mid-range accommodations will ensure a comfortable,
+                            stress-free vacation. Want a unique experience? Catch a
+                            bustling NBA game or visit a genuine NASA Space
+                            Center—experiences uniquely tied to American culture.
+                        </p>
+                    </section>
+                    <!-- 9. WHY BANGLADESHI PEOPLE SHOULD VISIT -->
+                    <section id="why-visit" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_7.jpg"
+                                alt="Tourist taking photo"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">
+                                Unforgettable travel experiences and iconic landmarks</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🇧🇩 Why Bangladeshi People Should Visit the USA
+                        </h2>
+                        <p class="mb-4">If you are contemplating an
+                            international trip,
+                            securing a <strong>the United States of America
+                                tourist visa from Bangladesh</strong>opens the
+                            door to an unmatched global experience. Why should
+                            you visit? First,
+                            the USA offers a perfect blend of high-energy urban
+                            exploration and awe-inspiring natural beauty. It is
+                            the ultimate playground for tourists,
+                            whether you want to shop in premium outlets or
+                            explore natural wonders that you simply cannot find
+                            in South Asia.</p>
+                        <p class="mb-4">For Bangladeshis,
+                            the strong presence of the diaspora means you can
+                            easily experience the modern Western world without
+                            feeling completely isolated from your roots. Need a
+                            comforting plate of biryani or a cup of deshi tea
+                            after a long day of sightseeing in New York? The
+                            vibrant communities in places like Jackson Heights
+                            (New York) or Devon Avenue (Chicago) have you warmly
+                            covered.</p>
+                        <p>Furthermore,
+                            the US is exceptionally friendly toward South Asian
+                            visitors. Hospitality is a core American trait;
+                            you will find locals genuinely curious and
+                            welcoming. A tourist visa also provides the
+                            brilliant opportunity to personally tour university
+                            campuses if you are planning future studies,
+                            or scout cities if you have long-term immigration
+                            aspirations. It is a high-value journey that expands
+                            your worldview,
+                            enriches your cultural understanding,
+                            and creates memories that will last a lifetime.</p>
+                    </section>
+                    <!-- 10. WHY BANGLADESHIS SHOULD STUDY -->
+                    <section id="why-study" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_8.jpg"
+                                alt="Students graduating"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">World-class
+                                education and promising career pathways</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🎓 Why Bangladeshis Should Study in the USA</h2>
+                        <p class="mb-4">Choosing to <strong>study in the
+                                United States of America from
+                                Bangladesh</strong>is an investment that
+                            yields incredible returns. When you compare the
+                            quality of education with global competitors
+                            like the UK,
+                            Canada,
+                            or Australia,
+                            the USA consistently dominates in terms of
+                            research funding,
+                            faculty prestige,
+                            and campus facilities. An American degree
+                            signals to global employers that you possess
+                            critical thinking skills and adaptability.</p>
+                        <p class="mb-4">While tuition fees can appear
+                            high—ranging widely from $15,
+                            000 to over $50,
+                            000 per year (approximately 16.5 Lakh to 55 Lakh
+                            BDT)—the extensive availability of financial
+                            aid,
+                            assistantships,
+                            and the specific <strong>the United States of
+                                America scholarship for Bangladeshi
+                                students</strong>significantly offsets these
+                            Country Overview costs. Moreover,
+                            international students with a <strong>the United
+                                States of America student visa for
+                                Bangladesh</strong>(the F-1 visa) are
+                            legally permitted to work part-time (up to 20
+                            hours per week) on campus,
+                            which helps massively in covering living
+                            expenses like accommodation and groceries.</p>
+                        <p class="mb-4">Academically,
+                            to secure admission,
+                            most universities will require English
+                            proficiency tests such as IELTS (averaging a
+                            band score requirement of 6.0 to 7.0) or TOEFL.
+                            Depending on the level of study,
+                            standardised tests like the SAT,
+                            GRE,
+                            or GMAT may also be necessary. Popular
+                            disciplines among Bangladeshi students include
+                            Computer Science,
+                            Engineering,
+                            Business Administration,
+                            Data Science,
+                            and Public Health,
+                            aligning well with the rapid digitization in
+                            Bangladesh.</p>
+                        <p>Perhaps the most compelling reason to study in
+                            the US is the Post-Completion Optional Practical
+                            Training (OPT). This allows graduates to work in
+                            the US in their field of study for 12 months,
+                            which can be extended by an additional 24 months
+                            for STEM degrees. This work experience is
+                            invaluable,
+                            often serving as a stepping block towards an
+                            employment-based visa (H-1B) and,
+                            eventually,
+                            a path to permanent residency.</p>
+                    </section>
+                    <!-- 11. WHY BANGLADESHIS SHOULD CONSIDER IMMIGRATING -->
+                    <section id="why-immigrate" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_9.jpg"
+                                alt="City life and diverse neighborhood"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A high
+                                standard of living and endless opportunities for growth</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🌍 Why Bangladeshis Should Consider
+                            Immigrating to the USA</h2>
+                        <p class="mb-4">If securing a stable,
+                            prosperous,
+                            and high-quality life is your ultimate goal,
+                            then looking to <strong>immigrate to the
+                                United States of America from
+                                Bangladesh</strong>is a profoundly smart
+                            move. The US consistently ranks highly on
+                            global quality of life indices. It offers
+                            cutting-edge healthcare,
+                            a heavily emphasised work-life balance in
+                            modern corporate sectors,
+                            and unparalleled consumer conveniences.</p>
+                        <p class="mb-4">From an immigration standpoint,
+                            the USA provides multiple concrete pathways
+                            to becoming a Lawful Permanent Resident
+                            (getting a Green Card) and eventually
+                            achieving full citizenship. The job market
+                            is remarkably dynamic,
+                            placing a massive premium on talent,
+                            hard work,
+                            and innovation. Bangladeshi
+                            professionals—especially in tech,
+                            medicine,
+                            academia,
+                            and engineering—are in high demand. The
+                            average salary in the US dwarfs what can be
+                            earned in South Asia,
+                            allowing immigrants to achieve financial
+                            independence,
+                            build substantial generational wealth,
+                            and easily support families back home.</p>
+                        <p class="mb-4">For those who may not have
+                            advanced degrees or specialised skills,
+                            pathways like <strong>the United States of
+                                America PR (Specially EB3 Unskilled) for
+                                Bangladeshi</strong>citizens provide an
+                            exceptional opportunity. This program grants
+                            a direct Green Card through sponsored,
+                            certified employment,
+                            allowing whole families—including spouses
+                            and children under 21—to immigrate
+                            simultaneously. This means your children
+                            will have access to free public schooling
+                            and identical university opportunities as
+                            American citizens. </p>
+                        <p>Cultural integration is also a massive
+                            benefit. The Bangladeshi community in the
+                            States is deeply woven into the local
+                            fabric. Through community associations,
+                            cultural festivals,
+                            and religious institutions,
+                            immigrant families successfully maintain
+                            their heritage while embracing the
+                            tremendous benefits of American social
+                            welfare formats,
+                            excellent infrastructure,
+                            and personal liberties.</p>
+                    </section>
+                    <!-- 12. HOW TO VISIT -->
+                    <section id="how-to-visit" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_10.jpg"
+                                alt="Passport and Visa"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Securing a
+                                B1/B2 tourist visa requires careful documentation</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📋 How to Visit the USA from Bangladesh
+                        </h2>
+                        <p class="mb-4">Planning to travel? Securing
+                            a <strong>the United States of America
+                                tourist visa from
+                                Bangladesh</strong>(specifically the
+                            B-1/B-2 visitor visa) is a
+                            straightforward,
+                            albeit rigorous,
+                            process. Here is your step-by-step guide
+                            to navigating it smoothly:</p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>Step 1: Complete the DS-160
+                                    Form.</strong>This is the online
+                                non-immigrant visa application. You
+                                must fill it out accurately
+                                detailing your travel plans,
+                                background,
+                                and employment.</li>
+                            <li><strong>Step 2: Pay the Visa
+                                    Fee.</strong>The current fee for
+                                a tourist visa is typically $185
+                                (around 20, 500 BDT, subject to
+                                exchange rates). This is paid at
+                                designated banks in Bangladesh.</li>
+                            <li><strong>Step 3: Schedule Your
+                                    Interview.</strong>Book an
+                                appointment at the US Embassy in
+                                Dhaka. Wait times can vary,
+                                so plan months in advance of your
+                                intended travel date. </li>
+                            <li><strong>Step 4: Prepare Your
+                                    Documents.</strong>You will need
+                                a valid passport (with at least six
+                                months validity),
+                                a recent photograph meeting strict
+                                US criteria,
+                                your DS-160 confirmation page,
+                                and strong supporting documents.
+                                These include robust bank
+                                statements,
+                                property documents,
+                                and employment letters showing your
+                                financial capability and strong ties
+                                to Bangladesh,
+                                proving you will return after your
+                                visit.</li>
+                            <li><strong>Step 5: Attend the
+                                    Interview.</strong>The consular
+                                officer will ask you about the
+                                purpose of your trip and your ties
+                                to your home country. Answer
+                                honestly,
+                                confidently,
+                                and concisely.</li>
+                        </ul>
+                        <p>Visas are often granted with a 5-year
+                            multiple entry validity,
+                            allowing you to stay for up to 6 months
+                            per visit. Common reasons for rejection
+                            include weak financial evidence or
+                            failure to demonstrate strong ties to
+                            Bangladesh. Having a clear itinerary and
+                            solid proof of employment back home
+                            ensures a smooth approval.</p>
+                    </section>
+                    <!-- 13. HOW TO APPLY TO STUDY -->
+                    <section id="how-to-study" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_11.jpg"
+                                alt="College Application"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Navigating
+                                university applications and securing the F-1 visa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📚 How to Apply to Study in the USA
+                            from Bangladesh</h2>
+                        <p class="mb-4">Securing a <strong>the
+                                United States of America student
+                                visa for
+                                Bangladesh</strong>requires
+                            careful planning and a strategic
+                            timeline. We recommend starting the
+                            process 10 to 12 months before your
+                            intended intake.</p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>Step 1: Shortlist
+                                    Universities.</strong>Research
+                                universities that align with
+                                your academic background,
+                                budget,
+                                and career goals. Look closely
+                                at their curriculum and
+                                scholarship opportunities.</li>
+                            <li><strong>Step 2: Check
+                                    Eligibility and Take
+                                    Tests.</strong>Ensure you
+                                meet the academic requirements.
+                                You will likely need to sit for
+                                the IELTS (target 6.5+ for
+                                competitive universities) or
+                                TOEFL,
+                                and potentially the SAT,
+                                GRE,
+                                or GMAT.</li>
+                            <li><strong>Step 3: Prepare the
+                                    Application
+                                    Package.</strong>Gather your
+                                academic transcripts,
+                                degree certificates,
+                                a compelling Statement of
+                                Purpose (SOP),
+                                Letters of Recommendation (LORs)
+                                from professors or employers,
+                                and an updated CV.</li>
+                            <li><strong>Step 4:
+                                    Apply.</strong>Submit your
+                                applications directly through
+                                the university portals or via a
+                                trusted consultant like Edu
+                                Abroad Limited to avoid complex
+                                paperwork errors.</li>
+                            <li><strong>Step 5: Receive the I-20
+                                    Form.</strong>Once accepted,
+                                you must show proof of funds
+                                (bank statements) capable of
+                                covering your first year of
+                                tuition and living costs. The
+                                university will then issue an
+                                I-20 form.</li>
+                            <li><strong>Step 6: Apply for the
+                                    F-1 Visa.</strong>Fill out
+                                the DS-160,
+                                pay the SEVIS fee (around $350)
+                                and the visa application fee
+                                ($185),
+                                and schedule your embassy
+                                interview. </li>
+                        </ul>
+                        <p>During your visa interview,
+                            you must clearly articulate why you
+                            chose the particular university and
+                            how the degree will benefit your
+                            career upon returning to Bangladesh.
+                        </p>
+                    </section>
+                    <!-- 14. HOW TO IMMIGRATE -->
+                    <section id="how-to-immigrate" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_12.jpg"
+                                alt="Statue of Liberty"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The Statue
+                                of Liberty, welcoming immigrants to new beginnings</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🏠 How to Immigrate to the USA
+                            from Bangladesh</h2>
+                        <p class="mb-4">The journey to
+                            <strong>immigrate to the United
+                                States of America from
+                                Bangladesh</strong>relies
+                            largely on family sponsorship,
+                            employment,
+                            or significant investment. Here
+                            are the most prominent pathways:
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>Student to
+                                    Professional
+                                    Pathway:</strong>Many
+                                Bangladeshis start with an
+                                F-1 student visa,
+                                gain employment through OPT,
+                                and have their employer
+                                sponsor a dual-intent H-1B
+                                visa. Eventually,
+                                the employer sponsors an
+                                Employment-Based (EB) Green
+                                Card.</li>
+                            <li><strong>Skilled Worker
+                                    Visas:</strong>Highly
+                                skilled professionals can be
+                                sponsored directly from
+                                Bangladesh via EB-1,
+                                EB-2,
+                                or EB-3 skilled categories.
+                                This requires a US employer
+                                to file a petition and labor
+                                certification proving no
+                                American worker was
+                                available for the job.</li>
+                            <li><strong>EB-3 Unskilled
+                                    Program:</strong><strong>The
+                                    United States of America
+                                    PR (Specially EB3
+                                    Unskilled) for
+                                    Bangladeshi</strong>citizens
+                                is a massive opportunity.
+                                Because no degree or prior
+                                experience is required,
+                                a trusted employer sponsors
+                                you for entry-level
+                                positions. Processing times
+                                typically take 2-4 years,
+                                but it grants a direct Green
+                                Card upon entry for you and
+                                your family.</li>
+                            <li><strong>Family
+                                    Sponsorship:</strong>If
+                                you have immediate relatives
+                                (spouse, parents,
+                                siblings, or adult children)
+                                who are US citizens or
+                                permanent residents,
+                                they can file a family-based
+                                petition for you.</li>
+                        </ul>
+                        <p>Successful immigrants often
+                            advise patience and strict
+                            adherence to documentation.
+                            Working with highly experienced
+                            consultants ensures that your
+                            petitions are filed seamlessly,
+                            avoiding costly delays or
+                            denials.</p>
+                    </section>
+                    <!-- 15. HOW EDU ABROAD CAN HELP -->
+                    <section id="how-we-help"
+                        class="bg-brand-50 p-8 rounded-3xl border border-brand-100 mt-12 mb-12 relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_13.jpg"
+                                alt="Consultation Office"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Expert
+                                guidance and consultation at Edu Abroad Limited</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-brand-500 mb-4 flex items-center gap-2">
+                            💬 How Edu Abroad Limited
+                            Can Help You</h2>
+                        <p class="mb-4">Navigating the
+                            complexities of university
+                            admissions,
+                            scholarship hunting,
+                            and immigration law can feel
+                            overwhelming. At <a href="../index.html"
+                                class="text-brand-600 font-bold hover:underline">Edu
+                                Abroad Limited</a>,
+                            we transform this stressful
+                            process into a seamless,
+                            confident journey. Whether
+                            you are aiming to visit,
+                            study,
+                            or immigrate,
+                            our expert consultants
+                            provide personalised
+                            guidance tailored to your
+                            specific background.</p>
+                        <p class="mb-4">From
+                            shortlisting top-tier
+                            universities and crafting
+                            the perfect Statement of
+                            Purpose,
+                            to rigorous visa interview
+                            preparation and handling
+                            <strong>the United States of
+                                America PR (Specially
+                                EB3 Unskilled) for
+                                Bangladeshi</strong>applications,
+                            we stand by your side every
+                            step of the way.
+                        </p>
+                        <p>Your American Dream is
+                            achievable,
+                            and you don’t have to do it
+                            alone. We encourage you to
+                            reach out,
+                            <a href="../index.html#consultation-form-section"
+                                class="text-brand-600 font-bold underline">book
+                                a free
+                                consultation</a>today,
+                            and let’s start mapping out
+                            your future together.
+                        </p>
+                        <p class="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-200">
+                            <em>Edu Abroad Limited | Do
+                                not distribute without
+                                permission.</em>
+                        </p>
+                    </section>
+                    <!-- 16. FAQ -->
+                    <section id="faq" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_14.jpg"
+                                alt="Questions and Answers"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Got
+                                questions? We have the answers.</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            ❓ Frequently Asked
+                            Questions (FAQ)</h2>
+                        <div class="space-y-6">
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: Is the United
+                                    States of
+                                    America safe for
+                                    Bangladeshi
+                                    people?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Yes,
+                                    it is generally
+                                    very safe. Like
+                                    any major
+                                    country,
+                                    safety depends
+                                    on the location
+                                    and common
+                                    sense.
+                                    University
+                                    campuses and
+                                    suburban areas
+                                    are highly
+                                    secure.
+                                    Furthermore,
+                                    the US has
+                                    stringent laws
+                                    protecting the
+                                    civil liberties
+                                    and rights of
+                                    all individuals,
+                                    including
+                                    foreigners.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: What is the
+                                    cost of studying
+                                    in the United
+                                    States of
+                                    America for
+                                    Bangladeshi
+                                    students?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Tuition fees
+                                    typically range
+                                    from $15,
+                                    000 to over $50,
+                                    000 annually.
+                                    However,
+                                    living costs and
+                                    tuition can be
+                                    significantly
+                                    mitigated
+                                    through a
+                                    <strong>the
+                                        United
+                                        States of
+                                        America
+                                        scholarship
+                                        for
+                                        Bangladeshi
+                                        students</strong>and
+                                    by working
+                                    part-time on
+                                    campus.
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: Can I work
+                                    while studying
+                                    in the United
+                                    States of
+                                    America?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Yes !
+                                    International
+                                    students on an
+                                    F-1 visa are
+                                    permitted to
+                                    work up to 20
+                                    hours per week
+                                    on-campus during
+                                    the semester,
+                                    and up to 40
+                                    hours during
+                                    official
+                                    university
+                                    breaks and
+                                    holidays.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: Is there a
+                                    Bangladeshi
+                                    community in the
+                                    United States of
+                                    America?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Absolutely. The
+                                    US hosts a
+                                    thriving
+                                    Bangladeshi
+                                    diaspora of over
+                                    200,
+                                    000 people,
+                                    with massive,
+                                    actively
+                                    supportive
+                                    communities in
+                                    cities like New
+                                    York,
+                                    Los Angeles,
+                                    Detroit,
+                                    and Houston.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: What is the
+                                    easiest visa to
+                                    get for the
+                                    United States of
+                                    America from
+                                    Bangladesh?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    The "easiest"
+                                    depends on your
+                                    qualifications.
+                                    A <strong>the
+                                        United
+                                        States of
+                                        America
+                                        student visa
+                                        for
+                                        Bangladesh</strong>(F-1)
+                                    is highly
+                                    achievable if
+                                    you have
+                                    university
+                                    acceptance and
+                                    financial
+                                    backing. For
+                                    immigration,
+                                    the EB-3
+                                    Unskilled visa
+                                    is highly
+                                    accessible as it
+                                    requires no
+                                    prior degree or
+                                    experience. </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: What IELTS
+                                    score do I need
+                                    to study in the
+                                    United States of
+                                    America?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Generally,
+                                    US universities
+                                    require an
+                                    overall IELTS
+                                    band score
+                                    between 6.0 and
+                                    7.0 for
+                                    undergraduate
+                                    and graduate
+                                    programs.
+                                    High-ranking
+                                    institutions
+                                    typically prefer
+                                    a minimum of 6.5
+                                    or 7.0.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: How long does
+                                    it take to get a
+                                    PR in the United
+                                    States of
+                                    America?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Timelines vary
+                                    massively based
+                                    on the pathway.
+                                    The EB-3
+                                    Unskilled route
+                                    currently takes
+                                    around 2 to 4
+                                    years to
+                                    process,
+                                    but grants
+                                    immediate PR
+                                    upon landing in
+                                    the US.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: Is the food
+                                    Halal-friendly
+                                    in the United
+                                    States of
+                                    America?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    Yes. With a vast
+                                    and growing
+                                    Muslim
+                                    population,
+                                    finding
+                                    certified Halal
+                                    restaurants,
+                                    grocery stores,
+                                    and meat
+                                    delivery
+                                    services is
+                                    extremely
+                                    convenient,
+                                    particularly in
+                                    all major
+                                    metropolitan
+                                    areas and near
+                                    large university
+                                    campuses.</p>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+                <article id="article-bn"
+                    class="hidden space-y-12 text-[1rem] md:text-[1.125rem] leading-[1.75] text-gray-700">
+                    <!-- 1. INTRODUCTION -->
+                    <section id="bn-introduction" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_1.jpg"
+                                alt="Old Times Square"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The
+                                historic, dazzling lights of Times Square</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌟
+                            Introduction </h2>
+                        <p class="mb-4">নিউ ইয়র্ক সিটির চোখ ধাঁধানো স্কাইলাইন থেকে শুরু করে সিলিকন ভ্যালির
+                            টেকনোলজি হাব পর্যন্ত,
+                            the United States of America সবসময়ই উচ্চাকাঙ্ক্ষা,
+                            উদ্ভাবন এবং অসীম সম্ভাবনার প্রতীক। বহু প্রজন্ম ধরে বিশ্বের বিভিন্ন প্রান্তের মানুষ
+                            USA এর দিকে তাকিয়ে আছে একটি সুন্দর জীবনের আশায়,
+                            ওয়ার্ল্ড-ক্লাস এডুকেশন লাভের জন্য। কিন্তু বর্তমানে <strong>the United States of
+                                America for Bangladeshi</strong>নাগরিকদের জন্য এর আসল অর্থ কী?</p>
+                        <p class="mb-4">আপনি হয়তো একজন স্টুডেন্ট যিনি আইভি লিগ ডিগ্রির স্বপ্ন দেখছেন,
+                            একজন অ্যাম্বিশাস প্রফেশনাল যিনি গ্লোবাল এক্সপোজার খুঁজছেন,
+                            অথবা একজন ট্রাভেলার যিনি রুট ৬৬-এ রোড ট্রিপ করতে চান। আপনার লক্ষ্য যাই হোক না কেন,
+                            USA বাংলাদেশীদের কাছে দিন দিন পপুলার হচ্ছে কারণ এটি সবার জন্যই সুবর্ণ সুযোগ তৈরি
+                            করে।</p>
+                        <p>এই সম্পূর্ণ গাইডে,
+                            আমরা আপনাকে United States এর সমৃদ্ধ ইতিহাস থেকে শুরু করে এর শক্তিশালী ইকোনমি এবং
+                            কীভাবে আপনি বাংলাদেশ থেকে সেখানে visit,
+                            study অথবা immigrate করতে পারেন,
+                            তার বাস্তবসম্মত ধাপগুলো জানাবো।</p>
+                    </section>
+                    <!-- 2. COUNTRY OVERVIEW -->
+                    <section id="bn-overview" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_2.jpg"
+                                alt="USA Flag"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The
+                                Star-Spangled Banner, a symbol of freedom and opportunity</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🗺️
+                            Country Overview</h2>
+                        <p class="mb-4">The United States of America হলো ৫০টি রাজ্যের একটি বিশাল দেশ। এর
+                            ক্যাপিটাল Washington,
+                            D.C.। এর আয়তনের কারণে USA এর জিওগ্রাফি অত্যন্ত বৈচিত্র্যময়—ক্যালিফোর্নিয়ার
+                            সমুদ্রসৈকত থেকে শুরু করে মিডওয়েস্টের বিস্তীর্ণ সমভূমি পর্যন্ত।</p>
+                        <p class="mb-4">যদিও ইংলিশ এখানকার প্রধান ভাষা,
+                            তবুও USA পৃথিবীর বিভিন্ন কালচার এবং ভাষার এক অপূর্ব মিশ্রণ। আপনি নিউইয়র্ক বা
+                            ডালাসের মতো শহরে বাংলায় কথা বলতেও শুনবেন। এখানকার অফিসিয়াল কারেন্সি US Dollar
+                            (USD),
+                            যা গোটা বিশ্বের ইকোনমির মূল ভিত্তি।</p>
+                        <p class="mb-4">USA এর ওয়েদার বিভিন্ন স্টেটে বিভিন্ন রকম। আপনি যদি বাংলাদেশের মতো
+                            গরম আবহাওয়া পছন্দ করেন,
+                            তবে টেক্সাস বা ফ্লোরিডা আপনার ভালো লাগবে। আর যদি বরফ ঢাকা শীতকাল পছন্দ করেন,
+                            তবে নিউ ইংল্যান্ড আপনার জন্য সেরা।</p>
+                        <p>এখানকার সমাজব্যবস্থা ব্যক্তি স্বাধীনতা এবং 'American Dream' -এ বিশ্বাস করে—যেখানে
+                            কঠোর পরিশ্রমের মাধ্যমে যে কেউ সফল হতে পারে। বাংলাদেশীদের জন্য এখানে একটি চমৎকার
+                            পরিবেশ রয়েছে যেখানে তারা নিজেদের কালচার ও ধর্মকে স্বাধীনভাবে লালন করতে পারে।</p>
+                    </section>
+                    <!-- 3. HISTORY OF THE USA -->
+                    <section id="bn-history" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_3.jpg"
+                                alt="Historical USA - Washington Monument"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The iconic
+                                Washington Monument, symbol of American history</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📜 History of the United States of America</h2>
+                        <p class="mb-4">The story of the United States of America অত্যন্ত পরিবর্তনশীল
+                            এবং প্রগতিশীল। ইউরোপীয় সেটেলারদের আসার অনেক আগে থেকেই এখানে আদিবাসীদের
+                            নিজস্ব সমৃদ্ধ কালচার এবং ইতিহাস ছিল। পরবর্তীতে ব্রিটিশ,
+                            স্প্যানিশ এবং ফ্রেঞ্চরা এখানে কলোনি স্থাপন করে।</p>
+                        <p class="mb-4">অতিরিক্ত ট্যাক্স এবং নিজস্ব শাসনাধিকার না থাকায় ১৭৭৬ সালের ৪
+                            জুলাই এই কলোনিগুলো গ্রেট ব্রিটেনের কাছ থেকে ডিক্লারেশন অফ ইন্ডিপেন্ডেন্স
+                            গ্রহণ করে একটি নতুন গণতান্ত্রিক দেশের জন্ম দেয়।</p>
+                        <p class="mb-4">১৯ শতকে এই দেশটি আটলান্টিক থেকে প্যাসিফিক মহাসাগর পর্যন্ত
+                            বিস্তৃত হয়। এই সময়টি আমেরিকান সিভিল ওয়ার এবং ইন্ডাস্ট্রিয়াল রেভ্যুলেশনের
+                            কারণে অত্যন্ত গুরুত্বপূর্ণ। ২০ শতকে প্রথম ও দ্বিতীয় বিশ্বযুদ্ধের পর USA একটি
+                            গ্লোবাল সুপারপাওয়ার হিসেবে আত্মপ্রকাশ করে।</p>
+                        <p>১৯৬৫ সালের Immigration and Nationality Act এর পর সাউথ এশিয়ান এবং বাংলাদেশীদের
+                            সাথে USA এর স্টুডেন্ট ও প্রফেশনালদের সম্পর্ক একটি নতুন মাত্রায় পৌঁছায়,
+                            যা আজকের বিশাল বাংলাদেশী কমিউনিটি গড়ে তুলতে সাহায্য করেছে।</p>
+                    </section>
+                    <!-- 4. ECONOMY & ECONOMIC GROWTH -->
+                    <section id="bn-economy" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_4.jpg"
+                                alt="Dollars and Economy"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The robust
+                                US economy, an engine for global growth</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📊 Economy & Economic Growth</h2>
+                        <p class="mb-4">The United States of America হলো পৃথিবীর সবচেয়ে বড় ইকোনমি,
+                            যা গ্লোবাল ইকোনমির প্রায় এক-চতুর্থাংশ। সিলিকন ভ্যালির টেকনোলজি সেক্টর,
+                            ওয়াল স্ট্রিটের ফাইন্যান্সিয়াল মার্কেট,
+                            এবং আধুনিক ম্যানুফ্যাকচারিং ও হেলথকেয়ার এই ইকোনমির মূল চালিকাশক্তি।</p>
+                        <p class="mb-4">যারা <strong>immigrate to the United States of America from
+                                Bangladesh</strong>করার কথা ভাবছেন,
+                            তাদের জন্য এখানকার জব মার্কেট খুবই প্রমিজিং। IT,
+                            নার্সিং এবং ইঞ্জিনিয়ারিং এ স্পেশালিস্টদের পাশাপাশি আনস্কিলড লেবার
+                            সেক্টরেও বিশাল ডিমান্ড রয়েছে। এখানকার অপরচুনিটি এবং <strong>the United
+                                States of America work permit for Bangladeshi</strong>প্রফেশনালদের
+                            একটি অত্যন্ত লাভজনক ক্যারিয়ার গড়তে সাহায্য করে।</p>
+                        <p class="mb-4">Living cost কোন শহরে বাস করছেন তার উপর নির্ভর করে।
+                            নিউইয়র্কের মতো শহরগুলো ব্যয়বহুল হলেও টেক্সাস বা মিডওয়েস্টের শহরগুলো বেশ
+                            অ্যাফোর্ডেবল। উপার্জন (USD)-কে বাংলাদেশী টাকায় (BDT) কনভার্ট করলে এটি
+                            আর্থিকভাবে একটি বিশাল সুবিধাজনক অবস্থান তৈরি করে।</p>
+                    </section>
+                    <!-- 5. POLITICAL STATUS & GOVERNMENT -->
+                    <section id="bn-politics" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_5.jpg"
+                                alt="US Capitol Building"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The United
+                                States Capitol, the seat of the US Congress</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🏛️ Political Status & Government</h2>
+                        <p class="mb-4">USA একটি ফেডারেল ডেমোক্রেটিক রিপাবলিক। এখানকার ক্ষমতা
+                            এক্সিকিউটিভ (প্রেসিডেন্ট),
+                            লেজিসলেটিভ (কংগ্রেস) এবং জুডিশিয়াল (সুপ্রিম কোর্ট)-এর মধ্যে বিভক্ত,
+                            যা একটি স্ট্রং ব্যালান্স তৈরি করে রেখেছে।</p>
+                        <p class="mb-4">রাজনৈতিক স্থিতিশীলতা এবং মানবাধিকার সংরক্ষণ এখানকার
+                            সবচেয়ে বড় হাতিয়ার। বিদেশী হিসেবে USA একটি অত্যন্ত নিরাপদ জায়গা,
+                            কারণ এখানকার আইনি প্রক্রিয়া (Rule of law) সবার জন্য সমান অধিকার
+                            নিশ্চিত করে।</p>
+                        <p>বাংলাদেশ এবং USA এর মধ্যে চমৎকার ডিপ্লোমেটিক এবং ট্রেড সম্পর্ক রয়েছে।
+                            এর ফলে ভিসা প্রোসেস এবং ইমিগ্রেশন রুলে একটি স্বচ্ছ গাইডলাইন পাওয়া
+                            যায়।</p>
+                    </section>
+                    <!-- 6. POPULATION & DEMOGRAPHICS -->
+                    <section id="bn-demographics" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_6.jpg"
+                                alt="Diverse Population"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A diverse
+                                and vibrant population making up the cultural melting pot</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            👨‍👩‍👧‍👦 Population & Demographics</h2>
+                        <p class="mb-4">৩৩০ মিলিয়নের বেশি পপুলেশন নিয়ে USA বিশ্বের তৃতীয়
+                            বৃহত্তম দেশ। একে "Nation of
+                            immigrants" বা অভিবাসীদের দেশ বলা হয়। ইউরোপীয়দের পাশাপাশি এখানে
+                            হিসপ্যানিক,
+                            আফ্রিকান-আমেরিকান এবং এশিয়ানদের বিশাল কমিউনিটি রয়েছে।</p>
+                        <p class="mb-4">এখানে প্রায় ২০০,
+                            ০০০ এরও বেশি বাংলাদেশী বাস করছেন,
+                            যাদের অধিকাংশই নিউইয়র্ক,
+                            টেক্সাস এবং মিশিগান এর মতো বড় শহরগুলোতে ছড়িয়ে আছেন। নতুন আগতদের
+                            জন্য এটি একটি বিশাল সাপোর্ট নেটওয়ার্ক হিসেবে কাজ করে।</p>
+                        <p>ইংলিশ এখানকার প্রধান ভাষা। এখানকার সংবিধানে কোনো নির্দিষ্ট ধর্মের
+                            প্রাধান্য নেই,
+                            তাই আপনি হাজার হাজার মসজিদ এবং ইসলামিক সেন্টার দেখতে পাবেন
+                            যেখানে কমিউনিটিগুলো নিরাপদে তাদের ধর্মীয় আচার পালন করতে পারে।
+                        </p>
+                    </section>
+                    <!-- 7. EDUCATION SYSTEM -->
+                    <section id="bn-education" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_15.jpg"
+                                alt="Ivy League University Campus"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">
+                                বিশ্ববিখ্যাত বিশ্ববিদ্যালয়গুলো অতুলনীয় গবেষণা এবং পড়াশোনার সুযোগ প্রদান করে।
+                            </figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🎓 Education System</h2>
+                        <p class="mb-4">আপনি যদি <strong>study in the United States of
+                                America from Bangladesh</strong>করার প্ল্যান করে থাকেন,
+                            তবে আপনি গ্লোবাল এডুকেশনের সর্বোচ্চ স্তরে পদার্পণ করতে
+                            যাচ্ছেন। হার্ভার্ড,
+                            স্ট্যানফোর্ড,
+                            এবং এমআইটির মতো বিশ্বসেরা বিশ্ববিদ্যালয়গুলো এখানে অবস্থিত যা
+                            রিসার্চ এবং প্র্যাক্টিকাল এডুকেশনের জন্য বিখ্যাত।</p>
+                        <p class="mb-4">বাংলাদেশী স্টুডেন্টদের জন্য পড়ালেখার মাধ্যম
+                            ইংলিশ। এখানকার সেমিস্টার সিস্টেম সাধারণত Fall
+                            (অগাস্ট/সেপ্টেম্বর) এবং Spring (জানুয়ারি) সেশনে বিভক্ত থাকে।
+                            ফ্লেক্সিবল কোর্স সিলেকশন এবং মেজর ডিক্লেয়ার করার সুযোগ
+                            এখানকার একটি বিশাল সুবিধা।</p>
+                        <p>এখানে পড়ার খরচ কমানোর জন্য টিচিং অ্যাসিস্ট্যান্টশিপ (TA),
+                            রিসার্চ অ্যাসিস্ট্যান্টশিপ (RA) সহ অনেক ধরনের <strong>the
+                                United States of America scholarship for Bangladeshi
+                                students</strong>এভেইলেবল রয়েছে। এখানকার ডিগ্রি সারা
+                            বিশ্বে অত্যন্ত ভ্যালুয়েবল,
+                            যা দ্রুত ক্যারিয়ার গ্রোথ নিশ্চিত করে।</p>
+                    </section>
+                    <!-- 8. TOURISM & TRAVEL -->
+                    <section id="bn-tourism" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_16.jpg"
+                                alt="Golden Gate Bridge Tourism"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">স্যান
+                                ফ্রান্সিস্কোর আইকনিক গোল্ডেন গেট ব্রিজ, ট্যুরিস্টদের অন্যতম আকর্ষণ</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            ✈️ Tourism & Travel</h2>
+                        <p class="mb-4">আপনি যদি <strong>visit the United States of
+                                America from Bangladesh</strong>করতে চান,
+                            তবে এটি সত্যিই একটি অবিশ্বাস্য অভিজ্ঞতা। নিউইয়র্কের টাইম
+                            স্কয়ার,
+                            ক্যালিফোর্নিয়ার সমুদ্রসৈকত থেকে শুরু করে গ্র্যান্ড
+                            ক্যানিয়নের মনোমুগ্ধকর দৃশ্য—এখানে ট্যুরিস্টদের জন্য সব
+                            ধরনের অ্যাট্রাকশন রয়েছে।</p>
+                        <p class="mb-4">এখানকার আবহাওয়া স্থানভেদে ভিন্ন,
+                            তবে সামার (জুন-অগাস্ট) সিজনটি ন্যাশনাল পার্কগুলো ঘোরার
+                            জন্য সবচেয়ে ভালো সময়।</p>
+                        <p>বাংলাদেশী মুসলিম ট্রাভেলারদের জন্য এখন নিউইয়র্ক,
+                            ডালাস,
+                            বা লস অ্যাঞ্জেলসে খুব সহজেই হালাল ফুড পাওয়া যায়। এখানে
+                            ট্রাভেল করা অত্যন্ত সেফ এবং সাউথ এশিয়ান ট্যুরিস্টদের
+                            প্রতি লোকাল আমেরিকানরা বেশ হেল্পফুল এবং ফ্রেন্ডলি হয়ে
+                            থাকে।</p>
+                    </section>
+                    <!-- 9. WHY BANGLADESHI PEOPLE SHOULD VISIT -->
+                    <section id="bn-why-visit" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_7.jpg"
+                                alt="Tourist taking photo"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">
+                                Unforgettable travel experiences and iconic landmarks</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🇧🇩 Why Bangladeshi People Should Visit the USA
+                        </h2>
+                        <p class="mb-4">যেকোনো ইন্টারন্যাশনাল ট্রিপের জন্য
+                            <strong>the United States of America tourist visa
+                                from Bangladesh</strong>পেলে তা আপনার চোখের
+                            সামনের পুরো পৃথিবীটাকেই বদলে দেবে। এখানে আসলে একদিকে
+                            যেমন আপনি অত্যাধুনিক শহরগুলো এক্সপ্লোর করতে পারবেন,
+                            অন্যদিকে প্রকৃতির এক অকল্পনীয় সৌন্দর্যের সাক্ষী
+                            হবেন।
+                        </p>
+                        <p class="mb-4">বাংলাদেশীদের জন্য এর একটি বড় সুবিধা হলো
+                            স্ট্রং ডায়াসপোরা। নিউইয়র্কের জ্যাকসন হাইটস বা
+                            শিকাগোর ডেভন এভিনিউতে গেলে আপনার মনেই হবে না যে আপনি
+                            দেশের বাইরে আছেন। সেখানে খাঁটি দেশীয় খাবার এবং
+                            আতিথেয়তা পাওয়া যায়।</p>
+                        <p>যেহেতু এখানকার মানুষ সাউথ এশিয়ান ট্যুরিস্টদের বেশ
+                            সমাদর করে,
+                            তাই আপনার ট্যুরিস্ট ভিসা পরবর্তীতে হায়ার স্টাডিজের
+                            জন্য ইউনিভার্সিটি ক্যাম্পাস পরিদর্শন কিংবা ফ্যামিলি
+                            মাইগ্রেশনের রাস্তা এক্সপ্লোর করার জন্য চমৎকার একটি
+                            সুযোগ হতে পারে।</p>
+                    </section>
+                    <!-- 10. WHY BANGLADESHIS SHOULD STUDY -->
+                    <section id="bn-why-study" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_8.jpg"
+                                alt="Students graduating"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">World-class
+                                education and promising career pathways</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🎓 Why Bangladeshis Should Study in the USA</h2>
+                        <p class="mb-4">যদি আপনি <strong>study in the United
+                                States of America from
+                                Bangladesh</strong>সিদ্ধান্তটি নেন,
+                            তবে সেটি হবে ভবিষ্যতের জন্য আপনার সেরা
+                            ইনভেস্টমেন্ট। ইউকে,
+                            কানাডা বা অস্ট্রেলিয়ার তুলনায় এখানকার রিসার্চ
+                            ফ্যাসিলিটি এবং ফানন্ডিং অনেক উন্নত।</p>
+                        <p class="mb-4">যদিও টিউশন ফি $15,
+                            000 থেকে $50,
+                            000 এর মতো হতে পারে,
+                            তবে প্রচুর স্কলারশিপ এবং অ্যাসিস্ট্যান্টশিপ
+                            রয়েছে। এছাড়া <strong>the United States of
+                                America student visa for
+                                Bangladesh</strong>(F-1 ভিসা) এর অধীনে
+                            স্টুডেন্টরা অন-ক্যাম্পাসে সপ্তাহে ২০ ঘণ্টা
+                            পার্ট-টাইম কাজ করতে পারেন,
+                            যা লিভিং এক্সপেন্সেস কভার করতে বিশাল ভূমিকা
+                            রাখে।</p>
+                        <p class="mb-4">অ্যাডমিশন পেতে সাধারণত IELTS (৬.০
+                            থেকে ৭.০ ব্যান্ড স্কোর) অথবা TOEFL এর মতো টেস্ট
+                            প্রয়োজন হয়। কম্পিউটার সায়েন্স,
+                            ইঞ্জিনিয়ারিং,
+                            পাবলিক হেলথ বা ডেটা সাইন্স এখানকার সবচেয়ে পপুলার
+                            কোর্স।</p>
+                        <p>গ্র্যাজুয়েশনের পর আপনি Post-Completion Optional
+                            Practical Training (OPT) এর আওতায় ১২ থেকে ৩৬
+                            মাসের মতো এখানে লিগ্যালি কাজ করার সুযোগ পাবেন,
+                            যা পরবর্তীতে H-1B ভিসা এবং গ্রিন কার্ড পাওয়ার
+                            প্রথম পদক্ষেপ হয়ে দাঁড়াতে পারে।</p>
+                    </section>
+                    <!-- 11. WHY BANGLADESHIS SHOULD CONSIDER IMMIGRATING
+                                                                    -->
+                    <section id="bn-why-immigrate" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A new
+                                beginning for families seeking opportunity in the USA</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🌍 Why Bangladeshis Should Consider
+                            Immigrating to the USA</h2>
+                        <p class="mb-4">একটি সুন্দর,
+                            সিকিউর এবং হাই-কোয়ালিটি জীবনের লক্ষ্য থাকলে
+                            <strong>immigrate to the United States of
+                                America from Bangladesh</strong>অত্যন্ত
+                            যৌক্তিক একটি সিদ্ধান্ত। এখানকার লাইফ
+                            কোয়ালিটি ইনডেক্স,
+                            হেলথকেয়ার এবং লিভিং স্ট্যান্ডার্ড পৃথিবীর
+                            যেকোনো দেশের তুলনায় অত্যন্ত উঁচু।
+                        </p>
+                        <p class="mb-4">স্কিলড প্রফেশনাল যেমন আইটি
+                            স্পেশালিস্ট,
+                            ডাক্তার এবং ইঞ্জিনিয়ারদের জন্য এখানকার
+                            স্যালারি সাউথ এশিয়ার তুলনায় বহুগুণ বেশি,
+                            যা শুধুমাত্র আপনার ক্যারিয়ারই নয়,
+                            বরং আপনার ফ্যামিলির ভবিষ্যৎকেও সম্পূর্ণ
+                            সুরক্ষিত করে।</p>
+                        <p class="mb-4">যাদের উচ্চতর ডিগ্রি বা
+                            এক্সপেরিয়েন্স নেই,
+                            তাদের জন্য <strong>the United States of
+                                America PR (Specially EB3 Unskilled) for
+                                Bangladeshi</strong>প্রোগ্রামটি একটি
+                            লাইফ-চেঞ্জিং সুযোগ। এটি আপনাকে এবং আপনার
+                            পরিবারের সবাইকে একসাথে ডিরেক্ট গ্রিন কার্ড
+                            দেয় এবং আপনার সন্তানের হাই স্কুল পর্যন্ত
+                            পড়াশোনার গ্যারান্টি দেয় আমেরিকান সিটিজেনদের
+                            মতোই। এখানকার বাংলাদেশী কমিউনিটি আপনাকে
+                            কালচারাল ইন্টিগ্রেশনে অত্যন্ত হেল্পফুল করবে।
+                        </p>
+                    </section>
+                    <!-- 12. HOW TO VISIT -->
+                    <section id="bn-how-to-visit" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_10.jpg"
+                                alt="Passport and Visa"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Securing a
+                                B1/B2 tourist visa requires careful documentation</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📋 How to Visit the USA from Bangladesh
+                        </h2>
+                        <p class="mb-4">ট্যুরিজম বা ভিজিটের জন্য
+                            <strong>the United States of America
+                                tourist visa from
+                                Bangladesh</strong>(B-1/B-2 ভিসা)
+                            পাবার নিয়মটি বেশ সোজাসাপ্টা হলেও,
+                            প্রতিটি ধাপে সতর্কতা প্রয়োজন:
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>স্টেপ ১: DS-160 ফর্ম ফিলাপ
+                                    করা:</strong>অনলাইনে আপনার
+                                ট্রাভেলের সব সঠিক ইনফরমেশন দিয়ে ফর্ম
+                                পূরণ করুন।</li>
+                            <li><strong>স্টেপ ২: ভিসা ফি
+                                    পেমেন্ট:</strong>বর্তমানে ভিসা
+                                ফি $185 (প্রায় ২০, ৫০০ টাকা),
+                                যা নির্ধারিত ব্যাংকে পে করতে হয়।
+                            </li>
+                            <li><strong>স্টেপ ৩: ইন্টারভিউ
+                                    শিডিউল:</strong>ঢাকার ইউএস
+                                এম্বেসিতে আপনার ইন্টারভিউয়ের ডেট বুক
+                                করুন।</li>
+                            <li><strong>স্টেপ ৪: ডকুমেন্টস রেডি
+                                    রাখা:</strong>৬ মাসের ভ্যালিড
+                                পাসপোর্ট,
+                                ব্যাংকের স্ট্রং স্টেটমেন্ট,
+                                সম্পত্তি এবং চাকরি প্রমাণকারী
+                                ডকুমেন্টসগুলো প্রস্তুত রাখুন যা
+                                প্রমাণ করে ভিসা শেষে আপনি বাংলাদেশে
+                                ফিরে আসবেন।</li>
+                            <li><strong>স্টেপ ৫: এম্বেসিতে
+                                    ইন্টারভিউ:</strong>কনস্যুলার
+                                অফিসারের প্রশ্নের সৎ এবং
+                                আত্মবিশ্বাসের সাথে উত্তর দিন।</li>
+                        </ul>
+                        <p>ট্যুরিস্ট ভিসা সাধারণত ৫ বছরের মাল্টিপল
+                            এন্ট্রি সহ ইস্যু করা হয়। ব্যাংকে
+                            অপর্যাপ্ত ফান্ড এবং বাংলাদেশে ফিরে আসার
+                            স্ট্রং এভিডেন্স না থাকাটা রিজেকশনের সব
+                            থেকে বড় কারণ।</p>
+                    </section>
+                    <!-- 13. HOW TO APPLY TO STUDY -->
+                    <section id="bn-how-to-study" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_11.jpg"
+                                alt="College Application"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Navigating
+                                university applications and securing the F-1 visa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            📚 How to Apply to Study in the USA
+                            from Bangladesh</h2>
+                        <p class="mb-4">সফলভাবে একটি <strong>the
+                                United States of America student
+                                visa for
+                                Bangladesh</strong>পাওয়ার জন্য
+                            সেশন শুরু হওয়ার অন্তত ১০ থেকে ১২ মাস
+                            আগে থেকে প্রস্তুতি নেওয়া উচিত।</p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>স্টেপ ১: ইউনিভার্সিটি
+                                    শর্টলিস্ট করা:</strong>আপনার
+                                রেজাল্ট এবং বাজেটের সাথে ম্যাচ
+                                করা ইউনিভার্সিটিগুলো চিহ্নিত
+                                করুন।</li>
+                            <li><strong>স্টেপ ২: রিকোয়ারমেন্টস
+                                    চেক:</strong>IELTS,
+                                TOEFL,
+                                SAT,
+                                GRE বা GMAT এর প্রয়োজনীয় স্কোর
+                                সম্পর্কে অবগত হোন।</li>
+                            <li><strong>স্টেপ ৩: অ্যাপ্লিকেশন
+                                    ডকুমেন্টস:</strong>ট্রান্সক্রিপ্ট,
+                                স্ট্রং স্টেটমেন্ট অফ পারপোজ
+                                (SOP),
+                                রিকমেন্ডেশন লেটার,
+                                এবং আপডেটেড CV প্রস্তুত করুন।
+                            </li>
+                            <li><strong>স্টেপ ৪: অ্যাপ্লাই
+                                    করা:</strong>সরাসরি অথবা Edu
+                                Abroad Limited এর মতো ট্রাস্টেড
+                                এজেন্সির মাধ্যমে অ্যাপ্লাই করুন।
+                            </li>
+                            <li><strong>স্টেপ ৫: I-20 ফর্ম
+                                    সংগ্রহ:</strong>অ্যাডমিশন
+                                পাওয়ার পর প্রথম বছরের টিউশন এবং
+                                থাকা-খাওয়ার টাকা ব্যাঙ্ক
+                                স্টেটমেন্টের মাধ্যমে শো করে I-20
+                                ফর্ম সংগ্রহ করুন।</li>
+                            <li><strong>স্টেপ ৬: F-1 ভিসা
+                                    অ্যাপ্লাই:</strong>DS-160
+                                ফর্ম ফিলাপ করে SEVIS ফি এবং ভিসা
+                                অ্যাপ্লিকেশন ফি দিয়ে
+                                ইন্টারভিউয়ের জন্য অ্যাপ্লাই
+                                করুন।</li>
+                        </ul>
+                    </section>
+                    <!-- 14. HOW TO IMMIGRATE -->
+                    <section id="bn-how-to-immigrate" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_12.jpg"
+                                alt="Statue of Liberty"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The Statue
+                                of Liberty, welcoming immigrants to new beginnings</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            🏠 How to Immigrate to the USA
+                            from Bangladesh</h2>
+                        <p class="mb-4"><strong>immigrate to
+                                the United States of America
+                                from Bangladesh</strong>করার
+                            কয়েকটি চমৎকার এবং নিশ্চিত রুট
+                            নিচে দেওয়া হলো:</p>
+                        <ul class="list-disc pl-6 space-y-2 mb-4">
+                            <li><strong>স্টুডেন্ট থেকে
+                                    প্রফেশনাল
+                                    পাথওয়ে:</strong>F-1
+                                ভিসায় পড়ার পর OPT এর মাধ্যমে
+                                কাজ পেয়ে,
+                                পরবর্তীতে H-1B ভিসা এবং
+                                ফাইনালি এমপ্লয়ার স্পনসরড
+                                গ্রিন কার্ড পাওয়া সম্ভব।
+                            </li>
+                            <li><strong>স্কিলড ওয়ার্কার
+                                    ভিসা:</strong>হাইলি
+                                স্কিলড প্রফেশনালরা EB-1,
+                                EB-2,
+                                অথবা EB-3 স্কিলড ক্যাটাগরিতে
+                                সরাসরি গ্রিন কার্ড পেতে
+                                পারেন,
+                                যদি স্পনসর করার মতো ইউএস
+                                এমপ্লয়ার থাকে।</li>
+                            <li><strong>EB-3 Unskilled
+                                    Program:</strong>এটি
+                                বাংলাদেশীদের জন্য একটি বিশাল
+                                সুযোগ। <strong>the United
+                                    States of America PR
+                                    (Specially EB3
+                                    Unskilled) for
+                                    Bangladeshi</strong>রুটে
+                                কোনো ডিগ্রি বা এক্সপেরিয়েন্স
+                                প্রয়োজন হয় না। একটি
+                                ট্রাস্টেড আমেরিকান এমপ্লয়ার
+                                আপনাকে এন্ট্রি-লেভেল জব
+                                স্পনসর করে,
+                                যা প্রসেস হতে ২-৪ বছর সময়
+                                লাগলেও সরাসরি আপনাকে এবং
+                                আপনার পরিবারকে গ্রিন কার্ড
+                                প্রদান করে।</li>
+                            <li><strong>ফ্যামিলি
+                                    স্পনসরশিপ:</strong>যদি
+                                আপনার কোনো ইমিডিয়েট ফ্যামিলি
+                                মেম্বার ইউএস সিটিজেন হয়ে
+                                থাকে,
+                                তবে তারা আপনার জন্য পিটিশন
+                                করতে পারেন।</li>
+                        </ul>
+                        <p>সফল ইমিগ্রেশন প্রসেসের জন্য সঠিক
+                            ডকুমেন্টস এবং এক্সপেরিয়েন্সড
+                            কন্সাল্ট্যান্ট এর হেল্প নেওয়া
+                            উচিত,
+                            যাতে প্রোসেসটি স্মুথ আর সহজ হয়।
+                        </p>
+                    </section>
+                    <!-- 15. HOW EDU ABROAD CAN HELP -->
+                    <section id="bn-how-we-help"
+                        class="bg-brand-50 p-8 rounded-3xl border border-brand-100 mt-12 mb-12 relative group clear-both">
+                        <figure
+                            class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_13.jpg"
+                                alt="Consultation Office"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Expert
+                                guidance
+                                and consultation at Edu Abroad Limited</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-brand-500 mb-4 flex items-center gap-2">
+                            💬 How Edu Abroad Limited
+                            Can Help You</h2>
+                        <p class="mb-4">ভিসা,
+                            ইউনিভার্সিটি অ্যাডমিশন এবং
+                            ইমিগ্রেশন আইনের এই জটিল
+                            ধাপগুলো একা মোকাবেলা করা
+                            অত্যন্ত কষ্টের হতে পারে।
+                            কিন্তু <a href="../index.html" class="text-brand-600 font-bold hover:underline">Edu
+                                Abroad Limited</a>আপনার
+                            এই জার্নিকে একেবারেই স্মুথ
+                            এবং নিশ্চিত করে তোলে। আপনি
+                            ভিজিট,
+                            স্টাডি বা ইমিগ্রেশন যেটাই
+                            খুঁজুন না কেন,
+                            আমরা দিচ্ছি পার্সোনালাইজড
+                            গাইডেন্স।</p>
+                        <p class="mb-4">টপ-টিয়ার
+                            ইউনিভার্সিটি শর্টলিস্টিং,
+                            নিখুঁত SOP তৈরি করা থেকে
+                            শুরু করে কঠিন ভিসা
+                            ইন্টারভিউয়ের প্রস্তুতি এবং
+                            বিশেষ করে <strong>the United
+                                States of America PR
+                                (Specially EB3
+                                Unskilled) for
+                                Bangladeshi</strong>অ্যাপ্লিকেশনের
+                            সব স্টেপে আমরা আপনাকে হেল্প
+                            করবো।</p>
+                        <p>আপনার আমেরিকান ড্রিম পূরণ করা
+                            সম্ভব। আর দেরি না করে আজই <a href="../index.html#consultation-form-section"
+                                class="text-brand-600 font-bold underline">book
+                                a free consultation</a>এ
+                            ক্লিক করুন আর ভবিষ্যতের পথে
+                            আপনার যাত্রা শুরু হোক আমাদের
+                            সাথেই !</p>
+                        <p class="text-xs text-gray-400 mt-6 pt-4 border-t border-gray-200">
+                            <em>Edu Abroad Limited | Do
+                                not distribute without
+                                permission.</em>
+                        </p>
+                    </section>
+                    <!-- 16. FAQ -->
+                    <section id="bn-faq" class="relative group mt-8 clear-both">
+                        <figure
+                            class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/usa/usa_sec_14.jpg"
+                                alt="Questions and Answers"
+                                class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Got
+                                questions? We have the answers.</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            ❓ Frequently Asked
+                            Questions (FAQ)</h2>
+                        <div class="space-y-6">
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: বাংলাদেশীদের
+                                    জন্য United
+                                    States of
+                                    America কি
+                                    নিরাপদ?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    হ্যাঁ,
+                                    এটি সাধারণত
+                                    অত্যন্ত নিরাপদ।
+                                    পৃথিবীর যেকোনো
+                                    দেশের মতোই আপনার
+                                    কমন সেন্স এবং
+                                    লোকেশন অনুযায়ী
+                                    সতর্কতা বজায়
+                                    রাখা উচিত।
+                                    এখানকার
+                                    ইউনিভার্সিটি
+                                    ক্যাম্পাস এবং
+                                    লোকাল
+                                    রেসিডেন্সিয়াল
+                                    এরিয়াগুলো খুবই
+                                    সিকিউরড।</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: বাংলাদেশীদের
+                                    জন্য USA তে পড়ার
+                                    খরচ কত হতে পারে?
+                                </h3>
+                                <p class="text-gray-600 mt-1">
+                                    টিউশন ফি সাধারণত
+                                    বছরে $15,
+                                    000 থেকে $50,
+                                    000 এর মতো হতে
+                                    পারে। তবে
+                                    <strong>the
+                                        United
+                                        States of
+                                        America
+                                        scholarship
+                                        for
+                                        Bangladeshi
+                                        students</strong>এবং
+                                    পার্ট-টাইম কাজ
+                                    করার সুযোগ থাকায়
+                                    লিভিং কভার করা
+                                    অনেক সহজ হয়ে
+                                    যায়।
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: USA তে
+                                    পড়াশোনার
+                                    পাশাপাশি কি কাজ
+                                    করা যায়? </h3>
+                                <p class="text-gray-600 mt-1">
+                                    হ্যাঁ ! F-1
+                                    ভিসার অধীনে
+                                    ইন্টারন্যাশনাল
+                                    স্টুডেন্টরা
+                                    সেমিস্টার
+                                    চলাকালীন
+                                    অন-ক্যাম্পাসে
+                                    সপ্তাহে ২০ ঘণ্টা
+                                    এবং ছুটির সময়
+                                    ফুল-টাইম বা
+                                    সপ্তাহে ৪০ ঘণ্টা
+                                    কাজ করতে পারেন।
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: USA তে কি
+                                    বিশাল বাংলাদেশী
+                                    কমিউনিটি আছে?
+                                </h3>
+                                <p class="text-gray-600 mt-1">
+                                    অবশ্যই। প্রায়
+                                    ২০০,
+                                    ০০০ এরও বেশি
+                                    বাংলাদেশী USA তে
+                                    বসবাস করছেন।
+                                    নিউইয়র্ক,
+                                    লস অ্যাঞ্জেলস,
+                                    এবং টেক্সাস এ
+                                    অনেক সাপোর্টিভ
+                                    ডায়াস্পোরা
+                                    রয়েছে।</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: বাংলাদেশ থেকে
+                                    USA এর কোন ভিসা
+                                    পাওয়া সবচেয়ে
+                                    সহজ?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    এটি আপনার
+                                    যোগ্যতার উপর
+                                    নির্ভর করে।
+                                    আপনার যদি ফান্ড
+                                    এবং অ্যাডমিশন
+                                    কনফার্ম থাকে তবে
+                                    <strong>the
+                                        United
+                                        States of
+                                        America
+                                        student visa
+                                        for
+                                        Bangladesh</strong>(F-1)
+                                    বেশ সহজলভ্য। আর
+                                    ইমিগ্রেশনের জন্য
+                                    EB-3 Unskilled
+                                    ভিসা অত্যন্ত
+                                    সুবিধাজনক।
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: USA তে স্টাডি
+                                    করতে কত IELTS
+                                    স্কোর প্রয়োজন?
+                                </h3>
+                                <p class="text-gray-600 mt-1">
+                                    সাধারণত,
+                                    আন্ডারগ্র্যাজুয়েট
+                                    বা গ্র্যাজুয়েট
+                                    প্রোগ্রামের জন্য
+                                    overall ৬.০ থেকে
+                                    ৭.০ ব্যান্ড
+                                    স্কোর প্রয়োজন
+                                    হয়। টপ র‍্যাংকিং
+                                    ইউনিভার্সিটির
+                                    জন্য ৬.৫ বা তার
+                                    বেশি প্রয়োজন হতে
+                                    পারে।</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: USA তে PR
+                                    পেতে কত সময়
+                                    লাগে?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    এটি নির্ভর করে
+                                    আপনার রুটের উপর।
+                                    EB-3 Unskilled
+                                    রুটে বর্তমানে
+                                    প্রসেস সম্পন্ন
+                                    হতে ২ থেকে ৪ বছর
+                                    সময় লাগে,
+                                    এবং এটি আমেরিকায়
+                                    পা রাখার সাথে
+                                    সাথেই আপনার
+                                    পরিবারসহ গ্রিন
+                                    কার্ড নিশ্চিত
+                                    করে।</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 class="font-bold text-gray-900 text-lg">
+                                    Q: USA তে কি
+                                    হালাল খাবার
+                                    পাওয়া যায়?</h3>
+                                <p class="text-gray-600 mt-1">
+                                    হ্যাঁ। বিশাল
+                                    মুসলিম কমিউনিটির
+                                    কারণে এখন
+                                    প্রতিটি বড় শহর
+                                    এবং
+                                    ইউনিভার্সিটির
+                                    আশেপাশেই খুব
+                                    সহজে হালাল
+                                    রেস্টুরেন্ট,
+                                    সুপারমার্কেট বা
+                                    মিট ডেলিভারি
+                                    সার্ভিস পাওয়া
+                                    যায়।</p>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+                <!-- Footer/CTA Area -->
+                <div class="mt-16 pt-12 border-t border-gray-100 text-center">
+                    <p class="text-sm font-bold uppercase tracking-widest text-brand-500 mb-6">Ready to Lock in
+                        Your Future?</p>
+                    <div class="bg-brand-900 rounded-[2rem] p-8 md:p-12 text-white relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <h3 class="text-[1.5rem] md:text-[2rem] font-black uppercase mb-4">Get 10% Off Your
+                                Service Fee</h3>
+                            <p class="text-white/70 mb-8 max-w-xl mx-auto">Start your journey before the end of
+                                the month to lock in this special discounted rate.</p><a
+                                href="../index.html#consultation-form-section"
+                                class="inline-block px-12 py-5 bg-white text-brand-900 font-black uppercase tracking-widest rounded-2xl hover:bg-brand-100 transition-all hover:scale-105 active:scale-95 shadow-2xl">Claim
+                                My Discount </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===========================
+             FEATURED UNIVERSITIES (USA)
+             =========================== -->
+        <section class="py-20 md:py-24 relative overflow-hidden" style="background:#0f1b3b;">
+            <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-[#00a2e8]/20 blur-3xl elig-float"></div>
+            <div class="container mx-auto px-6 max-w-6xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-12 reveal-up">
+                    <div class="text-[#00a2e8] text-[13px] uppercase tracking-[0.25em] font-bold mb-4">Partner Institutions</div>
+                    <h2 class="text-[28px] md:text-[42px] font-bold text-white leading-[1.15] mb-4">Featured Universities in the <span class="text-[#00a2e8]">USA</span></h2>
+                    <p class="text-white/70 text-[16px] leading-relaxed">Not sure which one fits your profile? Use our Eligibility Checker to instantly see requirements and documents.</p>
+                </div>
+                <div id="usa-uni-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"></div>
+                <div class="text-center reveal-up">
+                    <a href="index.html#eligibility-section" class="inline-flex items-center gap-2 bg-[#00a2e8] hover:bg-white hover:text-[#1b3168] text-white font-bold text-[13px] uppercase tracking-wider rounded-full px-8 py-4 transition-all duration-300">
+                        Check My Eligibility
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer/CTA Area structure remains intact -->
+    <!-- Language Toggle Script -->
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <div id="scroll-progress"></div>
+    <script>
+        (function () {
+            function money(n) { return '৳' + Number(n || 0).toLocaleString('en-IN'); }
+            function cardHTML(u) {
+                return '' +
+                    '<div class="premium-card reveal-up">' +
+                    '  <div class="pc-img-wrap"><img src="' + u.image + '" alt="' + u.name + '" loading="lazy">' +
+                    '    <span class="pc-ranking-badge">' + (u.ranking || u.country) + '</span>' +
+                    '    <span class="pc-price-badge">' + money(u.minBudgetBDT) + '+</span>' +
+                    '  </div>' +
+                    '  <div class="p-5">' +
+                    '    <div class="flex items-center gap-1.5 text-gray-400 text-[12px] mb-1.5 font-medium">' + u.city + ', ' + u.country + '</div>' +
+                    '    <h3 class="font-bold text-[17px] text-gray-900 leading-snug mb-3">' + u.name + '</h3>' +
+                    '    <div class="flex items-center gap-4 text-[13px] text-gray-500 mb-4 pb-4 border-b border-gray-100"><span>IELTS ' + u.minIELTS + '+</span><span>Age ' + u.minAge + '-' + u.maxAge + '</span></div>' +
+                    '    <a href="index.html#eligibility-section" class="block w-full text-center border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-full py-2.5 text-[13px] font-bold uppercase tracking-wide">View Details</a>' +
+                    '  </div>' +
+                    '</div>';
+            }
+            var wrap = document.getElementById('usa-uni-cards');
+            if (wrap && window.EduAuth) {
+                var unis = EduAuth.allUniversities().filter(function (u) { return u.country === 'USA'; });
+                wrap.innerHTML = unis.map(cardHTML).join('');
+            }
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal-up').forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
+    <script>function toggleLanguage() {
+            const btn = document.getElementById('langToggleBtn');
+            const articleEn = document.getElementById('article-en');
+            const articleBn = document.getElementById('article-bn');
+            const titleEn = document.getElementById('title-en');
+            const titleBn = document.getElementById('title-bn');
+
+            if (articleBn.classList.contains('hidden')) {
+                // Switch to Bangla
+                articleBn.classList.remove('hidden');
+                titleBn.classList.remove('hidden');
+                articleEn.classList.add('hidden');
+                titleEn.classList.add('hidden');
+                btn.textContent = 'English';
+                btn.classList.replace('bg-brand-500', 'bg-gray-900');
+                btn.classList.replace('hover:bg-brand-600', 'hover:bg-gray-800');
+            }
+
+            else {
+                // Switch to English
+                articleEn.classList.remove('hidden');
+                titleEn.classList.remove('hidden');
+                articleBn.classList.add('hidden');
+                titleBn.classList.add('hidden');
+                btn.textContent = 'Bangla';
+                btn.classList.replace('bg-gray-900', 'bg-brand-500');
+                btn.classList.replace('hover:bg-gray-800', 'hover:bg-brand-600');
+            }
+        }
+
+    </script>
+
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu" class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar" class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0"></div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About
+            </a>
+            <a href="index.html#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Services
+            </a>
+            <a href="index.html#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Destinations
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path></svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Blog
+            </a>
+            <a href="company-profile.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line></svg>
+                Company Profile
+            </a>
+            <a href="Appointment-form.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Book Appointment
+            </a>
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html" class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">Login</a>
+                <a href="Appointment-form.html" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Get Started</a>
+            </div>
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Go to Portal</a>
+                <button type="button" id="mobile-logout-btn" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var windist = document.documentElement.scrollTop;
+            var winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = winheight ? (windist / winheight) * 100 : 0;
+            var progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        var menuClose = document.getElementById('mobile-menu-close');
+        var menuDrawer = document.getElementById('mobile-menu-drawer');
+        var menuOverlay = document.getElementById('mobile-menu-overlay');
+        var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) closeMenu(); else openMenu();
+        }
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(function (link) {
+                link.addEventListener('click', function () { if (menuDrawer.classList.contains('active')) closeMenu(); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) closeMenu();
+            });
+        }
+
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+            var user = EduAuth.currentUser();
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+            if (!user) return;
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) { authedActions.classList.remove('hidden'); authedActions.classList.add('flex'); }
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+            if (logoutBtn) logoutBtn.addEventListener('click', function () { EduAuth.logout(); window.location.href = 'index.html'; });
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canada | Edu Abroad</title>
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1b3168',
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#e0e8ff',
+                            500: '#1b3168',
+                            600: '#152654',
+                            700: '#0f1b3b',
+                            900: '#090f23',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+    html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+    }
+
+    body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #1a202c;
+    }
+
+    h1 { font-size: 2.5rem; line-height: 1.2; font-weight: 900; }
+    h2 { font-size: 2rem; line-height: 1.2; font-weight: 700; }
+    h3 { font-size: 1.5rem; line-height: 1.2; font-weight: 700; }
+
+    .hero-gradient {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    }
+
+    .content-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Glassmorphism Header from index.html */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* For inner pages like USA, we want the text to be dark/visible since it might not be a dark background at the top */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        .elig-float { animation: floatSlow 6s ease-in-out infinite; }
+        .premium-card { border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid #eef0f4; box-shadow: 0 2px 12px rgba(17, 24, 39, 0.05); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease; }
+        .premium-card:hover { transform: translateY(-8px); box-shadow: 0 24px 40px -12px rgba(17, 24, 39, 0.18); }
+        .premium-card .pc-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+        .premium-card .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .premium-card:hover .pc-img-wrap img { transform: scale(1.09); }
+        .pc-ranking-badge { position: absolute; top: 14px; left: 14px; background: rgba(27,49,104,0.92); color: #fff; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+        .pc-price-badge { position: absolute; bottom: 14px; right: 14px; background: #fff; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); color: #1b3168; }
+        .reveal-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
+    
+        #mobile-menu-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(400px, 88vw); background: #ffffff; z-index: 1001; transform: translateX(100%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -18px 0 50px rgba(0,0,0,.12); overflow-y: auto; }
+        #mobile-menu-drawer.active { transform: translateX(0); }
+        #mobile-menu-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+        #mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .hamburger-line { transition: all .3s ease; transform-origin: center; }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+        .sidebar-link { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .85rem 1rem; border-radius: .75rem; color: #374151; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; transition: background-color .2s ease, color .2s ease; text-align: left; }
+        .sidebar-link:hover { background: #f3f4f6; color: #1b3168; }
+        .sidebar-link.active-page { background: rgba(27,49,104,0.08); color: #1b3168; }
+        .sidebar-link svg { flex-shrink: 0; color: #9ca3af; transition: color .2s ease; }
+        .sidebar-link:hover svg, .sidebar-link.active-page svg { color: #1b3168; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #1b3168, #00a2e8); z-index: 1000; width: 0%; transition: width .1s ease; }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4144669152460134');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'Destination: Canada' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4144669152460134&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Global Header -->
+    <header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="w-10 flex items-center text-gray-700 hover:text-primary transition-colors" aria-label="Back to Home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=2170&auto=format&fit=crop"
+            alt="Canada" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-[2rem] md:text-[2.5rem] font-black text-white uppercase tracking-tighter mb-4">Canada</h1>
+            <p class="text-[1rem] md:text-[1.25rem] text-white/90 font-medium tracking-wide">A Welcoming Beacon for Your
+                Future
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <main class="container mx-auto px-6 py-16 md:py-24">
+        <div class="max-w-4xl mx-auto">
+            <div class="content-card rounded-[2.5rem] p-8 md:p-16">
+                <div class="flex justify-end mb-6">
+                    <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-brand-500 text-white font-bold py-2.5 px-8 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-600 transition-all transform hover:-translate-y-1">Bangla</button>
+                </div>
+                <h1 id="title-en" class="text-[1.5rem] md:text-[2.25rem] font-black text-brand-500 mb-8 border-b border-gray-100 pb-6 uppercase tracking-tight">
+                    Study, Visit & Immigrate: The Ultimate Guide to Canada for Bangladeshis
+                </h1>
+                <h1 id="title-bn" class="hidden text-[1.5rem] md:text-[2.25rem] font-black text-brand-500 mb-8 border-b border-gray-100 pb-6 uppercase tracking-tight">
+                    Study, Visit & Immigrate: বাংলাদেশীদের জন্য কানাডার সম্পূর্ণ গাইড
+                </h1>
+                <article id="article-en" class="space-y-12 text-[1rem] md:text-[1.125rem] leading-[1.75] text-gray-700">
+                    <!-- INTRODUCTION -->
+                    <section id="introduction" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1542668595-fa939bece983?q=80&w=2070&auto=format&fit=crop" alt="Canadian Rocky Mountains" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The majestic Canadian Rockies in Alberta</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌟 Introduction</h2>
+                        <p class="mb-4">Canada is widely celebrated as one of the most welcoming, safe, and beautiful countries in the world. Stretching across the northern half of North America, it is a land of breathtaking diversity—both in its stunning landscapes, which range from the majestic Rocky Mountains to the rugged coastlines of the Maritimes, and in its vibrant, multicultural population.</p>
+                        <p class="mb-4">For decades, Canada has been a top destination for Bangladeshi students, skilled professionals, and families seeking a high quality of life. Its policies are explicitly designed to embrace immigrants, making it easier than almost anywhere else to transition from temporary study or work into permanent residency and eventually citizenship.</p>
+                    </section>
+                    <!-- OVERVIEW -->
+                    <section id="overview" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_1.jpg" alt="Canada Maple Leaf" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The iconic Maple Leaf flag</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🗺️ Country Overview</h2>
+                        <p class="mb-4">As the second-largest country in the world by total area, Canada consists of 10 provinces and 3 territories. Its capital is Ottawa, while major global cities like Toronto, Vancouver, and Montreal serve as economic and cultural hubs.</p>
+                        <p class="mb-4">Canada is officially bilingual, with English and French as its two official languages, though English is predominant in most provinces except Quebec. The country's currency is the Canadian Dollar (CAD).</p>
+                        <p class="mb-4">Because of its immense size, Canada experiences varied climates, but it is famous for its distinct four seasons, including cold, snowy winters and warm, beautiful summers. The commitment to a multicultural society ensures that immigrants from Bangladesh can seamlessly integrate while preserving their own rich heritage.</p>
+                    </section>
+                    <!-- HISTORY -->
+                    <section id="history" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1562919318-c2af2faffed6?q=80&w=2070&auto=format&fit=crop" alt="Parliament Hill Ottawa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Parliament Hill in the capital city of Ottawa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📜 History</h2>
+                        <p class="mb-4">Canada's history stretches back thousands of years with its Indigenous peoples (First Nations, Inuit, and Métis), whose deep connection to the land forms the cornerstone of Canadian heritage. Later, French and British colonization shaped the early political landscape.</p>
+                        <p class="mb-4">Canada peacefully transitioned into an independent nation, officially confederating in 1867. Modern Canadian history is characterized by a strong commitment to peace, human rights, and the historic 1971 declaration making Canada the world's first country to adopt multiculturalism as an official state policy.</p>
+                    </section>
+                    <!-- ECONOMY -->
+                    <section id="economy" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_3.jpg" alt="Toronto Skyline" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Toronto, Canada's financial and economic center</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📊 Economy & Economic Growth</h2>
+                        <p class="mb-4">Canada boasts a highly developed, mixed economy and is an active member of the G7. Its economy is deeply intertwined with that of the United States, facilitating massive cross-border trade.</p>
+                        <p class="mb-4">Key drivers of the Canadian economy include its abundant natural resources (such as oil, gas, and timber), a robust manufacturing sector, and rapidly growing tech hubs in cities like Toronto, Vancouver, and Waterloo.</p>
+                        <p class="mb-4">For professionals migrating from Bangladesh, the Canadian job market is highly favorable, particularly in IT, healthcare, engineering, nursing, and skilled trades. Salaries are highly competitive and accompanied by comprehensive workplace benefits.</p>
+                    </section>
+                    <!-- POLITICS -->
+                    <section id="politics" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1490212002302-386617a7806f?q=80&w=2070&auto=format&fit=crop" alt="Canadian Flag Waving" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Canada's strong democratic institutions</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🏛️ Political Status & Government</h2>
+                        <p class="mb-4">Canada is a parliamentary democracy and a constitutional monarchy. King Charles III is the head of state, while an elected Prime Minister leads the federal government.</p>
+                        <p class="mb-4">The political climate in Canada is incredibly stable, characterized by progressive social policies, universal healthcare, and a strong emphasis on equality and human rights. This robust legal framework ensures safety and security for international students and immigrants.</p>
+                    </section>
+                    <!-- DEMOGRAPHICS -->
+                    <section id="demographics" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_5.jpg" alt="Diverse Population" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A multicultural society built on inclusivity</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">👨‍👩‍👧‍👦 Population & Demographics</h2>
+                        <p class="mb-4">Despite its massive landmass, Canada has a relatively small population of roughly 40 million people, heavily concentrated in urban centers near the southern border.</p>
+                        <p class="mb-4">Because of its reliance on immigration for population growth, Canada is incredibly diverse. The Bangladeshi diaspora is large, well-established, and thriving, particularly in Toronto and Montreal. You will easily find Halal food, South Asian grocery chains, and vibrant cultural community centers throughout major Canadian cities.</p>
+                    </section>
+                    <!-- EDUCATION -->
+                    <section id="education" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_6.jpg" alt="University Campus" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">World-renowned research universities and colleges</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🎓 Education System</h2>
+                        <p class="mb-4">Canada's education system is globally revered, offering world-class universities like the University of Toronto, McGill University, and UBC. Alongside universities, Canada has a robust network of community colleges offering highly practical, job-oriented diplomas and post-graduate certificates.</p>
+                        <p class="mb-4">Degrees and diplomas from Canada are recognized worldwide. Furthermore, compared to the US and UK, Canadian tuition fees are often more affordable, and the cost of living in smaller college towns is highly manageable for Bangladeshi students.</p>
+                    </section>
+                    <!-- TOURISM -->
+                    <section id="tourism" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_7.jpg" alt="Banff National Park" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The pristine blue waters of Banff National Park</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">✈️ Tourism & Travel</h2>
+                        <p class="mb-4">Canada is a premier tourist destination for nature lovers and urban explorers alike. You can witness the spectacular Niagara Falls, ski the world-renowned slopes of Whistler, or explore the historic, European-style streets of Old Quebec.</p>
+                        <p class="mb-4">The country's vast expanse of national parks, lakes, and mountains offers unparalleled opportunities for hiking, camping, and experiencing true wilderness, including the magical Northern Lights in the northern territories.</p>
+                    </section>
+                    <!-- WHY-VISIT -->
+                    <section id="why-visit" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1526365997-6a1ea03c1d93?q=80&w=2028&auto=format&fit=crop" alt="Niagara falls" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Canada offers a mix of urban luxury and natural wonders</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🇧🇩 Why Bangladeshi People Should Visit</h2>
+                        <p class="mb-4">Securing a Canadian Temporary Resident Visa (Visitor Visa) opens up a world of exploration. For Bangladeshis, it is an incredible destination to visit family members who have immigrated, attend prestigious conferences, or simply take a vacation in a beautiful, highly developed, and remarkably safe environment.</p>
+                        <p class="mb-4">A visitor visa also provides an excellent opportunity to explore Canadian university campuses in person or assess the job market and living conditions if you are considering a permanent move in the future.</p>
+                    </section>
+                    <!-- WHY-STUDY -->
+                    <section id="why-study" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_9.jpg" alt="Students graduating" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Education in Canada is a direct pathway to permanent residency</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🎓 Why Bangladeshis Should Study in Canada</h2>
+                        <p class="mb-4">Studying in Canada is perhaps the single most effective pathway for a Bangladeshi student to build a permanent life abroad. The education is top-tier, yet more cost-effective than its southern neighbor, the US.</p>
+                        <p class="mb-4">International students can work part-time (20 hours per week) during their studies. The most significant advantage is the Post-Graduation Work Permit (PGWP), which allows graduates to work in Canada for up to three years after completing an eligible program. This Canadian work experience directly translates into highly required points for Canadian Permanent Residency (PR).</p>
+                    </section>
+                    <!-- WHY-IMMIGRATE -->
+                    <section id="why-immigrate" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_10.jpg" alt="City life and diverse neighborhood" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A welcoming society with free healthcare and education</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌍 Why Consider Immigrating to Canada</h2>
+                        <p class="mb-4">Canada sets annual immigration targets aiming to welcome hundreds of thousands of new permanent residents every year. The benefits of Canadian PR are phenomenal: access to free, world-class public healthcare, free public schooling for your children until the 12th grade, and the protection of the Canadian Charter of Rights and Freedoms.</p>
+                        <p class="mb-4">As a permanent resident, you live and work anywhere in Canada, and after just three years of physical presence, you can apply for Canadian citizenship, securing one of the most powerful passports in the world.</p>
+                    </section>
+                    <!-- HOW-TO-VISIT -->
+                    <section id="how-to-visit" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_11.jpg" alt="Passport and Visa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Securing your Canada Visitor Visa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📋 How to Visit Canada from Bangladesh</h2>
+                        <p class="mb-4">To visit Canada, Bangladeshi citizens must apply for a Temporary Resident Visa (TRV) online through the IRCC portal. The key to a successful TRV application is proving strong ties to Bangladesh, ensuring the officer that you will return home after your visit.</p>
+                        <p class="mb-4">You must supply comprehensive financial documents, including bank statements, income tax returns, and property valuations, alongside an invitation letter if you are visiting relatives, or a detailed travel itinerary if you are going for tourism.</p>
+                    </section>
+                    <!-- HOW-TO-STUDY -->
+                    <section id="how-to-study" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_12.jpg" alt="Student Visa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Applying to Designated Learning Institutions (DLIs)</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📚 How to Apply to Study</h2>
+                        <p class="mb-4">Your first step is to secure an acceptance letter from a Canadian Designated Learning Institution (DLI). Depending on the province, applying to colleges and universities may require specific credential evaluations.</p>
+                        <p class="mb-4">Once accepted, you must apply for a Study Permit. This requires proving you have the funds to cover your first year of tuition plus $20,635 CAD for living expenses. Good academic standing and a strong IELTS score (usually 6.0 to 6.5 minimum) are vital for a successful application. Edu Abroad Limited helps you craft a compelling Statement of Purpose (SOP) to maximize visa approval chances.</p>
+                    </section>
+                    <!-- HOW-TO-IMMIGRATE -->
+                    <section id="how-to-immigrate" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1628172909405-b77da33e9d0a?q=80&w=2070&auto=format&fit=crop" alt="Vancouver Skyline" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Express Entry and Provincial Nominee Programs</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🏠 How to Immigrate (PR Pathways)</h2>
+                        <p class="mb-4">The primary pathway for skilled workers outside Canada is to apply directly through the highly competitive Express Entry system. It awards points based on age, education, work experience, and language proficiency (IELTS).</p>
+                        <p class="mb-4">If your Express Entry score is not high enough, the Provincial Nominee Programs (PNPs) offer alternative routes. Provinces like Saskatchewan, Alberta, and Ontario regularly nominate candidates with specific skills required in their local labor markets. Studying in Canada bypasses much of this difficulty, granting immense extra points towards your PR score.</p>
+                    </section>
+                    <!-- HOW-WE-HELP -->
+                    <section id="how-we-help" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_14.jpg" alt="Edu Abroad Office" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Your trusted partner for Canadian admissions and visas</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">💬 How Edu Abroad Limited Can Help You</h2>
+                        <p class="mb-4 text-brand-700 font-medium">Canada's immigration and student visa laws are complex and frequently updated. A minor error can result in a refusal. Edu Abroad Limited offers end-to-end guidance, from selecting the right diploma or degree that perfectly aligns with PR demand, to submitting a flawless visa application.</p>
+                        <p class="mb-4 text-brand-700 font-medium">We handle university admissions, ensure your documents meet IRCC standards, process GIC (Guaranteed Investment Certificate) setups, and offer pre-departure briefings. Our focus is long-term: we don't just send you to study; we chart your optimal path to Canadian Permanent Residency.</p>
+                    </section>
+                    <!-- FAQ -->
+                    <section id="faq" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_15.jpg" alt="FAQ Questions" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Answers to your top questions</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">❓ Frequently Asked Questions (FAQ)</h2>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: Which is better for PR, a university degree or a college diploma?</strong><br>A: While a university degree offers higher academic prestige, two-year college diplomas are highly popular among Bangladeshis because they are more affordable, intensely focused on market skills, and equally qualify you for a 3-year PGWP, making them an excellent PR pathway.</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: How much does it cost to study in Canada?</strong><br>A: College diplomas usually cost between $15,000 to $20,000 CAD per year, whereas University degrees can range from $25,000 to over $40,000 CAD annually. It's crucial to prepare your finances accordingly.</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: Can I take my spouse with me?</strong><br>A: With recent policy updates in 2024, open work permits are now primarily restricted to the spouses of students in Master's and Doctoral programs, rather than undergraduate or college diploma programs. We can advise you on your specific situation.</p>
+                    </section>
+                </article>
+
+                <article id="article-bn" class="hidden space-y-12 text-[1rem] md:text-[1.125rem] leading-[1.75] text-gray-700">
+                    <!-- BN-INTRODUCTION -->
+                    <section id="bn-introduction" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1542668595-fa939bece983?q=80&w=2070&auto=format&fit=crop" alt="Canadian Rocky Mountains" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The majestic Canadian Rockies in Alberta</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌟 পরিচিতি</h2>
+                        <p class="mb-4">কানাডা বিশ্বব্যাপী অন্যতম সবচেয়ে স্বাগত জানানো, নিরাপদ এবং সুন্দর একটি দেশ হিসেবে সুপরিচিত। উত্তর আমেরিকার উত্তরাংশ জুড়ে বিস্তৃত এই দেশটি তার বৈচিত্র্যময় প্রাকৃতিক সৌন্দর্য যেমন— রকি পর্বতমালার রাজকীয় চূড়া থেকে শুরু করে আটলান্টিক উপকূলের সৌন্দর্য এবং বহুসংস্কৃতির জনসাধারণের জন্য বিখ্যাত।</p>
+                        <p class="mb-4">কানাডা দীর্ঘকাল যাবৎ বাংলাদেশী শিক্ষার্থী, দক্ষ পেশাজীবী এবং উন্নত জীবনমানের সন্ধানে থাকা পরিবারগুলোর অন্যতম শীর্ষ গন্তব্য। দেশটির অভিবাসন নীতিগুলো খুব সহজ ও অভিবাসনবান্ধব হওয়ায় এখানে পড়াশোনা বা চাকরি থেকে খুব সহজেই স্থায়ী বসবাস (পিআর) এবং নাগরিকত্ব লাভ করা সম্ভব।</p>
+                    </section>
+                    <!-- BN-OVERVIEW -->
+                    <section id="bn-overview" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_1.jpg" alt="Canada Maple Leaf" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The iconic Maple Leaf flag</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🗺️ দেশ সম্পর্কে ধারণা</h2>
+                        <p class="mb-4">আয়তনের দিক থেকে কানাডা বিশ্বের দ্বিতীয় বৃহত্তম দেশ, যা ১০টি প্রদেশ এবং ৩টি টেরিটরি নিয়ে গঠিত। এর রাজধানী অটোয়া, তবে টরোন্টো, ভ্যাঙ্কুভার এবং মন্ট্রিলের মতো শহরগুলো এর অর্থনীতি ও সংস্কৃতির প্রধান কেন্দ্র।</p>
+                        <p class="mb-4">কানাডা দাপ্তরিকভাবে একটি দ্বিভাষিক দেশ— ইংরেজি এবং ফ্রেঞ্চ এর দুটি রাষ্ট্রভাষা। তবে কুইবেক ছাড়া অন্যান্য প্রায় সব প্রদেশেই ইংরেজির আধিপত্য বেশি। দেশটির মুদ্রার নাম কানাডিয়ান ডলার (CAD)।</p>
+                        <p class="mb-4">বিশাল আয়তনের কারণে কানাডার আবহাওয়া ও জলবায়ু বেশ বৈচিত্র্যময়, তবে এটি মূলত তার চারটি স্পষ্ট ঋতু, বিশেষ করে বরফ ঢাকা শীতকাল এবং সুন্দর উষ্ণ গ্রীষ্মকালের জন্য বিখ্যাত। বহুজাতিক সংস্কৃতির প্রতি কানাডার এই প্রতিশ্রুতি বাংলাদেশ থেকে আসা অভিবাসীদের তাদের নিজ ঐতিহ্য বজায় রেখে এখানকার সমাজ ব্যবস্থার সাথে মানিয়ে নেওয়ার সুযোগ করে দেয়।</p>
+                    </section>
+                    <!-- BN-HISTORY -->
+                    <section id="bn-history" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1562919318-c2af2faffed6?q=80&w=2070&auto=format&fit=crop" alt="Parliament Hill Ottawa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Parliament Hill in the capital city of Ottawa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📜 ইতিহাস</h2>
+                        <p class="mb-4">কানাডার ইতিহাস হাজার বছরের পুরোনো, যা শুরু হয়েছিল এর আদিবাসী বা ইনডিজেনাস পিপলস (ফার্স্ট নেশনস, ইনুইট এবং মেটিস) দিয়ে। এই মাটির সাথে তাদের গভীর সংযোগই কানাডিয়ান ঐতিহ্যের মূল ভিত্তি। কালক্রমে ফরাসি ও ব্রিটিশদের আগমন দেশটির প্রাথমিক রাজনৈতিক কাঠামো গঠন করে।</p>
+                        <p class="mb-4">১৮৬৭ সালে কানাডা শান্তিপূর্ণ প্রক্রিয়ার মাধ্যমে কনফেডারেশনে যুক্ত হয়ে একটি স্বাধীন দেশে পরিণত হয়। আধুনিক কানাডার ইতিহাস শান্তি প্রতিষ্ঠা, মানবাধিকার রক্ষা এবং ১৯৭১ সালে পৃথিবীর প্রথম দেশ হিসেবে বহুসংস্কৃতিবাদকে (multiculturalism) রাষ্ট্রীয় নীতি হিসেবে গ্রহণের মাধ্যমে এক অনন্য দৃষ্টান্ত স্থাপন করেছে।</p>
+                    </section>
+                    <!-- BN-ECONOMY -->
+                    <section id="bn-economy" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_3.jpg" alt="Toronto Skyline" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Toronto, Canada's financial and economic center</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📊 অর্থনীতি ও অর্থনৈতিক প্রবৃদ্ধি</h2>
+                        <p class="mb-4">কানাডার অর্থনীতি একটি অত্যন্ত উন্নত, মিশ্র অর্থনীতি এবং এটি জি-৭ (G7) ভুক্ত অন্যতম একটি দেশ। এর অর্থনীতি অনেকাংশেই যুক্তরাষ্ট্রের বৃহত্তর অর্থনীতির সাথে গভীরভাবে সম্পৃক্ত, যা দুই দেশের মাঝে বিশাল আন্তঃসীমান্ত বাণিজ্যের সুযোগ করে দিয়েছে।</p>
+                        <p class="mb-4">প্রাকৃতিক সম্পদের প্রাচুর্য (তেল, গ্যাস এবং কাঠ), একটি শক্তিশালী উৎপাদনশীল খাত এবং টরোন্টো, ভ্যাঙ্কুভার ও ওয়াটারলু-এর মতো শহরগুলোতে দ্রুত বর্ধনশীল টেকনোলজি হাব কানাডার অর্থনীতির প্রধান চালিকাশক্তি।</p>
+                        <p class="mb-4">বাংলাদেশ থেকে আগত পেশাজীবীদের জন্য কানাডার চাকরির বাজার অত্যন্ত অনুকূল। বিশেষ করে আইটি, স্বাস্থ্যসেবা, ইঞ্জিনিয়ারিং এবং নার্সিং খাতে ব্যাপক চাহিদা রয়েছে এবং এখানকার বেতন কাঠামোর পাশাপাশি চাকরিতে সুযোগ–সুবিধাও অনেক বেশি।</p>
+                    </section>
+                    <!-- BN-POLITICS -->
+                    <section id="bn-politics" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1490212002302-386617a7806f?q=80&w=2070&auto=format&fit=crop" alt="Canadian Flag Waving" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Canada's strong democratic institutions</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🏛️ রাজনীতি ও সরকার ব্যবস্থা</h2>
+                        <p class="mb-4">কানাডায় সংসদীয় গণতন্ত্র এবং সাংবিধানিক রাজতন্ত্র বিদ্যমান। রাজা তৃতীয় চার্লস বর্তমান রাষ্ট্রপ্রধান এবং একজন নির্বাচিত প্রধানমন্ত্রী ফেডারেল সরকারের নেতৃত্ব দেন।</p>
+                        <p class="mb-4">কানাডার রাজনৈতিক পরিবেশ অত্যন্ত স্থিতিশীল, প্রগতিশীল সামাজিক নীতি এবং সর্বজনীন স্বাস্থ্যসেবামূলক। এখানে সমতা ও মানবাধিকারকে সবচেয়ে বেশি গুরুত্ব দেওয়া হয়, যা আন্তর্জাতিক ছাত্র ও অভিবাসীদের জন্য একটি নিরাপদ আইনি কাঠামোর নিশ্চয়তা দেয়।</p>
+                    </section>
+                    <!-- BN-DEMOGRAPHICS -->
+                    <section id="bn-demographics" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_5.jpg" alt="Diverse Population" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A multicultural society built on inclusivity</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">👨‍👩‍👧‍👦 জনসংখ্যা ও ডেমোগ্রাফিক্স</h2>
+                        <p class="mb-4">বিশাল আয়তনের একটি দেশ হওয়া সত্ত্বেও কানাডার জনসংখ্যা মাত্র ৪ কোটির কাছাকাছি, যার অধিকাংশ মানুষই দক্ষিণাঞ্চলীয় সীমান্ত সংলগ্ন শহুরে এলাকাগুলোতে বসবাস করে।</p>
+                        <p class="mb-4">জনসংখ্যা বৃদ্ধির ক্ষেত্রে ইমিগ্রেশন এর ওপর নির্ভরশীল হওয়ায় কানাডা অত্যন্ত একটি বৈচিত্র্যময় দেশ। বিশেষ করে টরোন্টো এবং মন্ট্রিলে প্রচুর সংখ্যক বাংলাদেশি প্রবাসী রয়েছেন। কানাডার বড় শহরগুলোতে আপনি খুব সহজেই হালাল খাবার, দেশি মসলাপাতির দোকান এবং সাংস্কৃতিক কেন্দ্র খুঁজে পাবেন।</p>
+                    </section>
+                    <!-- BN-EDUCATION -->
+                    <section id="bn-education" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_6.jpg" alt="University Campus" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">World-renowned research universities and colleges</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🎓 শিক্ষা ব্যবস্থা</h2>
+                        <p class="mb-4">কানাডার শিক্ষাব্যবস্থা বিশ্বব্যাপী অত্যন্ত সমাদৃত। টরোন্টো বিশ্ববিদ্যালয়, ম্যাকগিল বিশ্ববিদ্যালয় এবং ইউবিসি-র (UBC) মতো বিশ্বমানের বিশ্ববিদ্যালয়গুলো এখানেই অবস্থিত। বিশ্ববিদ্যালয়ের পাশাপাশি কানাডায় কমিউনিটি কলেজের একটি বড় নেটওয়ার্ক রয়েছে, যা চাকুরিবান্ধব ডিপ্লোমা এবং পোস্ট-গ্র্যাজুয়েট সার্টিফিকেট প্রদান করে।</p>
+                        <p class="mb-4">কানাডার যেকোনো ডিগ্রি এবং ডিপ্লোমার বিশ্বজুড়ে ব্যাপক গ্রহণযোগ্যতা রয়েছে। এছাড়াও যুক্তরাষ্ট্র এবং যুক্তরাজ্যের তুলনায় কানাডায় পড়ার খরচ অনেকটাই কম, এবং ছোট শহরগুলোতে জীবনযাত্রার মান বাংলাদেশী শিক্ষার্থীদের জন্য বেশ সাশ্রয়ী।</p>
+                    </section>
+                    <!-- BN-TOURISM -->
+                    <section id="bn-tourism" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_7.jpg" alt="Banff National Park" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">The pristine blue waters of Banff National Park</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">✈️ পর্যটন</h2>
+                        <p class="mb-4">প্রকৃতি প্রেমিক এবং পর্যটকদের জন্য কানাডা একটি অন্যতম আকর্ষণীয় গন্তব্য। আপনি নায়াগ্রা জলপ্রপাতের বিশালতা উপভোগ করতে পারেন, হুইস্লারে বিশ্বমানের স্নো-স্কিইং এর রোমাঞ্চ নিতে পারেন অথবা ওল্ড কুইবেকের পুরনো ইউরোপীয় স্টাইলের রাস্তায় ঘুরে বেড়াতে পারেন।</p>
+                        <p class="mb-4">দেশটির বিস্তীর্ণ ন্যাশনাল পার্ক, হ্রদ এবং পাহাড়-পর্বত হাইকং ও ক্যাম্পিং করার জন্য অসংখ্য সুযোগ প্রদান করে। এর পাশাপাশি এখানকার উত্তরাঞ্চলীয় টেরিটরিগুলোতে ম্যাজিকাল নর্দান লাইটস দেখার রোমাঞ্চকর অভিজ্ঞতা তো থাকছেই।</p>
+                    </section>
+                    <!-- BN-WHY-VISIT -->
+                    <section id="bn-why-visit" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1526365997-6a1ea03c1d93?q=80&w=2028&auto=format&fit=crop" alt="Niagara falls" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Canada offers a mix of urban luxury and natural wonders</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🇧🇩 কেন কানাডা ভ্রমণ করবেন?</h2>
+                        <p class="mb-4">কানাডার একটি 'টেম্পোরারি রেসিডেন্ট ভিসা' বা ভিজিটর ভিসা পাওয়া মানে চমৎকার একটি দেশে ভ্রমণের সুযোগ লাভ করা। বাংলাদেশিদের জন্য, বিদেশে স্থায়ী হওয়া আত্মীয়দের সাথে দেখা করা, আন্তর্জাতিক কনফারেন্সে যোগদান বা কেবল একটি সুন্দর এবং সুরক্ষিত পরিবেশে ছুটি কাটানোর জন্য এটি একটি দুর্দান্ত গন্তব্য।</p>
+                        <p class="mb-4">ভবিষ্যতে স্থায়ীভাবে বসবাস করার পরিকল্পনা থাকলে ভিজিটর ভিসার মাধ্যমে কানাডার বিশ্ববিদ্যালয়গুলোর ক্যাম্পাস নিজে ঘুরে দেখার এবং সেখানকার চাকরির বাজার ও দৈনন্দিন বসবাসের পরিবেশ যাচাই করে নেওয়ার একটি চমৎকার সুযোগ পাওয়া যায়।</p>
+                    </section>
+                    <!-- BN-WHY-STUDY -->
+                    <section id="bn-why-study" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_9.jpg" alt="Students graduating" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Education in Canada is a direct pathway to permanent residency</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🎓 কেন কানাডায় পড়াশোনা করবেন?</h2>
+                        <p class="mb-4">একজন বাংলাদেশি শিক্ষার্থীর জন্য কানাডায় পড়াশোনা করাটা স্থায়ীভাবে জীবন গঠনের সবচেয়ে কার্যকরী পথ। এখানকার শিক্ষার মান যেমন আন্তর্জাতিক মানের, তেমনি প্রতিবেশী দেশ যুক্তরাষ্ট্রের তুলনায় পড়াশোনার খরচও অনেক কম।</p>
+                        <p class="mb-4">আন্তর্জাতিক ছাত্রছাত্রীরা পড়াশোনার পাশাপাশি পার্ট-টাইম (সপ্তাহে ২০ ঘণ্টা) কাজের সুযোগ পায়। তবে সবচেয়ে বড় সুবিধা হলো 'পোস্ট-গ্রাজুয়েশন ওয়ার্ক পারমিট' (PGWP), যার মাধ্যমে কোর্স শেষ করার পর একজন শিক্ষার্থী ৩ বছর পর্যন্ত কানাডায় কাজ করার সুযোগ পায়, যা পরবর্তীতে স্থায়ী বাসিন্দা বা পিআর (PR) হওয়ার ক্ষেত্রে সবচেয়ে বড় ভূমিকা পালন করে।</p>
+                    </section>
+                    <!-- BN-WHY-IMMIGRATE -->
+                    <section id="bn-why-immigrate" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_10.jpg" alt="City life and diverse neighborhood" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">A welcoming society with free healthcare and education</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌍 কেন কানাডায় ইমিগ্রেট করবেন?</h2>
+                        <p class="mb-4">কানাডা প্রতিবছর লাখ লাখ নতুন অভিবাসীকে স্থায়ী বাসিন্দা হিসেবে স্বাগত জানাতে বার্ষিক অভিবাসন লক্ষ্যমাত্রা নির্ধারণ করে। একটি কানাডিয়ান পিআর (PR) পাওয়ার সুবিধা অপরিসীম: বিনামূল্যে বিশ্বমানের সরকারি স্বাস্থ্যসেবা, আপনার সন্তানের জন্য দ্বাদশ শ্রেণি পর্যন্ত বিনামূল্যে শিক্ষা এবং কানাডিয়ান মানবাধিকার সনদের সুরক্ষিত অধিকার।</p>
+                        <p class="mb-4">পিআর ধারীরা কানাডার যেকোনো স্থানে বাস এবং কাজ তৃতীয় বছর কানাডায় অবস্থান করলে আপনি নাগরিকত্বের জন্য আবেদন করার সুযোগ পাবেন, যা আপনাকে বিশ্বের অন্যতম শক্তিশালী পাসপোর্টটি হাতে পাওয়ার পথ সুগম করবে।</p>
+                    </section>
+                    <!-- BN-HOW-TO-VISIT -->
+                    <section id="bn-how-to-visit" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_11.jpg" alt="Passport and Visa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Securing your Canada Visitor Visa</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📋 বাংলাদেশ থেকে কীভাবে কানাডা ভিজিট করবেন</h2>
+                        <p class="mb-4">কানাডায় ভ্রমণের জন্য বাংলাদেশি নাগরিকদের IRCC পোর্টালের মাধ্যমে অনলাইনে টেম্পোরারি রেসিডেন্ট ভিসার (TRV) জন্য আবেদন করতে হয়। একটি সফল ভিজিটর ভিসার মূল চাবিকাঠি হলো এটা প্রমাণ করা যে আপনি ভ্রমণ শেষে স্বদেশে প্রত্যাবর্তন করবেন।</p>
+                        <p class="mb-4">আপনাকে অবশ্যই বাংলাদেশের সাথে আপনার দৃঢ় সম্পর্কের প্রমাণ হিসেবে সম্পদের মূল্যায়ন, ব্যাংক স্টেটমেন্ট এবং আয়কর রিটার্ন এর মতো আর্থিক কাগজপত্র জমা দিতে হবে। আত্মীয়ের সাথে দেখা করতে চাইলে একটি ইনভাইটেশন লেটার এবং কেবলমাত্র ভ্রমণের উদ্দেশ্যে গেলে একটি বিস্তারিত ট্রাভেল আইটিনারি (travel itinerary) দাখিল করতে হবে।</p>
+                    </section>
+                    <!-- BN-HOW-TO-STUDY -->
+                    <section id="bn-how-to-study" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_12.jpg" alt="Student Visa" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Applying to Designated Learning Institutions (DLIs)</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📚 পড়াশোনার জন্য কীভাবে আবেদন করবেন</h2>
+                        <p class="mb-4">প্রথম ধাপ হলো কানাডার একটি 'ডেজিগনেটেড লার্নিং ইনস্টিটিউশন' (DLI) থেকে অ্যাকসেপ্টেন্স লেটার সংগ্রহ করা। কিছু নির্দিষ্ট প্রদেশের ক্ষেত্রে বিশ্ববিদ্যালয়ে আবেদনের আগে আপনার পূর্ববর্তী শিক্ষাগত যোগ্যতার ইভ্যালুয়েশন প্রয়োজন হতে পারে।</p>
+                        <p class="mb-4">অফার লেটার হাতে পাওয়ার পর আপনাকে স্টাডি পারমিটের জন্য আবেদন করতে হবে। এজন্য আপনার প্রথম বছরের সম্পূর্ণ টিউশন ফি এবং এক বছরের থাকা-খাওয়ার জন্য অতিরিক্ত $২০,৬৩৫ CAD এর ব্যাংক ব্যালেন্স দেখাতে হবে। একটি সফল আবেদন নিশ্চিত করতে শিক্ষাগত যোগ্যতার পাশাপাশি আপনার ন্যূনতম ৬.০ থেকে ৬.৫ আইইএলটিএস (IELTS) স্কোর থাকা অত্যন্ত জরুরি। এডু অ্যাব্রড লিমিটেড আপনাকে ভিসার সম্ভাবনা বহুগুণে বাড়িয়ে দিতে একটি শক্তিশালী SOP লিখতে সহায়তা করে।</p>
+                    </section>
+                    <!-- BN-HOW-TO-IMMIGRATE -->
+                    <section id="bn-how-to-immigrate" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="https://images.unsplash.com/photo-1628172909405-b77da33e9d0a?q=80&w=2070&auto=format&fit=crop" alt="Vancouver Skyline" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Express Entry and Provincial Nominee Programs</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🏠 কীভাবে ইমিগ্রেট করবেন (PR এর পথ)</h2>
+                        <p class="mb-4">বিদেশ থাকা দক্ষ পেশাজীবীদের জন্য সবচেয়ে জনপ্রিয় অভিবাসন প্রক্রিয়া হলো এক্সপ্রেস এন্ট্রি (Express Entry), যা বয়স, শিক্ষা, কাজের অভিজ্ঞতা এবং ভাষা দক্ষতার (IELTS) ওপর ভিত্তি করে পয়েন্ট প্রদান করে।</p>
+                        <p class="mb-4">যদি আপনার এক্সপ্রেস এন্ট্রি স্কোর যথেষ্ট না হয়, তবে প্রভিন্সিয়াল নমিনি প্রোগ্রাম (PNP) বিকল্প একটি উপায় হতে পারে। সাসকাচোয়ান, অ্যালবার্টা বা অন্টারিওর মতো প্রদেশগুলো তাদের স্থানীয় শ্রমবাজারের চাহিদা পূরণে দক্ষ কর্মীদের নমিনেশন প্রদান করে। কানাডায় পড়াশোনা করা থাকলে খুব সহজেই প্রচুর অতিরিক্ত পয়েন্ট পাওয়া যায়, যা পিআর পাওয়াকে অনেকটাই সহজ করে তোলে।</p>
+                    </section>
+                    <!-- BN-HOW-WE-HELP -->
+                    <section id="bn-how-we-help" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-right lg:ml-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_14.jpg" alt="Edu Abroad Office" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Your trusted partner for Canadian admissions and visas</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">💬 কিভাবে এডু অ্যাব্রড লিমিটেড আপনাকে সাহায্য করতে পারে</h2>
+                        <p class="mb-4 text-brand-700 font-medium">কানাডার ইমিগ্রেশন এবং স্টুডেন্ট ভিসা আইন খুবই জটিল এবং নিয়মিত আপডেট হয়ে থাকে। ছোটখাটো কোনো ভুলের কারণে আপনার ভিসা আবেদন বাতিল হতে পারে। কোন কোর্সে পড়লে পরবর্তীতে সহজেই পিআর পাওয়া যায়— এমন প্রোগ্রাম সিলেক্ট করা থেকে শুরু করে একটি নির্ভুল ভিসা আবেদন জমা দেওয়া পর্যন্ত এডু অ্যাব্রড লিমিটেড প্রতিটি ধাপেই আপনাকে গাইড করে।</p>
+                        <p class="mb-4 text-brand-700 font-medium">আমরা বিশ্ববিদ্যালয়ের ভর্তি, IRCC-এর নিয়মানুযায়ী আপনার ডকুমেন্টস পরিমার্জন, GIC (Guaranteed Investment Certificate) সেটআপ এবং প্রাক-ভ্রমণ ব্রিফিং এর মতো সব বিষয়গুলো পরিচালনা করে থাকি। আমাদের মূল লক্ষ্য আপনাকে শুধুমাত্র বিদেশে পড়তে পাঠানো নয়, বরং কানাডার পিআর পাওয়ার জন্য সবচেয়ে সঠিক পথটি বাতলে দেওয়া।</p>
+                    </section>
+                    <!-- BN-FAQ -->
+                    <section id="bn-faq" class="relative group mt-8 clear-both">
+                        <figure class="mb-6 lg:float-left lg:mr-8 lg:mb-4 lg:w-1/2 rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-4">
+                            <img src="images/canada/canada_sec_15.jpg" alt="FAQ Questions" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-700 ease-in-out">
+                            <figcaption class="text-xs text-gray-500 italic mt-2 text-center p-2 bg-gray-50">Answers to your top questions</figcaption>
+                        </figure>
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">❓ সাধারণ জিজ্ঞাসিত প্রশ্ন (FAQ)</h2>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>প্রশ্ন: পিআর এর জন্য কোনটি বেশি ভালো, একটি বিশ্ববিদ্যালয়ের ডিগ্রি নাকি একটি কলেজের ডিপ্লোমা?</strong><br>উত্তর: ইউনিভার্সিটির ডিগ্রির অনেক সম্মানজনক হলেও, দু-বছরের কলেজ ডিপ্লোমা বাংলাদেশিদের মধ্যে সবচেয়ে বেশি জনপ্রিয় কারণ এটি সাশ্রয়ী, কর্মমুখী এবং সমপরিমাণে আপনাকে ৩ বছরের PGWP এর যোগ্যতা প্রদান করে— যা পিআর পাওয়ার অন্যতম একটি উপায়।</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>প্রশ্ন: কানাডায় পড়াশোনার খরচ কেমন?</strong><br>উত্তর: সাধারণত কলেজ ডিপ্লোমার জন্য বছরে খরচ হয় ১৫,০০০ থেকে ২০,০০০ CAD, যেখানে বিশ্ববিদ্যালয়ের ডিগ্রির জন্য বছরে ২৫,০০০ থেকে ৪০,০০০ CAD বা তারও বেশি খরচ হতে পারে। তাই এই বিষয়ে সঠিক ধারণা নিয়ে আর্থিক প্রস্তুতি নেওয়া অত্যন্ত জরুরি।</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>প্রশ্ন: আমি কি কানাডায় পড়ালেখার সময় আমার স্বামীকে/স্ত্রীকে সাথে নিতে পারি?</strong><br>উত্তর: ২০২৪ সালের সাম্প্রতিক পলিসি পরিবর্তন অনুযায়ী, স্পাউস ওপেন ওয়ার্ক পারমিটের সুযোগ মূলত কেবলমাত্র স্নাতক (Master's) ও ডক্টরাল প্রোগ্রামের শিক্ষার্থীদের জন্য। আন্ডারগ্রাজুয়েট বা ডিপ্লোমা প্রোগ্রামের শিক্ষার্থীদের স্পাউসদের জন্য এই সুযোগ সীমিত করা হয়েছে। আমরা আপনার নির্দিষ্ট প্রোফাইল বিশ্লেষণ করে এ বিষয়ে সঠিক পরামর্শ দিতে পারবো।</p>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+        <!-- ===========================
+             FEATURED UNIVERSITIES (CANADA)
+             =========================== -->
+        <section class="py-20 md:py-24 relative overflow-hidden" style="background:#0f1b3b;">
+            <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-[#00a2e8]/20 blur-3xl elig-float"></div>
+            <div class="container mx-auto px-6 max-w-6xl relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-12 reveal-up">
+                    <div class="text-[#00a2e8] text-[13px] uppercase tracking-[0.25em] font-bold mb-4">Partner Institutions</div>
+                    <h2 class="text-[28px] md:text-[42px] font-bold text-white leading-[1.15] mb-4">Featured Universities in <span class="text-[#00a2e8]">Canada</span></h2>
+                    <p class="text-white/70 text-[16px] leading-relaxed">Not sure which one fits your profile? Use our Eligibility Checker to instantly see requirements and documents.</p>
+                </div>
+                <div id="canada-uni-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"></div>
+                <div class="text-center reveal-up">
+                    <a href="index.html#eligibility-section" class="inline-flex items-center gap-2 bg-[#00a2e8] hover:bg-white hover:text-[#1b3168] text-white font-bold text-[13px] uppercase tracking-wider rounded-full px-8 py-4 transition-all duration-300">
+                        Check My Eligibility
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    
+
+    <!-- Language Toggle Script -->
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <div id="scroll-progress"></div>
+    <script>
+        (function () {
+            function money(n) { return '৳' + Number(n || 0).toLocaleString('en-IN'); }
+            function cardHTML(u) {
+                return '' +
+                    '<div class="premium-card reveal-up">' +
+                    '  <div class="pc-img-wrap"><img src="' + u.image + '" alt="' + u.name + '" loading="lazy">' +
+                    '    <span class="pc-ranking-badge">' + (u.ranking || u.country) + '</span>' +
+                    '    <span class="pc-price-badge">' + money(u.minBudgetBDT) + '+</span>' +
+                    '  </div>' +
+                    '  <div class="p-5">' +
+                    '    <div class="flex items-center gap-1.5 text-gray-400 text-[12px] mb-1.5 font-medium">' + u.city + ', ' + u.country + '</div>' +
+                    '    <h3 class="font-bold text-[17px] text-gray-900 leading-snug mb-3">' + u.name + '</h3>' +
+                    '    <div class="flex items-center gap-4 text-[13px] text-gray-500 mb-4 pb-4 border-b border-gray-100"><span>IELTS ' + u.minIELTS + '+</span><span>Age ' + u.minAge + '-' + u.maxAge + '</span></div>' +
+                    '    <a href="index.html#eligibility-section" class="block w-full text-center border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-full py-2.5 text-[13px] font-bold uppercase tracking-wide">View Details</a>' +
+                    '  </div>' +
+                    '</div>';
+            }
+            var wrap = document.getElementById('canada-uni-cards');
+            if (wrap && window.EduAuth) {
+                var unis = EduAuth.allUniversities().filter(function (u) { return u.country === 'Canada'; });
+                wrap.innerHTML = unis.map(cardHTML).join('');
+            }
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal-up').forEach(function (el) { observer.observe(el); });
+        })();
+    </script>
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const btn = document.getElementById('langToggleBtn');
+            const titleEn = document.getElementById('title-en');
+            const titleBn = document.getElementById('title-bn');
+            const articleEn = document.getElementById('article-en');
+            const articleBn = document.getElementById('article-bn');
+
+            if (currentLang === 'en') {
+                currentLang = 'bn';
+                btn.textContent = 'English';
+                titleEn.classList.add('hidden');
+                articleEn.classList.add('hidden');
+                titleBn.classList.remove('hidden');
+                articleBn.classList.remove('hidden');
+                btn.classList.replace('bg-brand-500', 'bg-green-600');
+                btn.classList.replace('hover:bg-brand-600', 'hover:bg-green-700');
+            } else {
+                currentLang = 'en';
+                btn.textContent = 'Bangla';
+                titleBn.classList.add('hidden');
+                articleBn.classList.add('hidden');
+                titleEn.classList.remove('hidden');
+                articleEn.classList.remove('hidden');
+                btn.classList.replace('bg-green-600', 'bg-brand-500');
+                btn.classList.replace('hover:bg-green-700', 'hover:bg-brand-600');
+            }
+        }
+    </script>
+
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu" class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar" class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0"></div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About
+            </a>
+            <a href="index.html#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Services
+            </a>
+            <a href="index.html#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Destinations
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path></svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Blog
+            </a>
+            <a href="company-profile.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line></svg>
+                Company Profile
+            </a>
+            <a href="Appointment-form.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Book Appointment
+            </a>
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html" class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">Login</a>
+                <a href="Appointment-form.html" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Get Started</a>
+            </div>
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Go to Portal</a>
+                <button type="button" id="mobile-logout-btn" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var windist = document.documentElement.scrollTop;
+            var winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = winheight ? (windist / winheight) * 100 : 0;
+            var progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        var menuClose = document.getElementById('mobile-menu-close');
+        var menuDrawer = document.getElementById('mobile-menu-drawer');
+        var menuOverlay = document.getElementById('mobile-menu-overlay');
+        var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) closeMenu(); else openMenu();
+        }
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(function (link) {
+                link.addEventListener('click', function () { if (menuDrawer.classList.contains('active')) closeMenu(); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) closeMenu();
+            });
+        }
+
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+            var user = EduAuth.currentUser();
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+            if (!user) return;
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) { authedActions.classList.remove('hidden'); authedActions.classList.add('flex'); }
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+            if (logoutBtn) logoutBtn.addEventListener('click', function () { EduAuth.logout(); window.location.href = 'index.html'; });
+        })();
+    </script>
+
+</body>
+</html>

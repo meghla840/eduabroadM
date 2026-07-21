@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Check — Edu Abroad Limited</title>
+<link rel="icon" href="images/logo_Black.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: { colors: {
+      primary: '#1b3168', secondary: '#00a2e8', 'brand-green': '#39b54a',
+      brand: { 50:'#f0f4ff',100:'#e0e8ff',500:'#1b3168',600:'#152654',700:'#0f1b3b',900:'#090f23' }
+    } } }
+  }
+</script>
+<script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.0.4/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --primary:#1b3168;
+    --primary-dark:#0f1b3b;
+    --secondary:#00a2e8;
+    --white:#ffffff;
+    --dark:#0f172a;
+    --gray:#64748b;
+    --light:#f8fafc;
+    --border:#e2e8f0;
+    --shadow:0 15px 40px rgba(0,0,0,.08);
+    --radius:16px;
+
+    --success:#16a34a;
+    --success-bg:#dcfce7;
+    --danger:#dc2626;
+    --danger-bg:#fee2e2;
+    --warn:#d97706;
+    --warn-bg:#fef3c7;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Roboto",system-ui,sans-serif;
+    background:#ffffff;
+    color:var(--dark);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:5rem;
+    overflow-x:hidden;
+  }
+  .font-display{font-family:"Cormorant Garamond",serif;}
+  .container{width:min(1100px,92%);margin:auto;}
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes pop{ 0%{transform:scale(.85); opacity:0;} 60%{transform:scale(1.04); opacity:1;} 100%{transform:scale(1);} }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes ring{ 0%{box-shadow:0 0 0 0 rgba(37,99,235,.35);} 100%{box-shadow:0 0 0 8px rgba(37,99,235,0);} }
+
+  /*=== Welcome banner ===*/
+  .page-intro{padding:36px 0 8px;margin-top:112px;animation:fadeUp .5s var(--ease) both;}
+  @media(max-width:768px){ .page-intro{ margin-top:96px; } }
+  .welcome-card{
+    padding:34px 38px;background:linear-gradient(135deg,#1b3168, #00a2e8 130%);
+    color:#fff;border-radius:22px;display:flex;justify-content:space-between;align-items:center;
+    gap:24px;box-shadow:0 25px 50px rgba(27,49,104,.25);position:relative;overflow:hidden;
+  }
+  .welcome-card::before,.welcome-card::after{
+    content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);
+  }
+  .welcome-card::before{width:240px;height:240px;top:-110px;right:60px;}
+  .welcome-card::after{width:150px;height:150px;bottom:-85px;right:210px;background:rgba(255,255,255,.06);}
+  .welcome-text{position:relative;z-index:1;}
+  .welcome-text h1{
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(24px,3vw,32px);margin:0 0 10px;letter-spacing:-.01em;
+  }
+  .welcome-text h1 b{color:#c7d2fe;font-weight:700;}
+  .welcome-text .sub{color:rgba(255,255,255,.85);max-width:60ch;font-size:15px;margin:0;}
+  .welcome-actions{display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;position:relative;z-index:1;}
+  .member-pill{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;
+    background:rgba(255,255,255,.16);font-weight:600;font-size:13.5px;
+  }
+  .member-pill.premium i{color:#6ee7b7;}
+  .member-pill.free i{color:#93c5fd;}
+  .welcome-actions a.logout-link{
+    color:rgba(255,255,255,.75);font-size:13px;font-weight:600;text-decoration:none;
+    display:flex;align-items:center;gap:6px;
+  }
+  .welcome-actions a.logout-link:hover{color:#fff;}
+  .welcome-icon{
+    width:92px;height:92px;border-radius:50%;background:rgba(255,255,255,.15);
+    display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;
+    position:relative;z-index:1;box-shadow:0 0 0 10px rgba(255,255,255,.06);
+  }
+  @media(max-width:760px){
+    .welcome-card{flex-direction:column;text-align:center;gap:18px;}
+    .welcome-actions{justify-content:center;}
+  }
+
+  section{margin-top:1.8rem;}
+  section.card-section{animation:fadeUp .55s .1s var(--ease) both;}
+  .card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:0 5px 20px rgba(0,0,0,.04);padding:2rem;transition:box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+  .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.4rem;}
+  .eyebrow{
+    font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;
+    color:var(--primary);display:flex;align-items:center;gap:8px;margin:0;
+  }
+  .eyebrow .num{
+    width:22px;height:22px;border-radius:50%;background:#dbeafe;color:var(--primary);
+    display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;
+  }
+
+  #dropzone{
+    border:2px dashed var(--border);border-radius:var(--radius);
+    padding:2.8rem 1.6rem;text-align:center;cursor:pointer;background:var(--light);
+    transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+  }
+  #dropzone:hover{border-color:var(--secondary);}
+  #dropzone.hover{background:#dbeafe;border-color:var(--primary);transform:scale(1.006);}
+  #dropzone i{font-size:28px;color:var(--primary);margin-bottom:.7rem;display:inline-block;transition:transform .25s var(--ease);}
+  #dropzone:hover i{transform:translateY(-3px);}
+  #dropzone .main-line{margin:0 0 .3rem;font-size:15.5px;font-weight:600;color:var(--dark);}
+  #dropzone .sub-line{margin:0;font-size:13px;color:var(--gray);}
+  #fileInput{display:none;}
+
+  #fileList{list-style:none;margin:1.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  #fileList li{
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;gap:12px;
+    background:var(--light);border:1px solid var(--border);border-radius:12px;
+    padding:10px 12px 10px 14px;font-size:14px;
+    animation:fadeUp .3s var(--ease) both;
+    transition:border-color .2s var(--ease);
+  }
+  #fileList li.is-ref{border-color:var(--primary);background:#eff6ff;}
+  .prog-fill{position:absolute;left:0;bottom:0;height:2px;background:var(--primary);width:0%;transition:width .25s var(--ease);}
+  #fileList li .ftype{
+    width:32px;height:32px;border-radius:9px;background:#dbeafe;color:var(--primary);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-size:10px;font-weight:700;text-transform:uppercase;
+  }
+  #fileList li.is-ref .ftype{background:var(--primary);color:#fff;}
+  #fileList li .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;}
+  #fileList li .reftag{
+    font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    background:var(--primary);color:#fff;border-radius:999px;padding:3px 10px;flex-shrink:0;
+    animation:pop .3s var(--ease) both;
+  }
+  #fileList li .status{font-size:12px;color:var(--gray);white-space:nowrap;}
+  .ref-btn{
+    border:1px solid var(--border);background:#fff;cursor:pointer;padding:0;
+    width:32px;height:32px;border-radius:9px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;color:var(--gray);
+    transition:background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease), transform .15s var(--ease);
+  }
+  .ref-btn:hover{border-color:var(--primary);color:var(--primary);transform:scale(1.06);}
+  .ref-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;animation:ring .6s var(--ease);}
+  .ref-btn svg{width:15px;height:15px;}
+  #fileList li button.remove{
+    border:none;background:none;color:var(--gray);cursor:pointer;padding:4px;line-height:1;
+    display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background .15s,color .15s;flex-shrink:0;
+  }
+  #fileList li button.remove:hover{background:var(--danger-bg);color:var(--danger);}
+
+  .actions{margin-top:1.7rem;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  button.primary{
+    background:var(--primary);color:#fff;border:none;
+    padding:13px 28px;border-radius:50px;font-size:14.5px;font-weight:600;
+    cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px;
+    transition:background .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  button.primary:disabled{background:#cbd5e1;cursor:not-allowed;}
+  button.primary:hover:not(:disabled){background:var(--primary-dark);transform:translateY(-3px);box-shadow:0 10px 25px rgba(37,99,235,.25);}
+  button.primary:active:not(:disabled){transform:scale(.98);}
+  .spin{animation:spin .8s linear infinite;}
+  .hint{font-size:13px;color:var(--gray);}
+  .note-strip{
+    margin-top:16px;font-size:12.5px;color:var(--gray);
+    display:flex;align-items:flex-start;gap:8px;padding-top:16px;border-top:1px solid var(--border);
+  }
+  .note-strip i{font-size:14px;flex-shrink:0;margin-top:2px;color:var(--primary);}
+
+  #results{display:none;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease), transform .4s var(--ease);}
+  #results.show{opacity:1;transform:translateY(0);}
+
+  .ref-banner{
+    display:flex;align-items:center;gap:10px;background:#dbeafe;border:1px solid #bfdbfe;
+    color:var(--primary-dark);border-radius:12px;padding:12px 15px;font-size:13.5px;margin-bottom:1.3rem;
+    animation:fadeUp .4s var(--ease) both;
+  }
+  .ref-banner i{flex-shrink:0;}
+  .ref-banner svg{width:18px;height:18px;flex-shrink:0;}
+  .ref-banner b{font-weight:700;}
+
+  .success-banner{
+    display:flex;align-items:center;gap:10px;background:var(--success-bg);border:1px solid #bbf7d0;
+    color:var(--success);border-radius:12px;padding:13px 16px;font-size:14px;font-weight:600;
+    margin-bottom:1.3rem;animation:pop .4s var(--ease) both;
+  }
+  .success-banner i{flex-shrink:0;}
+
+  .summary-bar{display:flex;gap:10px;margin-bottom:1.4rem;flex-wrap:wrap;}
+  .pill{
+    border-radius:999px;padding:8px 15px;font-size:13px;font-weight:600;
+    display:flex;align-items:center;gap:7px;animation:pop .35s var(--ease) both;
+  }
+  .pill .dotsm{width:6px;height:6px;border-radius:50%;}
+  .pill.ok{background:var(--success-bg);color:var(--success);}
+  .pill.ok .dotsm{background:var(--success);}
+  .pill.bad{background:var(--danger-bg);color:var(--danger);}
+  .pill.bad .dotsm{background:var(--danger);}
+  .pill.warn{background:var(--warn-bg);color:var(--warn);}
+  .pill.warn .dotsm{background:var(--warn);}
+  .pill.neutral{background:var(--light);color:var(--gray);border:1px solid var(--border);}
+  .pill.neutral .dotsm{background:var(--gray);}
+
+  .field-row{
+    border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;
+    animation:fadeUp .4s var(--ease) both;transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .field-row.mismatch{border-color:#fca5a5;}
+  .field-row.ref-missing{border-color:#fcd34d;}
+  .field-row:hover{box-shadow:0 4px 14px rgba(0,0,0,.05);}
+  .field-head{
+    display:flex;align-items:center;justify-content:space-between;padding:15px 16px;
+    background:var(--light);cursor:pointer;transition:background .15s var(--ease);
+  }
+  .field-head:hover{background:#eff2f6;}
+  .field-head .fname{font-weight:600;font-size:15px;display:flex;align-items:center;gap:10px;color:var(--dark);}
+  .stamp{
+    font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+    border-radius:999px;padding:5px 13px;font-weight:700;display:flex;align-items:center;gap:6px;
+    animation:pop .3s var(--ease) both;
+  }
+  .stamp i{font-size:11px;}
+  .stamp.match{background:var(--success-bg);color:var(--success);}
+  .stamp.mismatch{background:var(--danger-bg);color:var(--danger);}
+  .stamp.warn{background:var(--warn-bg);color:var(--warn);}
+  .stamp.single{background:#fff;color:var(--gray);border:1px solid var(--border);}
+  .chevron{color:var(--gray);transition:transform .25s var(--ease);display:flex;}
+  .field-row.open .chevron{transform:rotate(90deg);}
+
+  .field-body{
+    padding:0 16px;max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .35s var(--ease), opacity .3s var(--ease), padding .35s var(--ease);
+  }
+  .field-row.open .field-body{padding:8px 16px 16px;opacity:1;}
+  table.detail{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px;}
+  table.detail td{padding:9px 8px;border-top:1px solid var(--border);vertical-align:top;}
+  table.detail td.fname-cell{color:var(--gray);width:40%;font-size:13px;display:flex;align-items:center;gap:6px;}
+  table.detail td.val-cell{font-size:13px;color:var(--dark);}
+  tr.diff td.val-cell{color:var(--danger);font-weight:600;}
+  tr.diff td.fname-cell{color:var(--danger);}
+  tr.refrow td{background:#eff6ff;}
+  tr.refrow td.fname-cell{color:var(--primary-dark);font-weight:700;}
+  .mini-ref-tag{
+    font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;
+    background:var(--primary);color:#fff;border-radius:999px;padding:2px 7px;
+  }
+  td.val-cell.missing{color:var(--gray);font-style:italic;}
+
+  #mismatchSummary{margin-top:1.8rem;}
+  #mismatchSummary h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;margin:0 0 8px;color:var(--dark);}
+  .mm-item{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--border);font-size:14px;color:var(--gray);}
+  .mm-item .dot{width:7px;height:7px;border-radius:50%;background:var(--danger);margin-top:7px;flex-shrink:0;}
+  .mm-item.warn .dot{background:var(--warn);}
+  .mm-item b{font-weight:700;color:var(--dark);}
+
+  .rawtoggle{margin-top:1.8rem;}
+  .rawtoggle summary{cursor:pointer;font-size:13px;color:var(--gray);list-style:none;font-weight:600;}
+  .rawtoggle summary::-webkit-details-marker{display:none;}
+  .rawtoggle summary::before{content:"▸  ";}
+  .rawtoggle[open] summary::before{content:"▾  ";}
+  .rawblock{
+    margin-top:8px;background:var(--light);border:1px solid var(--border);border-radius:12px;padding:12px 14px;
+    font-size:12.5px;white-space:pre-wrap;max-height:220px;overflow:auto;color:var(--gray);
+  }
+  .rawblock b{color:var(--dark);}
+
+  /*=== Professional footer ===*/
+  footer.site-foot{
+    margin-top:4rem;background:#fff;border-top:1px solid var(--border);padding:48px 0 0;
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-bottom:36px;
+  }
+  .footer-brand .logo{
+    font-size:22px;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:9px;
+    margin-bottom:12px;text-decoration:none;
+  }
+  .footer-brand p{color:var(--gray);font-size:13.5px;max-width:34ch;line-height:1.7;margin-bottom:16px;}
+  .footer-social{display:flex;gap:10px;}
+  .footer-social a{
+    width:36px;height:36px;border-radius:10px;background:var(--light);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--gray);text-decoration:none;transition:.2s;
+  }
+  .footer-social a:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+  .footer-col h4{font-size:13.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--dark);margin-bottom:16px;}
+  .footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:14px;margin-bottom:11px;transition:.2s;}
+  .footer-col a:hover{color:var(--primary);}
+  .footer-bottom{
+    border-top:1px solid var(--border);padding:20px 0;display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--gray);
+  }
+  .footer-bottom .badges{display:flex;gap:16px;flex-wrap:wrap;}
+  .footer-bottom .badges span{display:flex;align-items:center;gap:6px;}
+  .footer-bottom .badges i{color:var(--primary);}
+  @media(max-width:900px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:560px){
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;align-items:flex-start;}
+  }
+
+  @media(max-width:640px){
+    .navbar{height:auto;padding:14px 0;}
+    .page-intro{padding:24px 0 8px;}
+    .card{padding:1.4rem;}
+  }
+
+        #mobile-menu-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(400px, 88vw); background: #ffffff; z-index: 1001; transform: translateX(100%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -18px 0 50px rgba(0,0,0,.12); overflow-y: auto; }
+        #mobile-menu-drawer.active { transform: translateX(0); }
+        #mobile-menu-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+        #mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .hamburger-line { transition: all .3s ease; transform-origin: center; }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+        .sidebar-link { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .85rem 1rem; border-radius: .75rem; color: #374151; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; transition: background-color .2s ease, color .2s ease; text-align: left; }
+        .sidebar-link:hover { background: #f3f4f6; color: #1b3168; }
+        .sidebar-link.active-page { background: rgba(27,49,104,0.08); color: #1b3168; }
+        .sidebar-link svg { flex-shrink: 0; color: #9ca3af; transition: color .2s ease; }
+        .sidebar-link:hover svg, .sidebar-link.active-page svg { color: #1b3168; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #1b3168, #00a2e8); z-index: 1000; width: 0%; transition: width .1s ease; }
+    </style>
+</head>
+<body class="bg-white">
+<div id="scroll-progress"></div>
+
+<header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="w-10 flex items-center text-gray-700 hover:text-primary transition-colors" aria-label="Back to Home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+<div class="container page-intro">
+  <div class="welcome-card">
+    <div class="welcome-text">
+      <h1>Verify your <b>documents</b> in seconds</h1>
+      <p class="sub">Upload 4–5 documents, pick one as the reference file, and this tool checks every other file's name, father's name, mother's name, date of birth, national ID number, and address against it — in both Bengali and English. Anything that doesn't match is flagged with the exact file it came from.</p>
+      <div class="welcome-actions">
+        <span class="member-pill" id="memberPill"><i class="fa-solid fa-gift"></i><span id="memberPillText">Checking status…</span></span>
+        <a href="client-dashboard.html" class="logout-link"><i class="fa-solid fa-arrow-left"></i>Back to Portal</a>
+      </div>
+    </div>
+    <div class="welcome-icon"><i class="fa-solid fa-file-shield"></i></div>
+  </div>
+</div>
+
+<div class="container">
+
+
+  <section class="card-section" id="lockSection" style="display:none;">
+    <div class="card" style="text-align:center;">
+      <div style="width:56px;height:56px;border-radius:50%;background:var(--danger-bg);color:var(--danger);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:22px;">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h3 style="margin:0 0 .6rem;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;color:var(--dark);" id="lockTitle">Your free document check has been used</h3>
+      <p class="sub" style="max-width:52ch;margin:0 auto 1.4rem;">Every account gets <b style="color:var(--dark);">one free verification</b>. To run more cross-checks, pay <b style="color:var(--dark);">৳100 for 4 checks</b> (viewing your past results is always free), or upgrade to <b style="color:var(--dark);">Premium</b> for unlimited checks.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button id="payUnlockBtn" style="display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;background:var(--primary);color:#fff;padding:13px 28px;border-radius:50px;font-size:14.5px;font-weight:700;font-family:inherit;transition:background .2s ease, transform .2s ease;">
+          <i class="fa-solid fa-mobile-screen-button"></i> Pay ৳100 for 4 Checks (bKash/Nagad)
+        </button>
+        <a href="client-dashboard.html#membership" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--primary);border:2px solid var(--primary);padding:11px 26px;border-radius:50px;font-size:14.5px;font-weight:700;text-decoration:none;transition:background .2s ease;">Upgrade to Premium (Unlimited)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="card-section" id="uploadSection">
+    <div class="card">
+      <div class="card-head">
+        <p class="eyebrow"><span class="num">1</span>Upload files</p>
+      </div>
+      <div id="dropzone">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <p class="main-line">Drop files here, or click to browse</p>
+        <p class="sub-line">Images, PDF, Word and Excel are all supported &nbsp;·&nbsp; up to 5 files</p>
+        <input type="file" id="fileInput" multiple accept=".txt,.csv,.json,.docx,.pdf,.xlsx,.xls,.jpg,.jpeg,.png,.bmp,.webp">
+      </div>
+      <ul id="fileList"></ul>
+      <div class="actions">
+        <button class="primary" id="runBtn" disabled>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          Run cross-check
+        </button>
+        <span class="hint" id="countHint">No files added yet</span>
+      </div>
+      <div class="note-strip">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>Click the star on any file to make it the reference — the one every other file gets checked against. Scanned images and image-only PDFs are read with on-device OCR (Bengali + English) with automatic sharpening and contrast boost. Everything runs in your browser — no file is uploaded anywhere.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="card">
+      <div class="card-head">
+        <p class="eyebrow"><span class="num">2</span>Results</p>
+        <a href="client-dashboard.html#doc-results" style="font-size:12.5px;font-weight:700;color:var(--primary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-layer-group"></i> Also saved to My Portal
+        </a>
+      </div>
+      <div id="refBannerHolder"></div>
+      <div id="successBannerHolder"></div>
+      <div class="summary-bar" id="summaryBar"></div>
+      <div id="fieldRows"></div>
+      <div id="mismatchSummary"></div>
+      <details class="rawtoggle">
+        <summary>View raw text extracted from each file</summary>
+        <div id="rawArea"></div>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<footer class="bg-gray-900 text-gray-300 relative overflow-hidden">
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none"></div>
+    <div class="container mx-auto px-6 py-20 pb-12 grid md:grid-cols-4 gap-12 text-left relative z-10">
+        <div class="md:col-span-2 space-y-6">
+            <a href="index.html" class="inline-block transition-all duration-300">
+                <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-16 w-auto object-contain" />
+            </a>
+            <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-sm mt-6">On-device document verification — cross-check names, IDs, and dates across multiple files in Bengali and English. Nothing ever leaves your browser.</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold font-display text-white mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
+            <div class="space-y-3">
+                <a href="index.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Home</a>
+                <a href="document-check.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Document Check</a>
+                <a href="index.html#eligibility-section" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Eligibility Checker</a>
+                <a href="client-dashboard.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Premium / My Portal</a>
+                <a href="contact.html" class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Contact</a>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold font-display text-white mb-6 uppercase tracking-wider text-sm">Connect</h3>
+            <ul class="space-y-4 text-gray-400">
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>info@eduabroad.com.bd</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <span>+880 1401-184949</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500 mt-1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>Confidence Center,<br>Gulshan, Dhaka</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="border-t border-gray-800 relative z-10 bg-black/20">
+        <div class="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>&copy; <span id="footer-year"></span> Edu Abroad. Built with precision.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-lock text-brand-500"></i>Processed locally in your browser</span>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+<script>
+//==============================
+// Access control: EduAuth session + 1 free check, then paid unlock (admin/premium unlimited)
+//==============================
+var authedUser = window.EduAuth ? EduAuth.currentUser() : null;
+if (!authedUser) {
+  window.location.href = "login.html?redirect=document-check.html";
+}
+var currentUser = authedUser; // { id, name, role, plan, ... } from EduAuth
+if (currentUser) {
+  var portalHref = currentUser.role === "admin" ? "admin-dashboard.html" : "client-dashboard.html";
+  var pl = document.getElementById('portalLink'); if (pl) pl.setAttribute('href', portalHref);
+  var plm = document.getElementById('portalLinkMobile'); if (plm) plm.setAttribute('href', portalHref);
+}
+
+function hasAccess(){
+  var status = EduAuth.docCheckStatus(currentUser.id);
+  return status.ok && status.canRun;
+}
+
+function renderAcctBar(){
+  if (!currentUser) return;
+  var status = EduAuth.docCheckStatus(currentUser.id);
+  const pill = document.getElementById('memberPill');
+  const pillText = document.getElementById('memberPillText');
+
+  if (status.unlimited){
+    pill.className = 'member-pill premium';
+    pill.querySelector('i').className = 'fa-solid fa-crown';
+    pillText.textContent = currentUser.name + (currentUser.role === 'admin' ? ' · Admin (Unlimited)' : ' · Premium (Unlimited)');
+  } else if (status.freeAvailable){
+    pill.className = 'member-pill free';
+    pill.querySelector('i').className = 'fa-solid fa-gift';
+    pillText.textContent = currentUser.name + ' · 1 free check left';
+  } else if (status.credits > 0){
+    pill.className = 'member-pill premium';
+    pill.querySelector('i').className = 'fa-solid fa-coins';
+    pillText.textContent = currentUser.name + ' · ' + status.credits + ' paid check(s) left';
+  } else {
+    pill.className = 'member-pill free';
+    pill.querySelector('i').className = 'fa-solid fa-triangle-exclamation';
+    pillText.textContent = currentUser.name + ' · free check used';
+  }
+}
+function escapeHtmlSafe(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function applyAccessGate(){
+  const lockSection = document.getElementById('lockSection');
+  const uploadSection = document.getElementById('uploadSection');
+  const resultsEl = document.getElementById('results');
+  if (hasAccess()){
+    lockSection.style.display = 'none';
+    uploadSection.style.display = 'block';
+  } else {
+    lockSection.style.display = 'block';
+    uploadSection.style.display = 'none';
+    resultsEl.style.display = 'none';
+    resultsEl.classList.remove('show');
+  }
+  renderAcctBar();
+}
+
+var payUnlockBtn = document.getElementById('payUnlockBtn');
+if (payUnlockBtn) {
+  payUnlockBtn.addEventListener('click', function () {
+    EduPayment.open({
+      title: 'Unlock 4 More Checks',
+      subtitle: 'Pay ৳100 via bKash or Nagad to unlock 4 more document cross-checks.',
+      amount: EduAuth.DOC_CHECK_PRICE_BDT,
+      onConfirm: function () {
+        EduAuth.payForDocCheck(currentUser.id);
+        applyAccessGate();
+      }
+    });
+  });
+}
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const FIELD_DEFS = [
+  { key: 'name', label: 'Name' },
+  { key: 'fatherName', label: "Father's name" },
+  { key: 'motherName', label: "Mother's name" },
+  { key: 'dob', label: 'Date of birth' },
+  { key: 'nid', label: 'National ID number' },
+  { key: 'address', label: 'Address' },
+];
+
+const KEYWORDS = {
+  fatherName: ["father's name","fathers name","father name","পিতার নাম","বাবার নাম","পিতা"],
+  motherName: ["mother's name","mothers name","mother name","মাতার নাম","মায়ের নাম","মাতা"],
+  dob: ["date of birth","dob","birth date","d.o.b","জন্ম তারিখ","জন্মতারিখ"],
+  nid: ["national id number","national id no","national identification","nid number","nid no","identification no","জাতীয় পরিচয়পত্র নম্বর","জাতীয় পরিচয় পত্র নম্বর","এনআইডি নম্বর","এনআইডি","ভোটার নম্বর","পরিচয়পত্র নম্বর","nid"],
+  address: ["present address","permanent address","বর্তমান ঠিকানা","স্থায়ী ঠিকানা","address","ঠিকানা"],
+  name: ["full name","নাম","name"],
+};
+const FIELD_PRIORITY = ['fatherName','motherName','dob','nid','address','name'];
+const EXT_LABEL = { txt:'TXT', csv:'CSV', json:'JSON', docx:'DOC', pdf:'PDF', xlsx:'XLS', xls:'XLS', jpg:'IMG', jpeg:'IMG', png:'IMG', bmp:'IMG', webp:'IMG' };
+
+function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function buildKeywordEntries(){
+  const entries = [];
+  FIELD_PRIORITY.forEach(field => KEYWORDS[field].forEach(kw => entries.push({ field, kw })));
+  entries.sort((a,b) => b.kw.length - a.kw.length);
+  return entries;
+}
+const KEYWORD_ENTRIES = buildKeywordEntries();
+const KEYWORD_TO_FIELD = {};
+KEYWORD_ENTRIES.forEach(e => { KEYWORD_TO_FIELD[e.kw.toLowerCase()] = e.field; });
+const KEYWORD_PATTERN = new RegExp(KEYWORD_ENTRIES.map(e => escapeRegExp(e.kw)).join('|'), 'gi');
+
+let files = [];
+let referenceIdx = null;
+
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const fileListEl = document.getElementById('fileList');
+const runBtn = document.getElementById('runBtn');
+const countHint = document.getElementById('countHint');
+
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('hover'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('hover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('hover');
+  addFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e => addFiles(e.target.files));
+
+function addFiles(fileListRaw){
+  for (const f of fileListRaw){
+    if (files.length >= 5) break;
+    if (files.some(x => x.file.name === f.name && x.file.size === f.size)) continue;
+    files.push({ file: f, text: null, fields: null });
+  }
+  if (referenceIdx === null && files.length > 0) referenceIdx = 0;
+  renderFileList();
+  fileInput.value = '';
+}
+
+function removeFile(idx){
+  files.splice(idx,1);
+  if (referenceIdx === idx) referenceIdx = files.length ? 0 : null;
+  else if (referenceIdx !== null && idx < referenceIdx) referenceIdx--;
+  renderFileList();
+}
+
+function setReference(idx){
+  referenceIdx = idx;
+  renderFileList();
+}
+
+function starIcon(filled){
+  return filled
+    ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>';
+}
+
+function renderFileList(){
+  fileListEl.innerHTML = '';
+  files.forEach((entry, idx) => {
+    const ext = entry.file.name.split('.').pop().toLowerCase();
+    const isRef = idx === referenceIdx;
+    const li = document.createElement('li');
+    li.className = isRef ? 'is-ref' : '';
+    li.style.animationDelay = (idx*40) + 'ms';
+    li.innerHTML = `<span class="ftype">${EXT_LABEL[ext] || 'FILE'}</span>
+      <span class="name">${escapeHtml(entry.file.name)}</span>
+      ${isRef ? '<span class="reftag">Reference</span>' : ''}
+      <span class="status" id="status-${idx}">${(entry.file.size/1024).toFixed(1)} KB</span>
+      <button class="ref-btn${isRef ? ' active':''}" data-idx="${idx}" title="Set as reference file">${starIcon(isRef)}</button>
+      <button class="remove" title="Remove" data-idx="${idx}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="prog-fill" id="prog-${idx}"></div>`;
+    li.querySelector('button.remove').addEventListener('click', () => removeFile(idx));
+    li.querySelector('button.ref-btn').addEventListener('click', () => setReference(idx));
+    fileListEl.appendChild(li);
+  });
+  countHint.textContent = files.length === 0 ? 'No files added yet' : `${files.length} file${files.length>1?'s':''} added`;
+  runBtn.disabled = files.length < 2;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function updateFileStatus(idx, text, percent){
+  const el = document.getElementById('status-' + idx);
+  if (el) el.textContent = text;
+  const bar = document.getElementById('prog-' + idx);
+  if (bar && percent !== undefined) bar.style.width = percent + '%';
+}
+
+let ocrWorkerPromise = null;
+let currentProgressCb = null;
+async function getOcrWorker(){
+  if (!ocrWorkerPromise){
+    ocrWorkerPromise = Tesseract.createWorker('ben+eng', 1, {
+      logger: m => { if (currentProgressCb) currentProgressCb(m); }
+    }).then(async worker => {
+      await worker.setParameters({ preserve_interword_spaces: '1' });
+      return worker;
+    });
+  }
+  return ocrWorkerPromise;
+}
+
+async function ocrImageLike(imageSource, idx, pageLabel){
+  const worker = await getOcrWorker();
+  currentProgressCb = (m) => {
+    if (m.status === 'recognizing text'){
+      updateFileStatus(idx, `OCR${pageLabel ? ' '+pageLabel : ''} ${Math.round(m.progress*100)}%`, Math.round(m.progress*100));
+    } else if (m.status){
+      updateFileStatus(idx, m.status);
+    }
+  };
+  const { data: { text } } = await worker.recognize(imageSource);
+  currentProgressCb = null;
+  return text;
+}
+
+function enhanceCanvasForOcr(canvas){
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const imageData = ctx.getImageData(0, 0, w, h);
+  const data = imageData.data;
+  const contrast = 1.25;
+  const intercept = 128 * (1 - contrast);
+  for (let i = 0; i < data.length; i += 4){
+    const gray = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+    let val = gray * contrast + intercept;
+    val = val < 0 ? 0 : (val > 255 ? 255 : val);
+    data[i] = data[i+1] = data[i+2] = val;
+  }
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+function loadImageFile(file){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function preprocessImageForOcr(file){
+  const img = await loadImageFile(file);
+  const minWidth = 1700;
+  const scale = img.width < minWidth ? minWidth / img.width : 1;
+  const w = Math.round(img.width * scale);
+  const h = Math.round(img.height * scale);
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, w, h);
+  return enhanceCanvasForOcr(canvas);
+}
+
+async function pdfPageToCanvas(page, scale){
+  const viewport = page.getViewport({ scale });
+  const canvas = document.createElement('canvas');
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  const ctx = canvas.getContext('2d');
+  await page.render({ canvasContext: ctx, viewport }).promise;
+  return enhanceCanvasForOcr(canvas);
+}
+
+function jsonToLines(obj){
+  let lines = [];
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)){
+    for (const k in obj){
+      const v = obj[k];
+      if (v && typeof v === 'object') lines = lines.concat(jsonToLines(v));
+      else lines.push(`${k}: ${v}`);
+    }
+  } else if (Array.isArray(obj)){
+    obj.forEach(item => { lines = lines.concat(jsonToLines(item)); });
+  }
+  return lines.join('\n');
+}
+
+function sheetMatrixToLines(matrix){
+  const lines = [];
+  if (matrix.length >= 2){
+    const headerRow = matrix[0].map(c => String(c || '').trim());
+    const headerMatches = headerRow.filter(h => h && KEYWORD_TO_FIELD[h.toLowerCase()]).length;
+    if (headerMatches >= 2){
+      const dataRow = matrix[1] || [];
+      headerRow.forEach((h, i) => {
+        if (h && dataRow[i] !== undefined && String(dataRow[i]).trim() !== ''){
+          lines.push(`${h}: ${dataRow[i]}`);
+        }
+      });
+    }
+  }
+  matrix.forEach(row => {
+    for (let i = 0; i + 1 < row.length; i++){
+      const label = row[i], value = row[i+1];
+      if (label && value && String(label).trim().length > 0 && String(label).trim().length < 40){
+        lines.push(`${String(label).trim()}: ${String(value).trim()}`);
+      }
+    }
+  });
+  return lines.join('\n');
+}
+
+async function extractText(file, idx){
+  const ext = file.name.split('.').pop().toLowerCase();
+
+  if (ext === 'txt' || ext === 'csv') return await file.text();
+
+  if (ext === 'json'){
+    const raw = await file.text();
+    try{ return jsonToLines(JSON.parse(raw)); } catch(e){ return raw; }
+  }
+
+  if (ext === 'docx'){
+    const buf = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer: buf });
+    return result.value;
+  }
+
+  if (ext === 'xlsx' || ext === 'xls'){
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, { type: 'array' });
+    const out = [];
+    wb.SheetNames.forEach(sheetName => {
+      const matrix = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header: 1, defval: '' });
+      out.push(sheetMatrixToLines(matrix));
+    });
+    return out.join('\n');
+  }
+
+  if (['jpg','jpeg','png','bmp','webp'].includes(ext)){
+    updateFileStatus(idx, 'Enhancing image…', 5);
+    const canvas = await preprocessImageForOcr(file);
+    updateFileStatus(idx, 'Starting OCR…', 8);
+    return await ocrImageLike(canvas, idx, '');
+  }
+
+  if (ext === 'pdf'){
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    let out = '';
+    for (let i=1; i<=pdf.numPages; i++){
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      out += content.items.map(it => it.str).join(' ') + '\n';
+    }
+    const meaningfulLength = out.replace(/\s+/g,'').length;
+    const avgPerPage = meaningfulLength / pdf.numPages;
+    if (avgPerPage < 25){
+      updateFileStatus(idx, 'Scanned PDF detected — starting OCR…', 5);
+      let ocrOut = '';
+      for (let i=1; i<=pdf.numPages; i++){
+        const page = await pdf.getPage(i);
+        const canvas = await pdfPageToCanvas(page, 2.6);
+        const pageLabel = pdf.numPages > 1 ? `(page ${i}/${pdf.numPages})` : '';
+        ocrOut += await ocrImageLike(canvas, idx, pageLabel) + '\n';
+      }
+      return ocrOut;
+    }
+    return out;
+  }
+
+  return await file.text();
+}
+
+function extractFields(text){
+  const fields = {};
+  if (!text) return fields;
+
+  const matches = [];
+  KEYWORD_PATTERN.lastIndex = 0;
+  let m;
+  while ((m = KEYWORD_PATTERN.exec(text)) !== null){
+    const field = KEYWORD_TO_FIELD[m[0].toLowerCase()];
+    if (field) matches.push({ field, start: m.index, end: m.index + m[0].length });
+    if (m.index === KEYWORD_PATTERN.lastIndex) KEYWORD_PATTERN.lastIndex++;
+  }
+  matches.sort((a,b) => a.start - b.start);
+
+  for (let i = 0; i < matches.length; i++){
+    const cur = matches[i];
+    const next = matches[i+1];
+    const sliceEnd = next ? next.start : text.length;
+    let raw = text.slice(cur.end, sliceEnd);
+    raw = raw.replace(/^[\s:：\-–—ঃ]+/, '');
+
+    let value;
+    if (cur.field === 'address'){
+      const blankLineIdx = raw.search(/\n\s*\n/);
+      let seg = blankLineIdx !== -1 ? raw.slice(0, blankLineIdx) : raw;
+      seg = seg.slice(0, 180);
+      value = seg.replace(/\s*\n\s*/g, ', ').replace(/\s+/g, ' ').trim();
+    } else {
+      const newlineIdx = raw.indexOf('\n');
+      let seg = newlineIdx !== -1 ? raw.slice(0, newlineIdx) : raw;
+      value = seg.replace(/\s+/g, ' ').trim();
+    }
+    value = value.replace(/^[,:\-–—]+|[,:\-–—]+$/g, '').trim();
+    if (value && !fields[cur.field]) fields[cur.field] = value;
+  }
+  return fields;
+}
+
+function toEnglishDigits(str){
+  const bn = '০১২৩৪৫৬৭৮৯';
+  return str.replace(/[০-৯]/g, d => bn.indexOf(d));
+}
+
+function normalizeValue(field, value){
+  if (value === undefined || value === null) return null;
+  let v = value.trim().toLowerCase();
+  v = v.replace(/\s+/g, ' ');
+  if (field === 'nid' || field === 'dob') v = v.replace(/[^0-9০-৯a-z]/g, '');
+  else v = v.replace(/[.,،]/g, '');
+  return toEnglishDigits(v);
+}
+
+runBtn.addEventListener('click', async () => {
+  runBtn.disabled = true;
+  runBtn.innerHTML = '<svg class="spin" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 11-9-9"/></svg>Reading files…';
+  try{
+    for (let idx = 0; idx < files.length; idx++){
+      const entry = files[idx];
+      updateFileStatus(idx, 'Reading…', 2);
+      entry.text = await extractText(entry.file, idx);
+      entry.fields = extractFields(entry.text || '');
+      updateFileStatus(idx, 'Done', 100);
+    }
+    const summary = renderResults();
+    const resultsEl = document.getElementById('results');
+    resultsEl.style.display = 'block';
+    requestAnimationFrame(() => resultsEl.classList.add('show'));
+    resultsEl.scrollIntoView({ behavior:'smooth', block:'start' });
+
+    logVerificationToHistory(summary);
+
+    // Consume the free check / a paid credit now that a run has completed successfully
+    // (admins and premium users are unlimited and untouched by this call)
+    EduAuth.consumeDocCheck(currentUser.id);
+  }catch(err){
+    alert('There was a problem reading one of the files: ' + err.message);
+  }finally{
+    runBtn.disabled = false;
+    runBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Run cross-check';
+    applyAccessGate();
+  }
+});
+
+applyAccessGate();
+
+function checkIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'; }
+function crossIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'; }
+function dashIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/></svg>'; }
+function warnIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.7 17.3A1.6 1.6 0 004.1 19.7h15.8a1.6 1.6 0 001.4-2.4L13.7 3.9a1.6 1.6 0 00-2.8 0z"/></svg>'; }
+
+function animateCount(el, target){
+  const dur = 500;
+  const start = performance.now();
+  function step(now){
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(eased * target);
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function toggleRow(row){
+  const body = row.querySelector('.field-body');
+  const isOpen = row.classList.toggle('open');
+  body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '0px';
+}
+
+function renderResults(){
+  const refBannerHolder = document.getElementById('refBannerHolder');
+  const successBannerHolder = document.getElementById('successBannerHolder');
+  const summaryBar = document.getElementById('summaryBar');
+  const fieldRows = document.getElementById('fieldRows');
+  const mismatchSummary = document.getElementById('mismatchSummary');
+  const rawArea = document.getElementById('rawArea');
+  refBannerHolder.innerHTML = '';
+  successBannerHolder.innerHTML = '';
+  summaryBar.innerHTML = '';
+  fieldRows.innerHTML = '';
+  mismatchSummary.innerHTML = '';
+  rawArea.innerHTML = '';
+
+  const refEntry = files[referenceIdx];
+  refBannerHolder.innerHTML = `<div class="ref-banner">${starIcon(true)}<span>Comparing every file against <b>${escapeHtml(refEntry.file.name)}</b> as the reference.</span></div>`;
+
+  let matchCount = 0, mismatchCount = 0, refMissingCount = 0, singleCount = 0;
+  const mismatchDetails = [];
+  const refGapDetails = [];
+  const fieldReport = [];
+
+  FIELD_DEFS.forEach((def, defIdx) => {
+    const perFile = files.map((entry, i) => ({
+      name: entry.file.name,
+      isRef: i === referenceIdx,
+      raw: entry.fields[def.key] || null,
+      norm: entry.fields[def.key] ? normalizeValue(def.key, entry.fields[def.key]) : null
+    }));
+
+    const refP = perFile[referenceIdx];
+    const othersPresent = perFile.filter(p => !p.isRef && p.norm !== null);
+
+    let status;
+    if (refP.norm === null){
+      status = othersPresent.length ? 'ref-missing' : 'single';
+    } else if (othersPresent.length === 0){
+      status = 'single';
+    } else {
+      const allMatch = othersPresent.every(p => p.norm === refP.norm);
+      status = allMatch ? 'match' : 'mismatch';
+    }
+
+    if (status === 'match') matchCount++;
+    else if (status === 'mismatch') mismatchCount++;
+    else if (status === 'ref-missing') refMissingCount++;
+    else singleCount++;
+
+    const row = document.createElement('div');
+    row.className = 'field-row' + (status === 'mismatch' ? ' mismatch open' : status === 'ref-missing' ? ' ref-missing open' : '');
+    row.style.animationDelay = (defIdx * 60) + 'ms';
+
+    const stampMeta = status === 'match'
+      ? { cls: 'match', label: 'Matched', icon: checkIcon() }
+      : status === 'mismatch'
+        ? { cls: 'mismatch', label: 'Mismatch', icon: crossIcon() }
+        : status === 'ref-missing'
+          ? { cls: 'warn', label: 'No reference value', icon: warnIcon() }
+          : { cls: 'single', label: 'Single source', icon: dashIcon() };
+
+    const head = document.createElement('div');
+    head.className = 'field-head';
+    head.innerHTML = `<span class="fname">${def.label}</span><span style="display:flex;align-items:center;gap:10px;"><span class="stamp ${stampMeta.cls}">${stampMeta.icon}${stampMeta.label}</span><span class="chevron"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></span>`;
+    head.addEventListener('click', () => toggleRow(row));
+
+    const body = document.createElement('div');
+    body.className = 'field-body';
+    const table = document.createElement('table');
+    table.className = 'detail';
+
+    const ordered = [refP, ...perFile.filter(p => !p.isRef)];
+    ordered.forEach(p => {
+      const tr = document.createElement('tr');
+      if (p.isRef) tr.classList.add('refrow');
+      const isDiff = status === 'mismatch' && !p.isRef && p.norm !== null && p.norm !== refP.norm;
+      if (isDiff) tr.classList.add('diff');
+      const valCell = p.raw ? escapeHtml(p.raw) : 'Not found';
+      const nameLabel = p.isRef ? `${escapeHtml(p.name)} <span class="mini-ref-tag">ref</span>` : escapeHtml(p.name);
+      tr.innerHTML = `<td class="fname-cell">${nameLabel}</td><td class="val-cell${p.raw ? '' : ' missing'}">${valCell}</td>`;
+      table.appendChild(tr);
+    });
+    body.appendChild(table);
+
+    row.appendChild(head);
+    row.appendChild(body);
+    fieldRows.appendChild(row);
+
+    fieldReport.push({
+      key: def.key,
+      label: def.label,
+      status: status,
+      values: ordered.map(p => ({
+        name: p.name,
+        isRef: p.isRef,
+        raw: p.raw || null,
+        isDiff: status === 'mismatch' && !p.isRef && p.norm !== null && p.norm !== refP.norm
+      }))
+    });
+
+    if (status === 'mismatch'){
+      const diffFiles = perFile.filter(p => !p.isRef && p.norm !== null && p.norm !== refP.norm).map(p => p.name);
+      mismatchDetails.push({ label: def.label, refValue: refP.raw, files: diffFiles });
+    } else if (status === 'ref-missing'){
+      const withValue = perFile.filter(p => !p.isRef && p.norm !== null).map(p => p.name);
+      refGapDetails.push({ label: def.label, files: withValue });
+    }
+  });
+
+  document.querySelectorAll('.field-row').forEach(row => {
+    const body = row.querySelector('.field-body');
+    body.style.maxHeight = row.classList.contains('open') ? body.scrollHeight + 'px' : '0px';
+  });
+
+  if (mismatchCount === 0 && refMissingCount === 0 && matchCount > 0){
+    successBannerHolder.innerHTML = `<div class="success-banner">${checkIcon()}<span>Every comparable field matches the reference file.</span></div>`;
+  }
+
+  const pillDefs = [];
+  if (matchCount) pillDefs.push({ cls:'ok', count: matchCount, label: `field${matchCount>1?'s':''} matched` });
+  if (mismatchCount) pillDefs.push({ cls:'bad', count: mismatchCount, label: `field${mismatchCount>1?'s':''} mismatched` });
+  if (refMissingCount) pillDefs.push({ cls:'warn', count: refMissingCount, label: `field${refMissingCount>1?'s':''} missing on reference` });
+  if (singleCount) pillDefs.push({ cls:'neutral', count: singleCount, label: `field${singleCount>1?'s':''} single-source` });
+
+  pillDefs.forEach(p => {
+    const span = document.createElement('span');
+    span.className = 'pill ' + p.cls;
+    const countSpan = document.createElement('span');
+    countSpan.className = 'countnum';
+    span.innerHTML = `<span class="dotsm"></span>`;
+    span.appendChild(countSpan);
+    const labelNode = document.createTextNode(' ' + p.label);
+    span.appendChild(labelNode);
+    summaryBar.appendChild(span);
+    animateCount(countSpan, p.count);
+  });
+
+  if (mismatchDetails.length){
+    const h3 = document.createElement('h3');
+    h3.textContent = 'Where the mismatches are';
+    mismatchSummary.appendChild(h3);
+    mismatchDetails.forEach(d => {
+      const item = document.createElement('div');
+      item.className = 'mm-item';
+      item.innerHTML = `<span class="dot"></span><span><b>${d.label}</b> — reference has "${escapeHtml(d.refValue||'—')}", differs in: ${d.files.map(escapeHtml).join(', ')}</span>`;
+      mismatchSummary.appendChild(item);
+    });
+  }
+
+  if (refGapDetails.length){
+    const h3 = document.createElement('h3');
+    h3.textContent = 'Fields the reference file is missing';
+    mismatchSummary.appendChild(h3);
+    refGapDetails.forEach(d => {
+      const item = document.createElement('div');
+      item.className = 'mm-item warn';
+      item.innerHTML = `<span class="dot"></span><span><b>${d.label}</b> — the reference file has no value here, so it couldn't be checked against: ${d.files.map(escapeHtml).join(', ')}</span>`;
+      mismatchSummary.appendChild(item);
+    });
+  }
+
+  files.forEach(entry => {
+    const block = document.createElement('div');
+    block.className = 'rawblock';
+    const fieldLines = FIELD_DEFS.map(def => `${def.label}: ${entry.fields[def.key] || '—'}`).join('\n');
+    block.innerHTML = `<b>${escapeHtml(entry.file.name)}</b>\n${escapeHtml(fieldLines)}`;
+    rawArea.appendChild(block);
+  });
+
+  return {
+    refFileName: refEntry.file.name,
+    fileCount: files.length,
+    matchCount, mismatchCount, refMissingCount, singleCount,
+    fields: fieldReport
+  };
+}
+
+function logVerificationToHistory(summary){
+  try{
+    const key = 'verifyHistory_' + currentUser.id;
+    const list = JSON.parse(localStorage.getItem(key) || '[]');
+    const overallStatus = summary.mismatchCount > 0 ? 'mismatch' : 'match';
+    const status = EduAuth.docCheckStatus(currentUser.id);
+    list.unshift({
+      id: 'v_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+      title: 'Document cross-check',
+      refFile: summary.refFileName,
+      fileCount: summary.fileCount,
+      matched: summary.matchCount,
+      mismatched: summary.mismatchCount,
+      refMissing: summary.refMissingCount,
+      status: overallStatus,
+      timestamp: new Date().toISOString(),
+      fields: summary.fields,
+      unlocked: true // Viewing a completed result is always free — payment is only for running a NEW check
+    });
+    // keep the most recent 30 entries
+    localStorage.setItem(key, JSON.stringify(list.slice(0, 30)));
+  }catch(err){
+    // non-critical — history is a convenience feature, never block the main flow
+  }
+}
+</script>
+
+
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu" class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar" class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0"></div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About
+            </a>
+            <a href="index.html#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Services
+            </a>
+            <a href="index.html#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Destinations
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link active-page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path></svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Blog
+            </a>
+            <a href="company-profile.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line></svg>
+                Company Profile
+            </a>
+            <a href="Appointment-form.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Book Appointment
+            </a>
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html" class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">Login</a>
+                <a href="Appointment-form.html" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Get Started</a>
+            </div>
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Go to Portal</a>
+                <button type="button" id="mobile-logout-btn" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var windist = document.documentElement.scrollTop;
+            var winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = winheight ? (windist / winheight) * 100 : 0;
+            var progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        var menuClose = document.getElementById('mobile-menu-close');
+        var menuDrawer = document.getElementById('mobile-menu-drawer');
+        var menuOverlay = document.getElementById('mobile-menu-overlay');
+        var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) closeMenu(); else openMenu();
+        }
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(function (link) {
+                link.addEventListener('click', function () { if (menuDrawer.classList.contains('active')) closeMenu(); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) closeMenu();
+            });
+        }
+
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+            var user = EduAuth.currentUser();
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+            if (!user) return;
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) { authedActions.classList.remove('hidden'); authedActions.classList.add('flex'); }
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+            if (logoutBtn) logoutBtn.addEventListener('click', function () { EduAuth.logout(); window.location.href = 'index.html'; });
+        })();
+    </script>
+
+</body>
+</html>

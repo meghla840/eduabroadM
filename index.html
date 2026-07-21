@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Abroad | Premium Education Consultancy</title>
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1b3168',
+                        secondary: '#00a2e8',
+                        "brand-green": '#39b54a',
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#e0e8ff',
+                            500: '#1b3168',
+                            600: '#152654',
+                            700: '#0f1b3b',
+                            900: '#090f23',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth Scroll CSS */
+        html {
+            font-size: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            color: #1a202c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            font-weight: 900;
+        }
+
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            font-size: 1rem !important;
+            /* Prevent iOS zoom */
+        }
+
+        /* Essential Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-on-load {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .modal-scale-in {
+            animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .floating-badge {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Hover Transitions */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Image Zoom on Hover */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ===========================
+    MARQUEE / TICKER STYLES
+    =========================== */
+
+        /* Scroll to the LEFT (standard ticker direction) */
+        @keyframes ticker-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Scroll to the RIGHT (reverse row) */
+        @keyframes ticker-right {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .marquee-track--left {
+            animation: ticker-left 28s linear infinite;
+        }
+
+        .marquee-track--right {
+            animation: ticker-right 32s linear infinite;
+        }
+
+        /* Pause on hover */
+        .marquee-row:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        /* Soft fade on the edges */
+        .marquee-row {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right,
+                    transparent 0%,
+                    black 6%,
+                    black 94%,
+                    transparent 100%);
+            mask-image: linear-gradient(to right,
+                    transparent 0%,
+                    black 6%,
+                    black 94%,
+                    transparent 100%);
+        }
+
+        /* Individual ticker item */
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 2rem;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #fff;
+            gap: 1.5rem;
+        }
+
+        /* Separator dot between items */
+        .ticker-item::after {
+            content: '●';
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Outlined (ghost) style for alternating items */
+        .ticker-item--outline {
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
+            color: transparent;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #1b3168, #00a2e8);
+            /* Lighter gradient for dark background */
+        }
+
+        /* Hero Title Sync Animation */
+        @keyframes title-fade-slide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            4.16% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            16.66% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-title-slide,
+        .hero-subtitle-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+
+        .hero-title-slide.active,
+        .hero-subtitle-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        /* Simulated Drone Flight Background */
+        /* Animation 1: Pan Right */
+        @keyframes drone-1 {
+            0% {
+                opacity: 0;
+                transform: scale(1.1) translateX(-3%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.1) translateX(3%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.1) translateX(3%);
+            }
+        }
+
+        /* Animation 2: Pan Left */
+        @keyframes drone-2 {
+            0% {
+                opacity: 0;
+                transform: scale(1.1) translateX(3%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.1) translateX(-3%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.1) translateX(-3%);
+            }
+        }
+
+        /* Animation 3: Pan Right & Zoom In */
+        @keyframes drone-3 {
+            0% {
+                opacity: 0;
+                transform: scale(1.0) translateX(-2%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.15) translateX(2%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.15) translateX(2%);
+            }
+        }
+
+        /* Animation 4: Pan Left & Zoom Out */
+        @keyframes drone-4 {
+            0% {
+                opacity: 0;
+                transform: scale(1.15) translateX(2%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.0) translateX(-2%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.0) translateX(-2%);
+            }
+        }
+
+        /* Animation 5: Pan Up */
+        @keyframes drone-5 {
+            0% {
+                opacity: 0;
+                transform: scale(1.1) translateY(3%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.1) translateY(-3%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.1) translateY(-3%);
+            }
+        }
+
+        /* Animation 6: Pan Down & Zoom In */
+        @keyframes drone-6 {
+            0% {
+                opacity: 0;
+                transform: scale(1.0) translateY(-2%);
+            }
+
+            4.16% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            20.83% {
+                opacity: 0;
+                transform: scale(1.15) translateY(3%);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.15) translateY(3%);
+            }
+        }
+
+        .drone-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Negative delays ensure an immediate perfect loop from all images */
+        .slide-1 {
+            background-image: url('images/europe_destination_1772687670147.png');
+            animation: drone-1 36s linear infinite;
+            animation-delay: 0s;
+        }
+
+        .slide-2 {
+            background-image: url('images/uk_destination_1772687702581.png');
+            animation: drone-2 36s linear infinite;
+            animation-delay: -30s;
+        }
+
+        .slide-3 {
+            animation: drone-3 36s linear infinite;
+            animation-delay: -24s;
+        }
+
+        .slide-4 {
+            background-image: url('images/canada_destination_1772687624868.png');
+            animation: drone-4 36s linear infinite;
+            animation-delay: -18s;
+        }
+
+        .slide-5 {
+            background-image: url('images/aus_destination_1772687687147.png');
+            animation: drone-5 36s linear infinite;
+            animation-delay: -12s;
+        }
+
+        .slide-6 {
+            background-image: url('images/nz_destination_1772687718254.png');
+            animation: drone-6 36s linear infinite;
+            animation-delay: -6s;
+        }
+
+        /* ===========================
+    DESTINATION CARD — Scroll Reveal Animation
+    =========================== */
+        .dest-card {
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            transition:
+                opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .dest-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Hover zoom + greyscale on the background image */
+        .dest-img {
+            filter: grayscale(0%);
+            transition:
+                transform 1s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .dest-card:hover .dest-img {
+            transform: scale(1.06);
+            filter: grayscale(100%);
+        }
+
+        /* Mobile: stack to 1 column */
+        @media (max-width: 640px) {
+            #destinations-section [style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            #destinations-section .dest-card[style*="grid-column"] {
+                grid-column: auto !important;
+            }
+        }
+
+        /* ===========================
+    SERVICE CARD — Scroll Reveal
+    =========================== */
+        [data-svc-card] {
+            opacity: 0;
+            transform: translateY(50px);
+            transition:
+                opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-svc-card].svc-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Universal Destination Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .details-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 1000px;
+            height: 90vh;
+            max-height: 750px;
+            border-radius: 2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            .details-modal {
+                flex-direction: row;
+            }
+        }
+
+        .modal-overlay.active .details-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-left {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: #fff;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (min-width: 768px) {
+            .modal-left {
+                padding: 3.5rem;
+            }
+        }
+
+        .modal-right {
+            width: 100%;
+            padding: 2.5rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            min-height: 300px;
+        }
+
+        @media (min-width: 1024px) {
+            .modal-right {
+                width: 420px;
+                min-height: auto;
+            }
+        }
+
+        .modal-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+        }
+
+        .modal-content-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: rotate(90deg);
+        }
+
+        /* Magnetic Wrap */
+        .magnetic-wrap {
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Scroll Progress */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #1b3168, #00a2e8);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Tilt Effect */
+        .tilt-card {
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Magnetic Nav */
+        .nav-link {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            transform: translateX(3px);
+        }
+
+        /* Slide-in Sidebar Menu */
+        #mobile-menu-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(400px, 88vw);
+            background: #ffffff;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -18px 0 50px rgba(0, 0, 0, 0.12);
+            overflow-y: auto;
+        }
+
+        #mobile-menu-drawer.active {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 15, 20, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #mobile-menu-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hamburger-line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .menu-open .line-1 {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-open .line-2 {
+            opacity: 0;
+        }
+
+        .menu-open .line-3 {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* Sidebar nav links */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 0.75rem;
+            color: #374151;
+            font-size: 14.5px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            text-align: left;
+        }
+
+        .sidebar-link:hover {
+            background: #f3f4f6;
+            color: #1b3168;
+        }
+
+        .sidebar-link svg {
+            flex-shrink: 0;
+            color: #9ca3af;
+            transition: color 0.2s ease;
+        }
+
+        .sidebar-link:hover svg {
+            color: #1b3168;
+        }
+
+        #company-profile-toggle .chevron {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        #company-profile-toggle.expanded .chevron {
+            transform: rotate(180deg);
+        }
+
+        /* FAQ Accordion Smooth Animation */
+        .faq-content-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .faq-item.is-active .faq-content-wrapper {
+            grid-template-rows: 1fr;
+        }
+
+        .faq-content-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* ---------- Eligibility Checker & Premium Cards ---------- */
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,162,232,0.45); } 70% { box-shadow: 0 0 0 18px rgba(0,162,232,0); } }
+        @keyframes shimmerBg { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        @keyframes fadeUpCard { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes ctaBadgeBounce { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(-4deg); } }
+
+        .elig-float { animation: floatSlow 6s ease-in-out infinite; }
+        .elig-float-delay { animation: floatSlow 7s ease-in-out infinite; animation-delay: 1.2s; }
+        .elig-shimmer { background: linear-gradient(120deg, #1b3168, #00a2e8, #1b3168); background-size: 200% 200%; animation: shimmerBg 6s linear infinite; }
+        .elig-fade-up { animation: fadeUpCard 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+        .premium-card { border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid #eef0f4; box-shadow: 0 2px 12px rgba(17, 24, 39, 0.05); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease; }
+        .premium-card:hover { transform: translateY(-8px); box-shadow: 0 24px 40px -12px rgba(17, 24, 39, 0.18); }
+        .premium-card .pc-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+        .premium-card .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .premium-card:hover .pc-img-wrap img { transform: scale(1.09); }
+        .pc-heart { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 999px; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: transform 0.25s ease; }
+        .pc-heart:hover { transform: scale(1.12); }
+        .pc-price-badge { position: absolute; bottom: 14px; right: 14px; background: #fff; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); color: #1b3168; }
+        .pc-ranking-badge { position: absolute; top: 14px; left: 14px; background: rgba(27,49,104,0.92); color: #fff; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+
+        .cta-highlight-badge { animation: ctaBadgeBounce 3.4s ease-in-out infinite; }
+        .cta-pulse-btn { animation: pulseGlow 2.4s ease-in-out infinite; }
+    </style>
+
+
+
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4144669152460134');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4144669152460134&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="bg-white">
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <div id="scroll-progress"></div>
+
+
+    <header
+        class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm animate-on-load transition-all duration-300 bg-[#e7e4df]"
+        style="animation-delay: 0.1s;">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <div class="w-10"></div> <!-- Placeholder for balance -->
+
+            <div class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo"
+                    class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </div>
+
+            <!-- Mobile Menu Toggle (Always Visible) -->
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors"
+                aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+
+
+
+    <main>
+        <!-- Hero Section with Simulated Drone Flight Background -->
+        <section id="hero-section"
+            class="relative min-h-[100vh] flex flex-col items-center justify-start pt-24 pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-[#e7e4df] cursor-default text-center">
+
+            <!-- Magnetic Physics Particle Canvas -->
+            <canvas id="magnetic-canvas" class="absolute inset-0 w-full h-full pointer-events-none"
+                style="z-index: 5; mix-blend-mode: multiply; opacity: 0.1;"></canvas>
+
+            <div id="hero-gallery"
+                class="relative w-full h-[45vh] sm:h-[55vh] z-0 flex items-center justify-center gap-2 sm:gap-4 md:gap-6 px-4 md:px-10 mt-2 sm:mt-6 mb-8 lg:mb-12 opacity-[0.25] transition-opacity duration-500 shrink-0">
+                <video data-index="0"
+                    class="gallery-item cursor-pointer w-[10%] h-[60%] sm:h-[70%] object-cover grayscale rounded-sm transform -translate-y-8 sm:-translate-y-12 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/Europe.mp4" loop muted playsinline></video>
+                <video data-index="1"
+                    class="gallery-item cursor-pointer w-[10%] h-[80%] sm:h-[90%] object-cover grayscale rounded-sm transform translate-y-4 sm:translate-y-8 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/London.mp4" loop muted playsinline></video>
+                <video data-index="2"
+                    class="gallery-item cursor-pointer w-[10%] h-[90%] sm:h-[100%] object-cover grayscale rounded-sm transform -translate-y-2 sm:-translate-y-4 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/Drone_Statue_of_Liberty_Video.mp4" loop muted playsinline></video>
+                <video data-index="3"
+                    class="gallery-item cursor-pointer w-[10%] h-[85%] sm:h-[95%] object-cover grayscale rounded-sm transform translate-y-6 sm:translate-y-10 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/Canada.mp4" loop muted playsinline></video>
+                <video data-index="4"
+                    class="gallery-item cursor-pointer w-[10%] h-[75%] sm:h-[85%] object-cover grayscale rounded-sm transform -translate-y-6 sm:-translate-y-10 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/Australia.mp4" loop muted playsinline></video>
+                <video data-index="5"
+                    class="gallery-item cursor-pointer w-[10%] h-[65%] sm:h-[75%] object-cover grayscale rounded-sm transform translate-y-4 sm:translate-y-6 transition-all duration-700 ease-out hover:grayscale-0 hover:w-[20%] hover:z-20 hover:shadow-2xl"
+                    src="images/Video for hero section/New Zealand Auckland.mp4" loop muted playsinline></video>
+            </div>
+
+            <!-- Floating Badges for extra Dribbble-like flair -->
+            <div class="absolute hidden md:flex items-center gap-4 top-32 left-8 lg:left-16 animate-on-load floating-badge bg-white/40 backdrop-blur-md p-3.5 rounded-2xl shadow-sm border border-[#1A1A1A]/10 z-10"
+                style="animation-delay: 1.1s;">
+                <div class="flex -space-x-3 border-2 border-transparent">
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                        src="https://placehold.co/100x100/D3D3D3/ffffff?text=1" alt="Student">
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                        src="https://placehold.co/100x100/D3D3D3/ffffff?text=2" alt="Student">
+                    <img class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+                        src="https://placehold.co/100x100/D3D3D3/ffffff?text=3" alt="Student">
+                </div>
+                <div>
+                    <p class="text-sm text-[#1A1A1A] font-bold whitespace-nowrap">10k+ Students</p>
+                </div>
+            </div>
+
+            <div class="absolute hidden md:flex items-center gap-4 bottom-[40%] right-8 lg:right-16 animate-on-load floating-badge bg-white/40 backdrop-blur-md p-4 rounded-2xl shadow-sm border border-[#1A1A1A]/10 z-10"
+                style="animation-delay: 1.3s;">
+                <div
+                    class="w-11 h-11 bg-green-500/20 rounded-full flex items-center justify-center text-green-600 border border-green-500/40 shrink-0 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <div class="text-left text-left">
+                    <p class="text-2xl font-bold font-display text-[#1A1A1A] leading-none mb-1">98%</p>
+                    <p class="text-[11px] text-[#1A1A1A]/70 font-bold uppercase tracking-widest whitespace-nowrap">
+                        Visa Success
+                    </p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10 w-full flex-1 flex flex-col items-center justify-center">
+                <!-- Main Content -->
+                <div class="animate-on-load w-full flex flex-col items-center text-center"
+                    style="animation-delay: 0.3s;">
+
+                    <div class="relative w-full h-[120px] sm:h-[150px] lg:h-[170px] mb-2">
+                        <h1
+                            class="hero-title-slide active uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            EXPERIENCE <br /> EUROPEAN EXCELLENCE
+                        </h1>
+                        <h1
+                            class="hero-title-slide uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            STUDY IN THE <br /> UNITED KINGDOM
+                        </h1>
+                        <h1
+                            class="hero-title-slide uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            DISCOVER YOUR <br /> AMERICAN DREAM
+                        </h1>
+                        <h1
+                            class="hero-title-slide uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            EMBRACE THE <br /> CANADIAN EXPERIENCE
+                        </h1>
+                        <h1
+                            class="hero-title-slide uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            EXPLORE <br /> AUSTRALIAN UNIVERSITIES
+                        </h1>
+                        <h1
+                            class="hero-title-slide uppercase text-[clamp(1.75rem,5vw,3.5rem)] font-bold font-['Cormorant_Garamond'] text-[#1A1A1A] leading-[1.1] px-4 whitespace-nowrap">
+                            ADVENTURE AWAITS IN <br /> NEW ZEALAND
+                        </h1>
+                    </div>
+
+                    <!-- Synced SEO subtitles - one per country title -->
+                    <div class="relative h-[120px] sm:h-[80px] w-full mt-6">
+                        <p
+                            class="hero-subtitle-slide active px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Study in top-ranked European universities with affordable tuition, rich culture, and
+                            Schengen-zone freedom across 27 countries.
+                        </p>
+                        <p
+                            class="hero-subtitle-slide px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Earn a globally respected UK degree from Oxford, Cambridge, or Imperial — your gateway to
+                            world-class careers and British residency.
+                        </p>
+                        <p
+                            class="hero-subtitle-slide px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Unlock Ivy League education, OPT work permits, and a lifetime of opportunity in the world's
+                            most innovative economy.
+                        </p>
+                        <p
+                            class="hero-subtitle-slide px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Benefit from Canada's post-graduation work permit, low tuition, and the fastest pathway to
+                            permanent residency and citizenship.
+                        </p>
+                        <p
+                            class="hero-subtitle-slide px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Study at Australia's Group of Eight universities with exceptional graduate employment rates
+                            and a clear skilled migration pathway.
+                        </p>
+                        <p
+                            class="hero-subtitle-slide px-4 text-center mx-auto max-w-3xl leading-[1.6] font-normal text-[clamp(0.875rem,3vw,1.125rem)] text-[#1A1A1A]/80 tracking-wide">
+                            Experience a safe, welcoming education environment in New Zealand, ranked among the world's
+                            best for student quality of life.
+                        </p>
+                    </div>
+
+
+                    <div class="mt-8 sm:mt-12 flex justify-center w-full px-4" style="animation-delay: 0.9s;">
+                        <a href="Appointment-form.html"
+                            class="inline-block border-b-2 border-[#1A1A1A] text-[#1A1A1A] text-[15px] uppercase tracking-[0.2em] font-semibold py-2 px-6 transition-all duration-500 hover:text-gray-500 hover:border-gray-500">
+                            FREE CONSULTATION
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================
+             INFINITE MARQUEE TICKER
+             =========================== -->
+        <section id="marquee-section"
+            style="background: #0a0a0a; padding: 4rem 0; overflow: hidden; position: relative;">
+
+            <!-- Subtle top shimmer line -->
+            <div
+                style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.15),transparent);">
+            </div>
+            <!-- Subtle bottom shimmer line -->
+            <div
+                style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,0.15),transparent);">
+            </div>
+
+            <!-- ROW 1 — scrolls LEFT -->
+            <div class="marquee-row" style="margin-bottom: 1.5rem;">
+                <div class="marquee-track marquee-track--left">
+                    <!-- Set A -->
+                    <span class="ticker-item">Study Abroad</span>
+                    <span class="ticker-item ticker-item--outline">Transform Your Future</span>
+                    <span class="ticker-item">98% Visa Success Rate</span>
+                    <span class="ticker-item ticker-item--outline">We Are Open for New Students</span>
+                    <span class="ticker-item">Europe ✦ UK ✦ USA ✦ Canada</span>
+                    <span class="ticker-item ticker-item--outline">Bring Your Dreams to Life</span>
+                    <span class="ticker-item">Premium Education Consultancy</span>
+                    <span class="ticker-item ticker-item--outline">Australia ✦ New Zealand</span>
+                    <!-- Set B (exact duplicate for seamless loop) -->
+                    <span class="ticker-item">Study Abroad</span>
+                    <span class="ticker-item ticker-item--outline">Transform Your Future</span>
+                    <span class="ticker-item">98% Visa Success Rate</span>
+                    <span class="ticker-item ticker-item--outline">We Are Open for New Students</span>
+                    <span class="ticker-item">Europe ✦ UK ✦ USA ✦ Canada</span>
+                    <span class="ticker-item ticker-item--outline">Bring Your Dreams to Life</span>
+                    <span class="ticker-item">Premium Education Consultancy</span>
+                    <span class="ticker-item ticker-item--outline">Australia ✦ New Zealand</span>
+                </div>
+            </div>
+
+            <!-- ROW 2 — scrolls RIGHT -->
+            <div class="marquee-row">
+                <div class="marquee-track marquee-track--right">
+                    <!-- Set A -->
+                    <span class="ticker-item ticker-item--outline">Expert Visa Guidance</span>
+                    <span class="ticker-item">10,000+ Students Placed</span>
+                    <span class="ticker-item ticker-item--outline">Your Global Journey Starts Here</span>
+                    <span class="ticker-item">IELTS &amp; TOEFL Coaching</span>
+                    <span class="ticker-item ticker-item--outline">Free Consultation Available</span>
+                    <span class="ticker-item">Top Ranked Universities</span>
+                    <span class="ticker-item ticker-item--outline">End-to-End Support</span>
+                    <span class="ticker-item">Transparent &amp; Trusted Since Day One 2008.</span>
+                    <!-- Set B (exact duplicate for seamless loop) -->
+                    <span class="ticker-item ticker-item--outline">Expert Visa Guidance</span>
+                    <span class="ticker-item">10,000+ Students Placed</span>
+                    <span class="ticker-item ticker-item--outline">Your Global Journey Starts Here</span>
+                    <span class="ticker-item">IELTS &amp; TOEFL Coaching</span>
+                    <span class="ticker-item ticker-item--outline">Free Consultation Available</span>
+                    <span class="ticker-item">Top Ranked Universities</span>
+                    <span class="ticker-item ticker-item--outline">End-to-End Support</span>
+                    <span class="ticker-item">Transparent &amp; Trusted Since Day One 2008.</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="about-section" class="py-24 md:py-32 bg-[#fafafa] relative overflow-hidden">
+            <div class="container mx-auto px-6 max-w-7xl relative z-10" data-svc-card data-svc-delay="0">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <!-- Left: Typography -->
+                    <div>
+                        <div class="text-gray-500 text-[14px] uppercase tracking-[0.2em] font-bold mb-6">
+                            OUR MISSION
+                        </div>
+                        <h2 class="text-[48px] md:text-[60px] font-bold font-display text-gray-900 leading-[1.1] mb-8">
+                            DELIVERING TRUE <br /> <span class="text-brand-600">EXCELLENCE</span>
+                        </h2>
+                        <p class="text-[23px] text-gray-600 italic font-serif leading-relaxed mb-6">
+                            We are more than just a consultancy firm; we are the dedicated partners for your
+                            international dream.
+                        </p>
+                        <p class="text-[16px] text-gray-500 leading-relaxed max-w-lg mb-12">
+                            Founded on honesty, ultimate transparency, and student-centricity, we provide world-class
+                            guidance to navigate complex global education pathways.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-5">
+                                <div class="mt-1 text-brand-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-[1.25rem] font-bold font-display text-gray-900 mb-1">100%
+                                        Transparent
+                                    </h4>
+                                    <p class="text-gray-500 text-[0.875rem] leading-relaxed">Clear and honest processes
+                                        from
+                                        day one, with absolutely no hidden fees or surprises.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <div class="mt-1 text-brand-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-[1.25rem] font-bold font-display text-gray-900 mb-1">Student Centric
+                                    </h4>
+                                    <p class="text-gray-500 text-[0.875rem] leading-relaxed">Tailored advice matching
+                                        your
+                                        specific academic goals and profile.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12">
+                            <a href="#services-section"
+                                class="inline-block border border-gray-900 text-gray-900 text-[0.875rem] uppercase tracking-[0.2em] font-bold py-4 px-10 transition-all duration-500 hover:bg-gray-900 hover:text-white">
+                                EXPLORE SERVICES
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Premium Video -->
+                    <div class="relative group mt-10 lg:mt-0">
+                        <!-- Elegant backdrop offset -->
+                        <div
+                            class="absolute -top-6 -right-6 w-full h-full bg-gray-200 border border-gray-300 -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2">
+                        </div>
+                        <div class="relative bg-white shadow-xl overflow-hidden border border-gray-100 aspect-[4/3]">
+                            <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/_prx77jeuQk"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-section" class="py-24 md:py-32 bg-white">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <div class="text-center max-w-4xl mx-auto mb-24">
+                    <div class="text-gray-500 text-[0.875rem] uppercase tracking-[0.2em] font-bold mb-6">
+                        OUR SERVICES
+                    </div>
+                    <h2
+                        class="text-[1.875rem] md:text-[2.25rem] font-bold font-display text-gray-900 leading-[1.2] mb-8 uppercase">
+                        WITH YOU FROM <br /> START TO <span class="text-brand-600">FINISH</span>
+                    </h2>
+                    <p class="text-[1.25rem] text-gray-600 italic font-serif leading-[1.5]">
+                        We provide premium, end-to-end assistance at every step of your international journey.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+
+                    <!-- Service 1: Student Visa Consultancy -->
+                    <div data-svc-card data-svc-delay="0"
+                        class="group bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] border border-gray-100 transition-all duration-700 transform hover:-translate-y-4 flex flex-col h-full relative">
+                        <!-- TOP PICK Badge -->
+                        <div class="absolute top-4 left-4 z-10">
+                            <span
+                                class="bg-primary text-white text-[0.75rem] font-black uppercase tracking-widest px-3 py-1.5 rounded-md shadow-lg">TOP
+                                PICK</span>
+                        </div>
+                        <div class="h-56 md:h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2170&auto=format&fit=crop"
+                                alt="Student Visa"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0"></div>
+                        </div>
+                        <div class="p-8 pt-10 relative flex-grow flex flex-col">
+                            <div class="absolute -top-6 left-8 h-1 pt-1">
+                                <!-- Icon removed for clean look -->
+                            </div>
+                                                            <h3
+                                                            class="text-[1.5rem] font-bold font-display text-gray-900 mb-4 tracking-tight leading-[1.2]">
+                                                            Student Visa<br>Consultancy</h3>
+                                                        <p class="text-[1rem] text-gray-500 leading-[1.5] font-normal mb-8 flex-grow">
+                                                            Navigate the complexities of global university placements with our end-to-end
+                                                            application, visa, and relocation support. We guide you from university selection to
+                                                            visa approval with a <strong class="text-gray-900">98% success rate</strong>.
+                                                        </p>
+                                                        <ul class="text-[0.875rem] text-gray-600 space-y-3 mb-10">
+                                                            <li class="flex items-center gap-3">
+                                                                <span
+                                                                    class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                                                <span>Global University Network</span>
+                                                            </li>
+                                                            <li class="flex items-center gap-3">
+                                                                <span
+                                                                    class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                                                <span>Scholarship & Funding Aid</span>
+                                                            </li>
+                                                            <li class="flex items-center gap-3">
+                                                                <span
+                                                                    class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                                                <span>One-on-One Mentorship</span>
+                                                            </li>
+                                                        </ul>
+                                                        <a href="student-visa.html"
+                                                            class="w-full h-14 bg-[#eff6ff] text-primary rounded-xl flex items-center justify-center font-bold text-sm tracking-wide transition-all duration-300 hover:bg-primary/10 active:scale-95">
+                                                            Learn More
+                                                        </a>                        </div>
+                    </div>
+
+                    <!-- Service 2: Immigration Visa Services -->
+                    <div data-svc-card data-svc-delay="200"
+                        class="group bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] border border-gray-100 transition-all duration-700 transform hover:-translate-y-4 flex flex-col h-full">
+                        <div class="h-56 md:h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=2170&auto=format&fit=crop"
+                                alt="Immigration Services"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0"></div>
+                        </div>
+                        <div class="p-8 pt-10 relative flex-grow flex flex-col">
+                            <div class="absolute -top-6 left-8 h-1 pt-1">
+                                <!-- Icon removed for clean look -->
+                            </div>
+                            <h3
+                                class="text-[1.5rem] font-bold font-display text-gray-900 mb-4 tracking-tight leading-[1.2]">
+                                Immigration Visa<br>Services</h3>
+                            <p class="text-[1rem] text-gray-500 leading-[1.5] font-normal mb-8 flex-grow">
+                                Licensed immigration consultants providing transparent, fully regulated advice to
+                                fast-track your PR application. A direct and legal pathway to global residency status.
+                            </p>
+                            <ul class="text-[0.875rem] text-gray-600 space-y-3 mb-10">
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Permanent Residency Status</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Legal Authorization to Work</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Immediate Family Inclusion</span>
+                                </li>
+                            </ul>
+                            <a href="immigration-visa.html"
+                                class="w-full h-14 bg-[#eff6ff] text-primary rounded-xl flex items-center justify-center font-bold text-sm tracking-wide transition-all duration-300 hover:bg-primary/10 active:scale-95">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Visit Visa Assistance -->
+                    <div data-svc-card data-svc-delay="400"
+                        class="group bg-white rounded-3xl overflow-hidden shadow-[0_4px_24px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.1)] border border-gray-100 transition-all duration-700 transform hover:-translate-y-4 flex flex-col h-full">
+                        <div class="h-56 md:h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2170&auto=format&fit=crop"
+                                alt="Visit Visa"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0"></div>
+                        </div>
+                        <div class="p-8 pt-10 relative flex-grow flex flex-col">
+                            <div class="absolute -top-6 left-8 h-1 pt-1">
+                                <!-- Icon removed for clean look -->
+                            </div>
+                            <h3
+                                class="text-[1.5rem] font-bold font-display text-gray-900 mb-4 tracking-tight leading-[1.2]">
+                                Visit Visa<br>Assistance</h3>
+                            <p class="text-[1rem] text-gray-500 leading-[1.5] font-normal mb-8 flex-grow">
+                                Specialized vocational training programs featuring industry-recognized certifications
+                                and dedicated job placement assistance. We handle everything so you can focus on
+                                planning.
+                            </p>
+                            <ul class="text-[0.875rem] text-gray-600 space-y-3 mb-10">
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Practical Hands-on Learning</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Global Certifications</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="size-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[0.75rem] font-bold">✓</span>
+                                    <span>Direct Career Placements</span>
+                                </li>
+                            </ul>
+                            <a href="visit-visa.html"
+                                class="w-full h-14 bg-[#eff6ff] text-primary rounded-xl flex items-center justify-center font-bold text-sm tracking-wide transition-all duration-300 hover:bg-primary/10 active:scale-95">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW CTA SECTION -->
+                <div class="mt-20">
+                    <div class="bg-primary rounded-[16px] p-6 md:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6"
+                        style="animation-delay: 0.6s;">
+                        <div class="text-left w-full md:w-auto">
+                            <h2 class="text-1.5rem md:text-[2rem] font-bold font-display text-white mb-2 leading-[1.2]">
+                                Not
+                                sure where to start?</h2>
+                            <p class="text-white/90 text-sm md:text-base font-normal">Book a free 15-minute consultation
+                                with our expert advisors.</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                            <a href="Appointment-form.html"
+                                class="h-[52px] px-8 bg-white text-primary rounded-[10px] flex items-center justify-center font-bold text-[0.875rem] transition-all duration-300 hover:bg-white/90 active:scale-95 shadow-sm whitespace-nowrap">
+                                Schedule Consultation
+                            </a>
+                            <a href="#"
+                                class="h-[52px] px-8 border border-white/40 text-white rounded-[10px] flex items-center justify-center font-bold text-[0.875rem] transition-all duration-300 hover:bg-white/10 active:scale-95 whitespace-nowrap">
+                                Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Added missing closing container div -->
+        </section>
+
+        <!-- ===========================
+             PERSONAL NOTE SECTION
+             =========================== -->
+        <section class="py-20 md:py-28 relative overflow-hidden" style="background-color: #1b3168;">
+            <!-- Subtle faint grid background (approximate the CSS grid pattern from image) -->
+            <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
+                style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 80px 80px; background-position: center center;">
+            </div>
+
+            <div class="container mx-auto px-6 max-w-7xl relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+                    <!-- Left Column: Text -->
+                    <div data-svc-card data-svc-delay="0">
+                        <div class="uppercase tracking-[0.1em] text-[0.875rem] font-bold text-[#00a2e8] mb-4">
+                            A PERSONAL NOTE
+                        </div>
+                        <h2
+                            class="text-[1.75rem] md:text-[2.25rem] font-bold font-display leading-[1.2] text-white mb-8 tracking-tight">
+                            We Are Not Just an Agency.<br>
+                            We Are Your Helping Hand.
+                        </h2>
+
+                        <div class="space-y-6 text-white/90 text-[1rem] leading-[1.5]">
+                            <p>
+                                At Edu Abroad, we don't view you as a "file number" or a "client". We see a dreamer. We
+                                see the sacrifice your family is making. We see the hope in your eyes.
+                            </p>
+                            <p>
+                                Most agencies operate for profit. We operate for <strong>impact</strong>. Our team was
+                                founded on the belief that everyone deserves a fair shot at a better life, free from
+                                deception.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Cards -->
+                    <div class="space-y-4">
+
+                        <!-- Mission Card -->
+                        <div data-svc-card data-svc-delay="100" class="rounded-xl p-6 lg:p-7 transition-colors"
+                            style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div class="flex items-center gap-3 mb-2.5">
+                                <div class="text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M12.5 4.5l-3 5.5-5 1.5 5.5 4-2 6.5 6-3.5 5.5 3.5-1.5-6.5 5-4.5h-6l-3-6.5z" />
+                                    </svg>
+                                </div>
+                                <h4 class="text-[1.125rem] font-bold text-white">Our Mission</h4>
+                            </div>
+                            <p class="text-white/70 text-[0.875rem] leading-[1.5]">
+                                To empower Bangladeshi dreamers by providing transparent, legal, and skilled pathways to
+                                global opportunities, removing the fear of fraud.
+                            </p>
+                        </div>
+
+                        <!-- Vision Card -->
+                        <div data-svc-card data-svc-delay="200" class="rounded-xl p-6 lg:p-7 transition-colors"
+                            style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div class="flex items-center gap-3 mb-2.5">
+                                <div class="text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                                        <path
+                                            d="M22 12c-2.66-4.2-6.66-7-10-7S4.66 7.8 2 12c2.66 4.2 6.66 7 10 7s7.34-2.8 10-7Z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-[1.125rem] font-bold text-white">Our Vision</h4>
+                            </div>
+                            <p class="text-white/70 text-[0.875rem] leading-[1.5]">
+                                To see a generation of Bangladeshis thriving as global citizens, respected for their
+                                skills and contributions worldwide.
+                            </p>
+                        </div>
+
+                        <!-- Commitment Card -->
+                        <div data-svc-card data-svc-delay="300" class="rounded-xl p-6 lg:p-7 transition-colors"
+                            style="background-color: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div class="flex items-center gap-3 mb-2.5">
+                                <div class="text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-[1.125rem] font-bold text-white">Our Commitment</h4>
+                            </div>
+                            <p class="text-[#b1c7f5] text-[0.875rem] leading-[1.5]">
+                                We promise 100% honesty. If a path isn't right for you, we will tell you. We promise to
+                                protect your legal interests and treat your dream with the respect it deserves.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================
+             ELIGIBILITY CHECKER SECTION
+             =========================== -->
+        <section id="eligibility-section" class="py-24 md:py-32 relative overflow-hidden" style="background:#0f1b3b;">
+            <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#00a2e8]/20 blur-3xl elig-float"></div>
+            <div class="absolute -bottom-24 -right-16 w-96 h-96 rounded-full bg-[#39b54a]/10 blur-3xl elig-float-delay"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <div class="text-[#00a2e8] text-[13px] uppercase tracking-[0.25em] font-bold mb-4">Find Your Match</div>
+                    <h2 class="text-[32px] md:text-[48px] font-bold font-display text-white leading-[1.15] mb-5">
+                        Check Your University <span class="text-[#00a2e8]">Eligibility</span>
+                    </h2>
+                    <p class="text-white/70 text-[16px] md:text-[18px] leading-relaxed">
+                        Enter your age, IELTS score and budget — or search by your field of study — to instantly see which of our partner universities you qualify for, along with required documents and subjects.
+                    </p>
+                </div>
+
+                <!-- Checker Form -->
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-14">
+                    <form id="eligibility-form" class="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Your Age</label>
+                            <input type="number" id="elig-age" min="15" max="60" placeholder="e.g. 22"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Program Level</label>
+                            <select id="elig-level" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
+                                <option value="">Any Level</option>
+                                <option value="Honors">Honors / Bachelor</option>
+                                <option value="Masters">Masters</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Field of Study</label>
+                            <input type="text" id="elig-subject" list="elig-subject-list" placeholder="e.g. Computer Science"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
+                            <datalist id="elig-subject-list"></datalist>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">IELTS Score</label>
+                            <input type="number" id="elig-ielts" min="0" max="9" step="0.5" placeholder="e.g. 6.5"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Budget (BDT/yr)</label>
+                            <input type="number" id="elig-budget" min="0" step="50000" placeholder="e.g. 1500000"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <button type="submit"
+                            class="bg-[#1b3168] hover:bg-[#00a2e8] text-white font-bold text-[14px] uppercase tracking-wider rounded-xl px-6 py-3.5 transition-all duration-300 shadow-lg hover:shadow-[#00a2e8]/40">
+                            Check Eligibility
+                        </button>
+                    </form>
+                    <p id="elig-error" class="hidden text-red-600 text-sm mt-3 font-medium"></p>
+                </div>
+
+                <!-- Results -->
+                <div id="elig-results-meta" class="hidden text-center text-white/80 text-sm mb-6"></div>
+                <div id="elig-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div id="elig-empty" class="hidden text-center py-14">
+                    <p class="text-white/70 text-lg">No matching universities found for these criteria — try lowering the IELTS score or increasing the budget, or contact our counselors for alternatives.</p>
+                    <a href="Appointment-form.html" class="inline-block mt-6 bg-[#00a2e8] text-white font-bold text-[13px] uppercase tracking-wider rounded-full px-8 py-3.5 hover:bg-white hover:text-[#1b3168] transition">Talk to a Counselor</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===========================
+             DESTINATIONS SECTION — Apple-style full-bleed grid
+             =========================== -->
+        <section id="destinations-section" style="background:#fff; padding: 0; overflow:hidden; position:relative;">
+
+            <!-- Destinations Particle Canvas -->
+            <canvas id="dest-magnetic-canvas" class="absolute inset-0 w-full h-full pointer-events-none"
+                style="z-index: 5; mix-blend-mode: screen;"></canvas>
+
+            <!-- Section Header -->
+            <div style="text-align:center; padding: 6rem 1.5rem 4rem;">
+                <div
+                    style="color:#6b7280; font-size:0.875rem; letter-spacing:0.2em; font-weight:700; text-transform:uppercase; margin-bottom:1.5rem;">
+                    EXPLORE THE WORLD</div>
+                <h2
+                    style="font-size:clamp(2rem, 5vw, 2.5rem); font-weight:700; color:#111; line-height:1.2; text-transform:uppercase; margin:0;">
+                    FIND YOUR <br><span style="color:#00a2e8;">DREAM DESTINATION</span>
+                </h2>
+            </div>
+
+            <!-- 2-Column Apple-style Full-Bleed Grid -->
+            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+
+                <!-- Card 1: United States (wide – spans 2 cols on large, stays 1 on mobile) -->
+                <div class="dest-card" data-delay="0"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer;">
+                    <img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?q=80&w=2170&auto=format&fit=crop"
+                        alt="United States"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            United States</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A Land of Unrivaled Opportunities</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="usa.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Universal Destination Modal Container REMOVED -->
+
+                <!-- Card 2: United Kingdom -->
+                <div class="dest-card" data-delay="100"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer;">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2170&auto=format&fit=crop"
+                        alt="United Kingdom"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            United Kingdom</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A Tradition of Academic Excellence</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="uk.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Canada -->
+                <div class="dest-card" data-delay="0"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer;">
+                    <img src="https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=2170&auto=format&fit=crop"
+                        alt="Canada"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            Canada</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A Welcoming Beacon for Your Future</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="canada.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Australia -->
+                <div class="dest-card" data-delay="100"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer;">
+                    <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=2170&auto=format&fit=crop"
+                        alt="Australia"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            Australia</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A Vibrant Horizon for Success</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="australia.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Europe (full-width) -->
+                <div class="dest-card tilt-card" data-delay="0"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer; grid-column: 1 / -1;">
+                    <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=2170&auto=format&fit=crop"
+                        alt="Europe"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            Europe</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A Gateway to Global Heritage</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="europe.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: New Zealand (full-width) -->
+                <div class="dest-card tilt-card" data-delay="0"
+                    style="position:relative; height:520px; overflow:hidden; cursor:pointer; grid-column: 1 / -1;">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2170&auto=format&fit=crop"
+                        alt="New Zealand"
+                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(0.25,1,0.5,1);"
+                        class="dest-img">
+                    <div
+                        style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);">
+                    </div>
+                    <div
+                        style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:2rem;height:100%;">
+                        <h3
+                            style="font-size:1.5rem;font-weight:800;color:#fff;margin:0 0 0.25rem;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.6);text-transform:uppercase;letter-spacing:-0.02em;">
+                            New Zealand</h3>
+                        <p
+                            style="font-size:1rem;font-weight:600;color:#fff;margin:0 0 1.5rem;line-height:1.5;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+                            A True Haven for Adventure & Education</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+                            <a href="new-zealand.html" target="_blank"
+                                class="inline-block text-white text-[13px] uppercase tracking-[0.15em] font-semibold py-3 px-8 transition-all duration-500 hover:bg-white hover:text-gray-900 shadow-md backdrop-blur-sm">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end grid -->
+
+            <!-- CTA -->
+            <div style="text-align:center; padding: 4rem 1.5rem;">
+                <a href="Appointment-form.html"
+                    style="display:inline-block; border:2px solid #111; color:#111; font-size:0.875rem; letter-spacing:0.2em; font-weight:700; text-transform:uppercase; padding:1rem 2.5rem; text-decoration:none; transition:all 0.4s;"
+                    onmouseover="this.style.background='#111';this.style.color='#fff';"
+                    onmouseout="this.style.background='transparent';this.style.color='#111';">
+                    VIEW ALL DESTINATIONS
+                </a>
+            </div>
+
+        </section>
+
+        <!-- University Detail Modal -->
+        <div id="uni-modal" class="hidden fixed inset-0 z-[999] flex items-end sm:items-center justify-center p-0 sm:p-6">
+            <div id="uni-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            <div class="relative bg-white w-full sm:max-w-2xl sm:rounded-3xl rounded-t-3xl max-h-[90vh] overflow-y-auto shadow-2xl elig-fade-up">
+                <button id="uni-modal-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center z-10 hover:bg-gray-100 transition" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <div id="uni-modal-body"></div>
+            </div>
+        </div>
+
+        <!-- ===========================
+             FAQ / TRANSPARENCY SECTION
+             =========================== -->
+        <section class="py-20 md:py-28 bg-[#f8fafc] relative overflow-hidden text-gray-800">
+            <div class="container mx-auto px-6 max-w-6xl relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
+
+                    <!-- Left Column: Title & Contact Card -->
+                    <div class="lg:col-span-5 flex flex-col justify-start" data-svc-card data-svc-delay="0">
+                        <h2
+                            class="text-[32px] md:text-[42px] font-bold font-display leading-[1.15] text-[#111827] mb-6 tracking-tight">
+                            Transparency is<br>Our Promise.
+                        </h2>
+                        <p class="text-[16px] text-gray-600 leading-relaxed mb-10 max-w-[90%]">
+                            We believe you have the right to know exactly how we operate before you spend a single Taka.
+                            Here are the answers to your most important questions.
+                        </p>
+
+                        <!-- Contact Card -->
+                        <div
+                            class="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex gap-4 items-start max-w-sm">
+                            <div class="bg-blue-50 text-blue-600 p-3 rounded-xl flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-[14px] font-bold text-gray-900 mb-1">Still have questions?</h4>
+                                <a href="mailto:support@eduabroad.com" onclick="if(window.fbq) window.fbq('track', 'Contact');"
+                                    class="text-[14px] font-semibold text-blue-600 hover:text-blue-800 transition-colors block mb-1">support@eduabroad.com</a>
+                                <p class="text-[13px] text-gray-500">Or visit our office directly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Accordion FAQs -->
+                    <div class="lg:col-span-7 space-y-4" data-svc-card data-svc-delay="100">
+
+                        <!-- FAQ 1 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-gray-100 overflow-hidden faq-item transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">Why
+                                    should students and professionals choose Edu Abroad?</span>
+                                <svg class="faq-icon transform transition-transform duration-500 text-gray-400 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p class="mb-3 font-semibold text-gray-800">Because we prioritize your future,
+                                            not just our profit.</p>
+                                        <p class="mb-3">Most agencies just process files. We build pathways.</p>
+                                        <ul class="list-disc pl-5 space-y-2 mb-3">
+                                            <li><strong class="text-gray-800">For Students:</strong> We don't just fill
+                                                forms; we provide expert counseling, scholarship strategy, and SOP
+                                                mentorship.</li>
+                                            <li><strong class="text-gray-800">For Professionals:</strong> We protect you
+                                                from fraud by only matching you with verified US employers.</li>
+                                        </ul>
+                                        <p><strong class="text-gray-800">For Everyone:</strong> We combine this with
+                                            strict legal contracts and zero hidden fees.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 2 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_6px_20px_rgb(37,99,235,0.08)] border border-blue-200 overflow-hidden faq-item is-active transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">How
+                                    do I know my money and personal data are safe?</span>
+                                <svg class="faq-icon transform rotate-180 transition-transform duration-500 text-blue-600 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p class="mb-4">Your safety is secured by three layers of protection:</p>
+                                        <ul class="grid gap-3">
+                                            <li class="flex gap-3"><span
+                                                    class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                                                <p><strong class="text-gray-800 font-semibold">Legal Contract:</strong>
+                                                    On valid stamp paper.</p>
+                                            </li>
+                                            <li class="flex gap-3"><span
+                                                    class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                                                <p><strong class="text-gray-800 font-semibold">Traceable
+                                                        Payments:</strong> Bank Transfers only.</p>
+                                            </li>
+                                            <li class="flex gap-3"><span
+                                                    class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                                                <p><strong class="text-gray-800 font-semibold">Data Privacy:</strong>
+                                                    Encrypted sharing with authorities only.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 3 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-gray-100 overflow-hidden faq-item transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">Do
+                                    you guarantee a visa, and what if I get rejected?</span>
+                                <svg class="faq-icon transform transition-transform duration-500 text-gray-400 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p class="mb-3">The final decision belongs solely to the Embassy. However, we
+                                            guarantee 100% effort and accuracy.</p>
+                                        <p><strong class="text-gray-800">Our Refund Policy:</strong> Reliable refunds as
+                                            per contract for genuine rejection cases.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 4 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-gray-100 overflow-hidden faq-item transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">Are
+                                    there hidden charges, and do I pay upfront?</span>
+                                <svg class="faq-icon transform transition-transform duration-500 text-gray-400 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p class="mb-3 font-semibold text-gray-800">No hidden charges. No full upfront
+                                            payments.</p>
+                                        <p>We operate on a Milestone Basis. You only pay for the specific stage of work
+                                            being done.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 5 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-gray-100 overflow-hidden faq-item transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">Do
+                                    you help with "managing" fake documents?</span>
+                                <svg class="faq-icon transform transition-transform duration-500 text-gray-400 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p class="mb-3"><strong class="text-gray-800 font-semibold">Absolutely
+                                                not.</strong> We have a strict "Legal-First" policy.</p>
+                                        <p>Using fake bank statements or certificates is a crime. We help you fix gaps
+                                            legally.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 6 -->
+                        <div
+                            class="bg-white rounded-xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-gray-100 overflow-hidden faq-item transition-all duration-500">
+                            <button
+                                class="faq-btn w-full text-left p-6 flex justify-between items-center bg-white cursor-pointer focus:outline-none group">
+                                <span
+                                    class="font-bold text-[15px] md:text-[16px] text-gray-900 pr-6 group-hover:text-blue-600 transition-colors">Can
+                                    I cancel my application midway?</span>
+                                <svg class="faq-icon transform transition-transform duration-500 text-gray-400 flex-shrink-0"
+                                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="faq-content-wrapper">
+                                <div class="faq-content-inner px-6 pb-6 text-[14.5px] text-gray-600 leading-relaxed">
+                                    <div class="border-t border-gray-50 pt-4">
+                                        <p>Yes, you have the right to withdraw at any time. Refunds will be calculated
+                                            based on the work already completed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inline scripting for simple Accordion toggle -->
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const faqBtns = document.querySelectorAll('.faq-btn');
+                    faqBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const parent = btn.closest('.faq-item');
+                            const icon = parent.querySelector('.faq-icon');
+                            const isActive = parent.classList.contains('is-active');
+
+                            // Close all other faqs
+                            document.querySelectorAll('.faq-item').forEach(item => {
+                                if (item !== parent) {
+                                    item.classList.remove('is-active', 'border-blue-200', 'shadow-[0_6px_20px_rgb(37,99,235,0.08)]');
+                                    item.classList.add('shadow-[0_2px_10px_rgb(0,0,0,0.02)]', 'border-gray-100');
+                                    const itemIcon = item.querySelector('.faq-icon');
+                                    itemIcon.classList.remove('rotate-180', 'text-blue-600');
+                                    itemIcon.classList.add('text-gray-400');
+                                }
+                            });
+
+                            if (!isActive) {
+                                // Open this one
+                                parent.classList.add('is-active', 'border-blue-200', 'shadow-[0_6px_20px_rgb(37,99,235,0.08)]');
+                                parent.classList.remove('shadow-[0_2px_10px_rgb(0,0,0,0.02)]', 'border-gray-100');
+                                icon.classList.add('rotate-180', 'text-blue-600');
+                                icon.classList.remove('text-gray-400');
+                            } else {
+                                // Close this one
+                                parent.classList.remove('is-active', 'border-blue-200', 'shadow-[0_6px_20px_rgb(37,99,235,0.08)]');
+                                parent.classList.add('shadow-[0_2px_10px_rgb(0,0,0,0.02)]', 'border-gray-100');
+                                icon.classList.remove('rotate-180', 'text-blue-600');
+                                icon.classList.add('text-gray-400');
+                            }
+                        });
+                    });
+                });
+            </script>
+
+        </section>
+
+        <section class="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
+            <div class="container mx-auto px-6 text-center relative z-10" data-svc-card data-svc-delay="0">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 font-semibold text-sm mb-6 uppercase tracking-wider">
+                    Testimonials</div>
+                <h2 class="text-4xl md:text-5xl font-bold font-display text-gray-900 tracking-tight">Our <span
+                        class="text-brand-600">Success Stories</span></h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-6 mb-20">See the students who achieved their dreams
+                    with our expert guidance across the globe.</p>
+            </div>
+
+            <div class="relative w-full overflow-hidden">
+                <!-- Fade overlays for the ultimate premium marquee look -->
+                <div
+                    class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-20 pointer-events-none">
+                </div>
+                <div
+                    class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-20 pointer-events-none">
+                </div>
+
+                <div class="marquee-container w-full overflow-x-hidden flex hover:pause">
+                    <div class="marquee-content flex gap-8 items-center px-4">
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Sarah M.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">Harvard University, USA</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Michael T.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">University of Toronto, Canada</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Elena R.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">Oxford University, UK</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Sarah M.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">Harvard University, USA</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Michael T.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">University of Toronto, Canada</p>
+                            </div>
+                        </div>
+                        <div
+                            class="relative group rounded-2xl overflow-hidden shadow-lg hover-lift aspect-video w-80 md:w-[400px] flex-shrink-0 bg-white border border-gray-100 p-2">
+                            <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&q=80&w=800&h=450"
+                                alt="Success Story" class="rounded-xl w-full h-full object-cover">
+                            <div
+                                class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur border border-white/20 p-4 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <h4 class="font-bold font-display text-gray-900">Elena R.</h4>
+                                <p class="text-sm text-brand-600 font-semibold">Oxford University, UK</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultation-cta-section" class="py-24 md:py-28 relative overflow-hidden elig-shimmer">
+            <div class="absolute inset-0 bg-black/25"></div>
+            <div class="container mx-auto px-6 max-w-5xl text-center relative z-10">
+                <div class="inline-flex items-center gap-2 bg-white/95 text-[#1b3168] text-[12px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full mb-8 cta-highlight-badge shadow-lg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#39b54a" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Free 1-on-1 Consultation — Limited Slots This Week
+                </div>
+                <h2 class="text-[36px] md:text-[56px] font-bold font-display text-white leading-[1.1] uppercase mb-6">
+                    BOOK YOUR <span class="text-[#00a2e8]">APPOINTMENT</span> TODAY
+                </h2>
+                <p class="text-[18px] md:text-[20px] text-white/85 leading-relaxed mb-10 max-w-2xl mx-auto">
+                    Sit down with a certified counselor and map out your entire study-abroad journey — university shortlist, documents, visa, and scholarships — in one session.
+                </p>
+                <a href="Appointment-form.html"
+                    class="cta-pulse-btn inline-flex items-center gap-3 bg-white hover:bg-[#1b3168] text-[#1b3168] hover:text-white text-[15px] uppercase tracking-[0.15em] font-bold py-5 px-12 rounded-full transition-all duration-300 shadow-2xl">
+                    Schedule My Appointment
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+
+                <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mt-16 pt-10 border-t border-white/20">
+                    <div><div class="text-[26px] md:text-[34px] font-bold text-white">10,000+</div><div class="text-white/70 text-[12px] uppercase tracking-wider mt-1">Students Placed</div></div>
+                    <div><div class="text-[26px] md:text-[34px] font-bold text-white">98%</div><div class="text-white/70 text-[12px] uppercase tracking-wider mt-1">Visa Success</div></div>
+                    <div><div class="text-[26px] md:text-[34px] font-bold text-white">450+</div><div class="text-white/70 text-[12px] uppercase tracking-wider mt-1">Universities</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact-section" class="bg-gray-900 text-gray-300 relative overflow-hidden">
+        <!-- Glowing orb in background -->
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 py-20 pb-12 grid md:grid-cols-4 gap-12 text-left relative z-10" data-svc-card
+            data-svc-delay="0">
+            <div class="md:col-span-2 space-y-6">
+                <a href="#" class="inline-block transition-all duration-300">
+                    <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-16 w-auto object-contain" />
+                </a>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-sm mt-6">We are a premier
+                    international
+                    education consultancy, dedicated to transforming student ambitions into global realities. Your
+                    future starts here.</p>
+                <div class="flex space-x-4 pt-2">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg></a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 4.01c-1 .49-1.98.68-3 .99-1.11-1.11-2.7-1.11-3.81 0-1.11 1.11-1.11 2.7 0 3.81 0 .5.18.99.49 1.48-1.58.19-3.08-1.48-4.17-2.96-1.1-1.48-1.58-2.96-1.58-4.94A10.02 10.02 0 0 1 12 2c5.52 0 10 4.48 10 10 0 .5-.05 1-.14 1.49-.49-1-1.48-1.48-2.97-1.48.5-.99.99-1.98.99-2.97 0-1.98-1.48-3.46-3.46-3.46">
+                            </path>
+                        </svg></a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-600 transition-colors shadow-lg"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg></a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold font-display text-white mb-6 uppercase tracking-wider text-sm">Quick
+                    Links</h3>
+                <div class="space-y-3">
+                    <a href="about.html"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">About
+                        Us</a>
+                    <a href="company-profile.html"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Company
+                        Profile</a>
+                    <a href="blog.html"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Blog</a>
+                    <a href="#destinations-section"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Top
+                        Destinations</a>
+                    <a href="Appointment-form.html"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Book
+                        Appointment</a>
+                    <a href="contact.html"
+                        class="block text-gray-400 hover:text-brand-400 hover:translate-x-1 transition-all duration-300">Contact
+                        Us</a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold font-display text-white mb-6 uppercase tracking-wider text-sm">Connect
+                </h3>
+                <ul class="space-y-4 text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-500 mt-1">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span onclick="if(window.fbq) window.fbq('track', 'Contact');" class="hover:text-brand-300 transition-colors cursor-pointer">info@eduabroad.com.bd</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-500 mt-1">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg>
+                        <span onclick="if(window.fbq) window.fbq('track', 'Contact');" class="hover:text-brand-300 transition-colors cursor-pointer">+880 1401-184949</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-brand-500 mt-1">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>Confidence Center,<br>Gulshan, Dhaka</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 relative z-10 bg-black/20">
+            <div
+                class="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 Edu Abroad. Built with precision.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-brand-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- Magnetic Particle Swarm Logic for Hero Section ---
+            const heroSection = document.getElementById('hero-section');
+            const canvas = document.getElementById('magnetic-canvas');
+
+            if (heroSection && canvas) {
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let particles = [];
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let isHoveringHero = false;
+                let globalAlpha = 0;
+
+                function resize() {
+                    const rect = heroSection.getBoundingClientRect();
+                    width = rect.width;
+                    height = rect.height;
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+
+                window.addEventListener('resize', resize);
+                resize();
+
+                class Particle {
+                    constructor(x, y) {
+                        this.x = x;
+                        this.y = y;
+                        // Velocity spreading outwards
+                        this.vx = (Math.random() - 0.5) * 2;
+                        this.vy = (Math.random() - 0.5) * 2;
+                        // Random sizes for depth (0.5px to 3px)
+                        this.size = Math.random() * 2.5 + 0.5;
+                        this.life = 1; // 1 to 0 fade out
+                        this.decay = Math.random() * 0.015 + 0.005; // How fast it fades
+                    }
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        // Slight float upwards
+                        this.vy -= 0.02;
+                        this.life -= this.decay;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        // Golden glowing colors
+                        ctx.fillStyle = `rgba(250, 204, 21, ${this.life})`; // Tailwind yellow-400
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = `rgba(234, 179, 8, ${this.life * 0.8})`; // Tailwind yellow-500
+                        ctx.fill();
+                    }
+                }
+
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    mouseX = e.clientX - rect.left;
+                    mouseY = e.clientY - rect.top;
+
+                    if (!isHoveringHero) {
+                        isHoveringHero = true;
+                    }
+
+                    // Emit particles on move
+                    for (let i = 0; i < 3; i++) {
+                        particles.push(new Particle(mouseX, mouseY));
+                    }
+                });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    isHoveringHero = false;
+                });
+
+                function renderPhysics() {
+                    ctx.clearRect(0, 0, width, height);
+
+                    // Smooth fade in/out
+                    if (isHoveringHero) {
+                        globalAlpha += (1 - globalAlpha) * 0.05;
+                    } else {
+                        globalAlpha += (0 - globalAlpha) * 0.05;
+                    }
+
+                    ctx.globalAlpha = globalAlpha;
+
+                    // Update and draw particles, remove dead ones
+                    for (let i = 0; i < particles.length; i++) {
+                        let p = particles[i];
+                        p.update();
+                        if (p.life <= 0) {
+                            particles.splice(i, 1);
+                            i--; // Adjust index after splice
+                        } else {
+                            if (globalAlpha > 0.01) p.draw();
+                        }
+                    }
+
+                    requestAnimationFrame(renderPhysics);
+                }
+
+                renderPhysics();
+            }
+
+            // --- Magnetic Particle Swarm Logic for Destinations Section ---
+            const destSection = document.getElementById('destinations-section');
+            const destCanvas = document.getElementById('dest-magnetic-canvas');
+
+            if (destSection && destCanvas) {
+                const dCtx = destCanvas.getContext('2d');
+                let dWidth, dHeight;
+                let dParticles = [];
+                let dMouseX = window.innerWidth / 2;
+                let dMouseY = window.innerHeight / 2;
+                let dIsHovering = false;
+                let dGlobalAlpha = 0;
+
+                function resizeDestCanvas() {
+                    const rect = destSection.getBoundingClientRect();
+                    dWidth = rect.width;
+                    dHeight = rect.height;
+                    destCanvas.width = dWidth;
+                    destCanvas.height = dHeight;
+                }
+
+                window.addEventListener('resize', resizeDestCanvas);
+                resizeDestCanvas();
+
+                class DestParticle {
+                    constructor(x, y) {
+                        this.x = x;
+                        this.y = y;
+                        this.vx = (Math.random() - 0.5) * 2;
+                        this.vy = (Math.random() - 0.5) * 2;
+                        this.size = Math.random() * 2.5 + 0.5;
+                        this.life = 1;
+                        this.decay = Math.random() * 0.015 + 0.005;
+                    }
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        this.vy -= 0.02;
+                        this.life -= this.decay;
+                    }
+                    draw() {
+                        dCtx.beginPath();
+                        dCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        dCtx.fillStyle = `rgba(250, 204, 21, ${this.life})`;
+                        dCtx.shadowBlur = 10;
+                        dCtx.shadowColor = `rgba(234, 179, 8, ${this.life * 0.8})`;
+                        dCtx.fill();
+                    }
+                }
+
+                destSection.addEventListener('mousemove', (e) => {
+                    const rect = destSection.getBoundingClientRect();
+                    dMouseX = e.clientX - rect.left;
+                    dMouseY = e.clientY - rect.top;
+
+                    if (!dIsHovering) {
+                        dIsHovering = true;
+                    }
+
+                    for (let i = 0; i < 3; i++) {
+                        dParticles.push(new DestParticle(dMouseX, dMouseY));
+                    }
+                });
+
+                destSection.addEventListener('mouseleave', () => {
+                    dIsHovering = false;
+                });
+
+                function renderDestPhysics() {
+                    dCtx.clearRect(0, 0, dWidth, dHeight);
+
+                    if (dIsHovering) {
+                        dGlobalAlpha += (1 - dGlobalAlpha) * 0.05;
+                    } else {
+                        dGlobalAlpha += (0 - dGlobalAlpha) * 0.05;
+                    }
+
+                    dCtx.globalAlpha = dGlobalAlpha;
+
+                    for (let i = 0; i < dParticles.length; i++) {
+                        let p = dParticles[i];
+                        p.update();
+                        if (p.life <= 0) {
+                            dParticles.splice(i, 1);
+                            i--;
+                        } else {
+                            if (dGlobalAlpha > 0.01) p.draw();
+                        }
+                    }
+                    requestAnimationFrame(renderDestPhysics);
+                }
+                renderDestPhysics();
+            }
+        });
+    </script>
+
+    <!-- Destination cards scroll-reveal via IntersectionObserver -->
+    <script>
+        (function () {
+            var cards = document.querySelectorAll('.dest-card');
+            if (!cards.length) return;
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var card = entry.target;
+                        var delay = parseInt(card.getAttribute('data-delay')) || 0;
+                        setTimeout(function () {
+                            card.classList.add('is-visible');
+                        }, delay);
+                        observer.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            cards.forEach(function (card) {
+                observer.observe(card);
+            });
+        })();
+    </script>
+    <!-- Mobile Menu Elements -->
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+
+        <!-- Sidebar header -->
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu"
+                class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Signed-in greeting (hidden until we confirm a session) -->
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar"
+                    class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0">
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                About
+            </a>
+            <a href="#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                Services
+            </a>
+            <a href="#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Destinations
+            </a>
+            <a href="#eligibility-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Check Eligibility
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path>
+                </svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Blog
+            </a>
+
+            <!-- Company Profile: expands in place, never navigates away -->
+            <button type="button" id="company-profile-toggle" class="sidebar-link" aria-expanded="false" aria-controls="company-profile-panel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line>
+                </svg>
+                Company Profile
+                <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="px-1 -mt-1">
+                <a href="company-profile.html" class="mobile-nav-link block text-center text-[11px] font-bold uppercase tracking-widest text-primary hover:underline py-1 mb-1">View Full Company Profile →</a>
+            </div>
+            <div id="company-profile-panel" class="hidden mx-1 mb-2 p-4 rounded-xl bg-gray-50 border border-gray-100 space-y-4">
+                <p class="text-[13px] text-gray-500 leading-relaxed">We are a premier international education &amp; immigration consultancy, dedicated to transforming student ambitions into global realities.</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white rounded-lg p-3 border border-gray-100 text-center">
+                        <p class="font-display text-xl font-bold text-primary leading-none">10,000+</p>
+                        <p class="text-[9.5px] uppercase tracking-wide text-gray-400 font-bold mt-1">Students Placed</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 border border-gray-100 text-center">
+                        <p class="font-display text-xl font-bold text-primary leading-none">98%</p>
+                        <p class="text-[9.5px] uppercase tracking-wide text-gray-400 font-bold mt-1">Visa Success</p>
+                    </div>
+                </div>
+                <div class="space-y-2.5 text-[13px] text-gray-500 pt-1 border-t border-gray-200/70">
+                    <p class="flex items-start gap-2 pt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0 mt-0.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Confidence Center, Gulshan, Dhaka
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        info@eduabroad.com.bd
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        +880 1401-184949
+                    </p>
+                </div>
+            </div>
+
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <!-- Portal: always visible. Routes to login, or straight to the right dashboard if already signed in -->
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <!-- Bottom actions -->
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <!-- Guest actions: shown when nobody is logged in -->
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html"
+                    class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">
+                    Login
+                </a>
+                <a href="Appointment-form.html"
+                    class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">
+                    Get Started
+                </a>
+            </div>
+
+            <!-- Signed-in actions: shown once a session is detected -->
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn"
+                    class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">
+                    Go to Portal
+                </a>
+                <button type="button" id="mobile-logout-btn"
+                    class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Modal Control Scripts -->
+    <script>
+        (function () {
+            var svcCards = document.querySelectorAll('[data-svc-card]');
+            if (!svcCards.length) return;
+            var svcObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var card = entry.target;
+                        var delay = parseInt(card.getAttribute('data-svc-delay')) || 0;
+                        setTimeout(function () {
+                            card.classList.add('svc-visible');
+                        }, delay);
+                        svcObserver.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.15 });
+            svcCards.forEach(function (card) { svcObserver.observe(card); });
+        })();
+
+        function openUsaModal() {
+
+            const overlay = document.getElementById('usa-modal-overlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeUsaModal(event) {
+            const overlay = document.getElementById('usa-modal-overlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
+
+        // --- MICRO-INTERACTIONS ---
+        // 1. Scroll Progress
+        window.addEventListener('scroll', () => {
+            const windist = document.documentElement.scrollTop;
+            const winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (windist / winheight) * 100;
+            const progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        // 2. Magnetic Effect
+        const magnets = document.querySelectorAll('.magnetic-wrap');
+        magnets.forEach(m => {
+            m.addEventListener('mousemove', (e) => {
+                const pos = m.getBoundingClientRect();
+                const x = e.clientX - pos.left - pos.width / 2;
+                const y = e.clientY - pos.top - pos.height / 2;
+                m.style.transform = `translate(${x * 0.35}px, ${y * 0.5}px)`;
+            });
+            m.addEventListener('mouseleave', () => {
+                m.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // 3. Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const pos = card.getBoundingClientRect();
+                const x = e.clientX - pos.left;
+                const y = e.clientY - pos.top;
+                const centerX = pos.width / 2;
+                const centerY = pos.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+
+        // 4. Fluid Reveal (Intersection Observer enhancement)
+        const revealCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        };
+        const observer = new IntersectionObserver(revealCallback, { threshold: 0.1 });
+        document.querySelectorAll('.dest-card, [data-svc-card]').forEach(el => observer.observe(el));
+        // --- HERO TITLE ROTATION & GALLERY HOVER ---
+        (function () {
+            const titles = document.querySelectorAll('.hero-title-slide');
+            const subtitles = document.querySelectorAll('.hero-subtitle-slide');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryContainer = document.getElementById('hero-gallery');
+            let currentIndex = 0;
+            const totalSlides = titles.length;
+            let autoRotateInterval;
+
+            if (totalSlides === 0) return;
+
+            function setActiveSlide(index) {
+                // Remove active from current
+                titles[currentIndex].classList.remove('active');
+                subtitles[currentIndex].classList.remove('active');
+
+                currentIndex = index;
+
+                // Add active to next
+                titles[currentIndex].classList.add('active');
+                subtitles[currentIndex].classList.add('active');
+            }
+
+            function rotateHero() {
+                setActiveSlide((currentIndex + 1) % totalSlides);
+            }
+
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(rotateHero, 6000);
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+
+            // Initialize rotation
+            startAutoRotate();
+
+            // Hover interactions for scrapbook gallery
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', function () {
+                    stopAutoRotate();
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (!isNaN(index) && index !== currentIndex) {
+                        setActiveSlide(index);
+                    }
+
+                    // Play and unmute if it's a gallery video
+                    if (this.tagName === 'VIDEO' && index >= 0 && index <= 5) {
+                        this.muted = false;
+                        this.play().catch(e => console.warn("Autoplay with sound might be blocked:", e));
+                    }
+
+                    // Optional: Make gallery a bit more visible when interacted with
+                    if (galleryContainer) galleryContainer.style.opacity = '0.9';
+                });
+
+                item.addEventListener('mouseleave', function () {
+                    const index = parseInt(this.getAttribute('data-index'));
+
+                    // Stop and mute if it's a gallery video
+                    if (this.tagName === 'VIDEO' && index >= 0 && index <= 5) {
+                        this.pause();
+                        this.muted = true;
+                    }
+
+                    if (galleryContainer) galleryContainer.style.opacity = '0.25';
+                    startAutoRotate();
+                });
+            });
+        })();
+
+        // --- MOBILE MENU LOGIC ---
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const menuClose = document.getElementById('mobile-menu-close');
+        const menuDrawer = document.getElementById('mobile-menu-drawer');
+        const menuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (menuDrawer.classList.contains('active')) {
+                        closeMenu();
+                    }
+                });
+            });
+
+            // Close the menu with the Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+        }
+
+        // Company Profile expands in place inside the sidebar — never navigates away
+        const companyProfileToggle = document.getElementById('company-profile-toggle');
+        const companyProfilePanel = document.getElementById('company-profile-panel');
+        if (companyProfileToggle && companyProfilePanel) {
+            companyProfileToggle.addEventListener('click', () => {
+                const isOpen = companyProfilePanel.classList.toggle('hidden') === false;
+                companyProfileToggle.classList.toggle('expanded', isOpen);
+                companyProfileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        }
+
+        // --- MOBILE MENU: LOGIN-AWARE STATE ---
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+
+            var user = EduAuth.currentUser();
+
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+
+            if (!user) return; // Guest state: "Portal" simply routes to Login (default markup)
+
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+
+            // Swap guest actions for signed-in actions
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) {
+                authedActions.classList.remove('hidden');
+                authedActions.classList.add('flex');
+            }
+
+            // Greeting
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) {
+                avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            }
+
+            // Portal now goes straight to the signed-in user's own dashboard
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    EduAuth.logout();
+                    window.location.href = 'index.html';
+                });
+            }
+        })();
+
+    </script>
+
+    <!-- Eligibility Checker Logic -->
+    <script>
+        (function () {
+            var form = document.getElementById('eligibility-form');
+            if (!form) return;
+            var resultsEl = document.getElementById('elig-results');
+            var metaEl = document.getElementById('elig-results-meta');
+            var emptyEl = document.getElementById('elig-empty');
+            var errorEl = document.getElementById('elig-error');
+            var modal = document.getElementById('uni-modal');
+            var modalBody = document.getElementById('uni-modal-body');
+
+            function money(n) {
+                return '৳' + Number(n || 0).toLocaleString('en-IN');
+            }
+
+            function cardHTML(u, i) {
+                return '' +
+                    '<div class="premium-card elig-fade-up cursor-pointer" style="animation-delay:' + (i * 0.08) + 's" data-uid="' + u.id + '">' +
+                    '  <div class="pc-img-wrap">' +
+                    '    <img src="' + u.image + '" alt="' + u.name + '" loading="lazy">' +
+                    '    <span class="pc-ranking-badge">' + (u.ranking || u.country) + '</span>' +
+                    '    <span class="pc-heart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1b3168" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg></span>' +
+                    '    <span class="pc-price-badge">' + money(u.minBudgetBDT) + '+</span>' +
+                    '  </div>' +
+                    '  <div class="p-5">' +
+                    '    <div class="flex items-center gap-1.5 text-gray-400 text-[12px] mb-1.5 font-medium"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>' + u.city + ', ' + u.country + '</div>' +
+                    '    <h3 class="font-bold text-[17px] text-gray-900 leading-snug mb-3">' + u.name + '</h3>' +
+                    '    <div class="flex items-center gap-4 text-[13px] text-gray-500 mb-4 pb-4 border-b border-gray-100">' +
+                    '      <span class="flex items-center gap-1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"></path><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"></path></svg>IELTS ' + u.minIELTS + '+</span>' +
+                    '      <span class="flex items-center gap-1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Age ' + u.minAge + '-' + u.maxAge + '</span>' +
+                    '    </div>' +
+                    '    <div class="flex flex-wrap gap-1.5 mb-4">' + (u.levels || []).map(function (lv) { return '<span class="inline-block bg-[#e0f2fe] text-[#0369a1] text-[11px] font-bold px-2.5 py-1 rounded-full">' + (lv === 'Honors' ? 'Honors/Bachelor' : lv) + '</span>'; }).join('') + '</div>' +
+                    '    <button class="w-full text-center border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-full py-2.5 text-[13px] font-bold uppercase tracking-wide">View Details</button>' +
+                    '  </div>' +
+                    '</div>';
+            }
+
+            function openModal(u) {
+                var docsHTML = (u.documents || []).map(function (dId) {
+                    var label = (window.EduAuth.DOCUMENT_TYPES_MAP && window.EduAuth.DOCUMENT_TYPES_MAP[dId]) || dId;
+                    return '<li class="flex items-start gap-2.5 py-1.5"><svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39b54a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-gray-700 text-[14px]">' + label + '</span></li>';
+                }).join('');
+                var subjHTML = (u.subjects || []).map(function (s) {
+                    return '<span class="inline-block bg-[#f0f4ff] text-[#1b3168] text-[12px] font-semibold px-3 py-1.5 rounded-full mr-2 mb-2">' + s + '</span>';
+                }).join('');
+                modalBody.innerHTML = '' +
+                    '<div class="relative h-56 sm:h-64"><img src="' + u.image + '" class="w-full h-full object-cover sm:rounded-t-3xl" alt="' + u.name + '">' +
+                    '  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent sm:rounded-t-3xl"></div>' +
+                    '  <div class="absolute bottom-4 left-6 right-6 text-white"><div class="text-[12px] uppercase tracking-widest opacity-80 mb-1">' + u.city + ', ' + u.country + '</div><h3 class="text-2xl font-bold">' + u.name + '</h3></div>' +
+                    '</div>' +
+                    '<div class="p-6 sm:p-8">' +
+                    '  <div class="grid grid-cols-3 gap-4 mb-8 text-center">' +
+                    '    <div class="bg-gray-50 rounded-xl py-3"><div class="text-[11px] text-gray-400 uppercase font-bold">Min IELTS</div><div class="text-lg font-bold text-[#1b3168]">' + u.minIELTS + '</div></div>' +
+                    '    <div class="bg-gray-50 rounded-xl py-3"><div class="text-[11px] text-gray-400 uppercase font-bold">Age Range</div><div class="text-lg font-bold text-[#1b3168]">' + u.minAge + '-' + u.maxAge + '</div></div>' +
+                    '    <div class="bg-gray-50 rounded-xl py-3"><div class="text-[11px] text-gray-400 uppercase font-bold">Tuition/yr</div><div class="text-[13px] font-bold text-[#1b3168] leading-tight mt-1">' + u.tuitionLabel + '</div></div>' +
+                    '  </div>' +
+                    '  <div class="mb-8"><h4 class="font-bold text-gray-900 mb-3 text-[15px] uppercase tracking-wide">Program Levels Offered</h4><div>' + (u.levels || []).map(function (lv) { return '<span class="inline-block bg-[#e0f2fe] text-[#0369a1] text-[12px] font-bold px-3 py-1.5 rounded-full mr-2 mb-2">' + (lv === 'Honors' ? 'Honors/Bachelor' : lv) + '</span>'; }).join('') + '</div></div>' +
+                    '  <div class="mb-8"><h4 class="font-bold text-gray-900 mb-2 text-[15px] uppercase tracking-wide">Qualification Required</h4><p class="text-gray-600 text-[14px] leading-relaxed">' + u.qualification + '</p></div>' +
+                    '  <div class="mb-8"><h4 class="font-bold text-gray-900 mb-3 text-[15px] uppercase tracking-wide">Available Subjects</h4><div>' + subjHTML + '</div></div>' +
+                    '  <div class="mb-8"><h4 class="font-bold text-gray-900 mb-1 text-[15px] uppercase tracking-wide">Documents Needed</h4><ul>' + docsHTML + '</ul></div>' +
+                    '  <a href="Appointment-form.html" class="block text-center bg-[#1b3168] hover:bg-[#00a2e8] text-white font-bold text-[14px] uppercase tracking-wider rounded-full py-4 transition-all duration-300">Book Appointment for This University</a>' +
+                    '</div>';
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            document.getElementById('uni-modal-close').addEventListener('click', closeModal);
+            document.getElementById('uni-modal-backdrop').addEventListener('click', closeModal);
+
+            resultsEl.addEventListener('click', function (e) {
+                var card = e.target.closest('[data-uid]');
+                if (!card) return;
+                var u = window.EduAuth.getUniversity(card.getAttribute('data-uid'));
+                if (u) openModal(u);
+            });
+
+            // Populate the "Field of Study" autocomplete list from live university data.
+            (function populateSubjectList() {
+                var dl = document.getElementById('elig-subject-list');
+                if (!dl || !window.EduAuth || typeof window.EduAuth.allSubjects !== 'function') return;
+                dl.innerHTML = window.EduAuth.allSubjects().map(function (s) {
+                    return '<option value="' + s + '"></option>';
+                }).join('');
+            })();
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errorEl.classList.add('hidden');
+                var age = document.getElementById('elig-age').value;
+                var ielts = document.getElementById('elig-ielts').value;
+                var budget = document.getElementById('elig-budget').value;
+                var level = document.getElementById('elig-level').value;
+                var subject = document.getElementById('elig-subject').value;
+                if (!age || !ielts || !budget) {
+                    errorEl.textContent = 'Please fill in age, IELTS score and budget to check eligibility.';
+                    errorEl.classList.remove('hidden');
+                    return;
+                }
+                var matches = window.EduAuth.matchUniversities({ age: age, ielts: ielts, budget: budget, level: level, subject: subject });
+                resultsEl.innerHTML = matches.map(cardHTML).join('');
+                if (matches.length) {
+                    metaEl.textContent = 'You are eligible for ' + matches.length + ' partner universit' + (matches.length === 1 ? 'y' : 'ies') + (subject ? (' offering ' + subject) : '') + '. Tap a card to see full requirements.';
+                    metaEl.classList.remove('hidden');
+                    emptyEl.classList.add('hidden');
+                } else {
+                    metaEl.classList.add('hidden');
+                    emptyEl.classList.remove('hidden');
+                }
+                document.getElementById('eligibility-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        })();
+    </script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard | Edu Abroad Limited</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Cormorant Garamond', 'serif'] },
+                    colors: {
+                        primary: '#1b3168', secondary: '#00a2e8', 'brand-green': '#39b54a', cream: '#e7e4df',
+                        brand: { 50: '#f0f4ff', 100: '#e0e8ff', 500: '#1b3168', 600: '#152654', 700: '#0f1b3b', 900: '#090f23' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Roboto', system-ui, sans-serif; color: #1a202c; background:#f7f6f3; }
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; font-size: 20px; vertical-align: middle; }
+        .nav-item { transition: all .2s; }
+        .nav-item.active { background: rgba(27,49,104,0.08); color: #1b3168; font-weight: 700; }
+        .nav-item.active .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeIn .35s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+        .status-chip { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; display:inline-flex; align-items:center; gap:4px; }
+        .status-not_uploaded { background:#f1f5f9; color:#64748b; }
+        .status-pending { background:#fef9c3; color:#a16207; }
+        .status-verified { background:#dcfce7; color:#15803d; }
+        .status-rejected { background:#fee2e2; color:#b91c1c; }
+        input:focus, select:focus, textarea:focus { outline: none; }
+        #mobile-sidebar-overlay { position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 40; display:none; }
+        #mobile-sidebar-overlay.show { display:block; }
+
+        .premium-card { border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid #eef0f4; box-shadow: 0 2px 12px rgba(17, 24, 39, 0.05); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease; }
+        .premium-card:hover { transform: translateY(-6px); box-shadow: 0 20px 32px -12px rgba(17, 24, 39, 0.16); }
+        .premium-card .pc-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+        .premium-card .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .premium-card:hover .pc-img-wrap img { transform: scale(1.08); }
+        .pc-ranking-badge { position: absolute; top: 12px; left: 12px; background: rgba(27,49,104,0.92); color: #fff; padding: 4px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 700; }
+        .pc-price-badge { position: absolute; bottom: 12px; right: 12px; background: #fff; padding: 5px 12px; border-radius: 999px; font-weight: 700; font-size: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.12); color: #1b3168; }
+
+        /* Document check result cards */
+        .dr-card { background:#fff; border:1px solid #eef0f4; border-radius:18px; padding:20px; cursor:pointer; transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease; }
+        .dr-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px -10px rgba(17,24,39,.15); border-color:#dbe3f5; }
+        .dr-status { font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:9999px; display:inline-flex; align-items:center; gap:5px; }
+        .dr-status.match { background:#dcfce7; color:#15803d; }
+        .dr-status.mismatch { background:#fee2e2; color:#b91c1c; }
+        .dr-lock-pill { display:inline-flex; align-items:center; gap:6px; background:#fef3c7; color:#92400e; font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:9999px; }
+        .dr-unlocked-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(27,49,104,0.08); color:#1b3168; font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:9999px; }
+        .dr-field-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid #f1f1f1; font-size:13.5px; }
+        .dr-field-row:first-child { border-top:none; }
+        .dr-stamp { font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:3px 9px; border-radius:9999px; }
+        .dr-stamp.match { background:#dcfce7; color:#15803d; }
+        .dr-stamp.mismatch { background:#fee2e2; color:#b91c1c; }
+        .dr-stamp.ref-missing { background:#fef3c7; color:#92400e; }
+        .dr-stamp.single { background:#f1f5f9; color:#64748b; }
+        .dr-blur-wrap { position: relative; }
+        .dr-blur-wrap.locked .dr-blur-target { filter: blur(6px); user-select:none; pointer-events:none; }
+        .dr-unlock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:12px; background:rgba(255,255,255,.55); border-radius:16px; padding:20px; }
+        #dr-modal-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.6); z-index: 9990; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition: opacity .3s ease; }
+        #dr-modal-overlay.active { opacity:1; pointer-events:auto; }
+        #dr-modal { background:#fff; width:100%; max-width:640px; max-height:88vh; overflow-y:auto; border-radius:24px; box-shadow: 0 30px 80px rgba(0,0,0,.35); transform: translateY(16px) scale(.97); opacity:0; transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+        #dr-modal-overlay.active #dr-modal { transform: translateY(0) scale(1); opacity:1; }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="w-72 bg-white border-r border-gray-100 flex-col justify-between fixed lg:static inset-y-0 left-0 z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex">
+            <div>
+                <div class="h-20 flex items-center px-6 border-b border-gray-100">
+                    <img src="images/logo_Black.png" alt="Edu Abroad" class="h-11 w-auto object-contain" />
+                </div>
+                <nav id="side-nav" class="p-4 space-y-1">
+                    <a href="#overview" data-panel="overview" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">space_dashboard</span> Overview
+                    </a>
+                    <a href="#application" data-panel="application" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">flight_takeoff</span> My Application
+                    </a>
+                    <a href="#documents" data-panel="documents" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">folder_open</span> Documents
+                        <span id="doc-alert-badge" class="hidden ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full size-5 flex items-center justify-center">!</span>
+                    </a>
+                    <a href="#universities" data-panel="universities" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">school</span> University Matches
+                    </a>
+                    <a href="#docresults" data-panel="docresults" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">fact_check</span> Document Check
+                        <span id="docresults-badge" class="hidden ml-auto bg-primary text-white text-[10px] font-bold rounded-full size-5 flex items-center justify-center"></span>
+                    </a>
+                    <a href="#membership" data-panel="membership" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">workspace_premium</span> Membership
+                    </a>
+                    <a href="#appointments" data-panel="appointments" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">event</span> Appointments
+                    </a>
+                    <a href="#profile" data-panel="profile" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50">
+                        <span class="material-symbols-outlined">person</span> Profile &amp; Settings
+                    </a>
+                </nav>
+            </div>
+            <div class="p-4 border-t border-gray-100">
+                <div id="plan-pill" class="mb-3 rounded-xl p-3 bg-primary/5 border border-primary/10 text-xs"></div>
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 font-semibold text-sm">
+                    <span class="material-symbols-outlined">logout</span> Log Out
+                </button>
+            </div>
+        </aside>
+        <div id="mobile-sidebar-overlay"></div>
+
+        <!-- MAIN -->
+        <div class="flex-1 lg:ml-0 min-w-0">
+            <!-- Topbar -->
+            <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-5 sm:px-8 sticky top-0 z-30">
+                <div class="flex items-center gap-4">
+                    <button id="menu-toggle" class="lg:hidden text-gray-600"><span class="material-symbols-outlined">menu</span></button>
+                    <div>
+                        <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                        <h1 id="topbar-name" class="font-display text-2xl font-semibold text-gray-900 leading-tight">—</h1>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="hidden sm:flex text-xs font-semibold text-gray-500 hover:text-primary items-center gap-1">
+                        <span class="material-symbols-outlined text-base">home</span> Home
+                    </a>
+                    <div class="relative">
+                        <button id="notif-btn" class="relative size-10 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span id="notif-dot" class="hidden absolute top-1.5 right-1.5 size-2 rounded-full bg-red-500"></span>
+                        </button>
+                        <div id="notif-panel" class="hidden absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-40 max-h-96 overflow-y-auto"></div>
+                    </div>
+                    <div id="avatar" class="size-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">—</div>
+                </div>
+            </header>
+
+            <main class="p-5 sm:p-8 max-w-6xl mx-auto">
+
+                <!-- OVERVIEW -->
+                <section id="panel-overview" class="panel active space-y-6">
+                    <div id="trial-banner" class="hidden rounded-2xl p-5 bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-amber-600">schedule</span>
+                            <p class="text-sm text-amber-800"><strong id="trial-days-left">—</strong> days left on your Free Trial.</p>
+                        </div>
+                        <button data-goto="membership" class="goto-panel text-xs font-black uppercase tracking-wide bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700">Upgrade to Premium</button>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-5">
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Application Stage</p>
+                            <p id="stat-stage" class="font-display text-xl font-semibold text-gray-900">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Documents Verified</p>
+                            <p id="stat-docs" class="font-display text-xl font-semibold text-gray-900">—</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                            <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-2">Destination</p>
+                            <p id="stat-destination" class="font-display text-xl font-semibold text-gray-900">—</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                        <h3 class="font-display text-xl font-semibold mb-6">Application Progress</h3>
+                        <div id="stage-tracker" class="flex flex-col sm:flex-row gap-4 sm:gap-0"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="bg-primary rounded-2xl p-6 text-white flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-display text-xl font-semibold mb-2">Need to talk to a consultant?</h3>
+                                <p class="text-white/80 text-sm">Book a free 15-minute session with our expert advisors.</p>
+                            </div>
+                            <button data-goto="appointments" class="goto-panel mt-5 bg-white text-primary font-bold text-sm px-5 py-3 rounded-xl w-fit hover:bg-white/90">Book Appointment</button>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-display text-xl font-semibold mb-2 text-gray-900">Upload pending documents</h3>
+                                <p class="text-gray-500 text-sm">Keep your file moving — verify your remaining documents today.</p>
+                            </div>
+                            <button data-goto="documents" class="goto-panel mt-5 bg-[#eff6ff] text-primary font-bold text-sm px-5 py-3 rounded-xl w-fit hover:bg-primary/10">Go to Documents</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- APPLICATION -->
+                <section id="panel-application" class="panel space-y-6">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">My Application</h2>
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">
+                        <div class="grid sm:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-1">Destination</p>
+                                <p id="app-destination" class="font-semibold text-gray-900">—</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-1">Current Stage</p>
+                                <p id="app-stage-label" class="font-semibold text-gray-900">—</p>
+                            </div>
+                        </div>
+                        <h3 class="font-display text-lg font-semibold mb-5">Timeline</h3>
+                        <div id="app-timeline" class="space-y-0"></div>
+                    </div>
+                </section>
+
+                <!-- DOCUMENTS -->
+                <section id="panel-documents" class="panel space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">Document Verification Center</h2>
+                        <span id="doc-limit-note" class="text-xs text-gray-500"></span>
+                    </div>
+                    <p class="text-sm text-gray-500 -mt-4">Upload clear scans/photos. Our team reviews every document and marks it Verified or Rejected with feedback.</p>
+                    <div id="doc-list" class="grid md:grid-cols-2 gap-5"></div>
+                </section>
+
+                <!-- UNIVERSITY MATCHES -->
+                <section id="panel-universities" class="panel space-y-6">
+                    <div>
+                        <h2 class="font-display text-2xl font-semibold text-gray-900">University Matches</h2>
+                        <p class="text-sm text-gray-500 mt-1">Enter your age, IELTS score and budget — or search by field of study — to see which partner universities you're eligible for.</p>
+                    </div>
+                    <form id="cd-elig-form" class="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] p-5 grid grid-cols-1 sm:grid-cols-5 gap-4 items-end">
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">Age</label>
+                            <input type="number" id="cd-elig-age" min="15" max="60" placeholder="22" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">Field of Study</label>
+                            <input type="text" id="cd-elig-subject" list="cd-elig-subject-list" placeholder="e.g. Computer Science" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm">
+                            <datalist id="cd-elig-subject-list"></datalist>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">IELTS Score</label>
+                            <input type="number" id="cd-elig-ielts" min="0" max="9" step="0.5" placeholder="6.5" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">Budget (BDT/yr)</label>
+                            <input type="number" id="cd-elig-budget" min="0" step="50000" placeholder="1500000" class="w-full h-11 px-3 rounded-xl border border-gray-200 text-sm" required>
+                        </div>
+                        <button type="submit" class="h-11 rounded-xl bg-primary text-white font-bold text-sm">Check Matches</button>
+                    </form>
+                    <div id="cd-elig-meta" class="hidden text-sm text-gray-500"></div>
+                    <div id="cd-elig-results" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                    <div id="cd-elig-empty" class="hidden bg-white rounded-2xl p-10 text-center border border-gray-100 text-gray-400 text-sm">No matches yet — fill in the form above to see eligible universities.</div>
+                </section>
+
+                <!-- DOCUMENT CHECK RESULTS -->
+                <section id="panel-docresults" class="panel space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <h2 class="font-display text-2xl font-semibold text-gray-900">Document Check Results</h2>
+                            <p class="text-sm text-gray-500 mt-1">Every cross-check you've run shows up here as a card. Tap a card to open the full report — unlock it any time for ৳100 via bKash or Nagad.</p>
+                        </div>
+                        <a href="document-check.html" class="shrink-0 h-11 px-5 rounded-xl bg-primary text-white font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors">
+                            <span class="material-symbols-outlined text-base">add</span> Run New Check
+                        </a>
+                    </div>
+                    <div id="docresults-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                    <div id="docresults-empty" class="hidden bg-white rounded-2xl p-12 text-center border border-gray-100">
+                        <span class="material-symbols-outlined text-4xl text-gray-300">fact_check</span>
+                        <p class="text-gray-500 text-sm mt-3 mb-5">You haven't run a document check yet.</p>
+                        <a href="document-check.html" class="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90">Run Your First Check</a>
+                    </div>
+                </section>
+
+                <!-- MEMBERSHIP -->
+                <section id="panel-membership" class="panel space-y-6">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Membership &amp; Billing</h2>
+                    <div id="current-plan-banner" class="rounded-2xl p-6 border"></div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="rounded-3xl p-7 border-2 border-gray-200 bg-white">
+                            <span class="text-[11px] font-black uppercase tracking-widest bg-brand-green/10 text-brand-green px-3 py-1 rounded-full">Free Trial</span>
+                            <p class="font-display text-3xl font-semibold text-gray-900 mt-4">৳0 <span class="text-sm font-sans font-normal text-gray-400">/ 7 days</span></p>
+                            <ul class="mt-5 space-y-2 text-sm text-gray-600">
+                                <li class="flex gap-2"><span class="text-brand-green">✓</span> Dashboard &amp; progress tracker</li>
+                                <li class="flex gap-2"><span class="text-brand-green">✓</span> Upload up to 3 documents</li>
+                                <li class="flex gap-2"><span class="text-brand-green">✓</span> 1 free consultation call</li>
+                            </ul>
+                            <button id="btn-plan-free" class="mt-7 w-full h-12 rounded-xl border border-gray-300 text-gray-600 font-bold text-sm hover:bg-gray-50">Switch to Free Trial</button>
+                        </div>
+                        <div class="rounded-3xl p-7 border-2 border-primary bg-primary text-white relative overflow-hidden">
+                            <div class="absolute -top-3 right-6 bg-secondary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow">Recommended</div>
+                            <span class="text-[11px] font-black uppercase tracking-widest bg-white/15 px-3 py-1 rounded-full">Premium</span>
+                            <p class="font-display text-3xl font-semibold mt-4">৳4,999 <span class="text-sm font-sans font-normal text-white/70">/ month</span></p>
+                            <ul class="mt-5 space-y-2 text-sm text-white/90">
+                                <li class="flex gap-2"><span class="text-secondary">✓</span> Unlimited document uploads</li>
+                                <li class="flex gap-2"><span class="text-secondary">✓</span> Priority document verification</li>
+                                <li class="flex gap-2"><span class="text-secondary">✓</span> Dedicated visa consultant</li>
+                                <li class="flex gap-2"><span class="text-secondary">✓</span> Unlimited consultations</li>
+                            </ul>
+                            <button id="btn-plan-premium" class="mt-7 w-full h-12 rounded-xl bg-white text-primary font-bold text-sm hover:bg-white/90">Upgrade to Premium</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- APPOINTMENTS -->
+                <section id="panel-appointments" class="panel space-y-6">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Book a Consultation</h2>
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <form id="appt-form" class="bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] space-y-4">
+                            <div>
+                                <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Preferred Date</label>
+                                <input id="appt-date" type="date" required class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Preferred Time</label>
+                                <input id="appt-time" type="time" required class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Topic</label>
+                                <select id="appt-topic" class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white">
+                                    <option>University Selection</option>
+                                    <option>Visa Documentation</option>
+                                    <option>Scholarship Guidance</option>
+                                    <option>General Consultation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Notes (optional)</label>
+                                <textarea id="appt-notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+                            </div>
+                            <button type="submit" class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90">Request Appointment</button>
+                        </form>
+                        <div>
+                            <h3 class="font-display text-lg font-semibold mb-4">Your Requests</h3>
+                            <div id="appt-list" class="space-y-3"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROFILE -->
+                <section id="panel-profile" class="panel space-y-6">
+                    <h2 class="font-display text-2xl font-semibold text-gray-900">Profile &amp; Settings</h2>
+                    <form id="profile-form" class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)] grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Full Name</label>
+                            <input id="pf-name" type="text" class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                        </div>
+                        <div>
+                            <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Email (read-only)</label>
+                            <input id="pf-email" type="email" disabled class="w-full h-12 px-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-500" />
+                        </div>
+                        <div>
+                            <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Phone</label>
+                            <input id="pf-phone" type="tel" class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                        </div>
+                        <div>
+                            <label class="block text-[13px] font-semibold text-gray-700 mb-2 uppercase tracking-wide">Study Destination</label>
+                            <select id="pf-destination" class="w-full h-12 px-4 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white">
+                                <option>Not decided yet</option>
+                                <option>United Kingdom</option>
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>Australia</option>
+                                <option>New Zealand</option>
+                                <option>Europe</option>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <button type="submit" class="h-12 px-8 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90">Save Changes</button>
+                            <span id="profile-saved" class="hidden ml-3 text-sm text-brand-green font-semibold">Saved ✓</span>
+                        </div>
+                    </form>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Payment / upgrade modal -->
+    <div id="pay-modal" class="hidden fixed inset-0 bg-black/50 z-[60] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-7 text-center">
+            <div class="size-14 mx-auto rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-3xl">credit_card</span>
+            </div>
+            <h3 class="font-display text-xl font-semibold mb-2">Confirm Upgrade</h3>
+            <p class="text-sm text-gray-500 mb-6">This is a demo checkout. In production this connects to a real payment gateway (bKash / Nagad / Card).</p>
+            <div class="flex gap-3">
+                <button id="pay-cancel" class="flex-1 h-11 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm">Cancel</button>
+                <button id="pay-confirm" class="flex-1 h-11 rounded-xl bg-primary text-white font-semibold text-sm">Confirm &amp; Pay</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="hidden-file-input" class="hidden" accept=".pdf,.jpg,.jpeg,.png" />
+
+    <!-- Document Check Result Modal -->
+    <div id="dr-modal-overlay">
+        <div id="dr-modal"></div>
+    </div>
+
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <script>
+        (function () {
+            var user = EduAuth.requireRole('client', 'login.html');
+            if (!user) return;
+
+            var STAGES = EduAuth.APPLICATION_STAGES;
+            var DOC_TYPES = EduAuth.DOCUMENT_TYPES;
+
+            function initials(name) {
+                return name.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            }
+
+            function refreshUser() {
+                var db = JSON.parse(localStorage.getItem('eduabroad_db_v1'));
+                user = db.users.find(function (u) { return u.id === user.id; });
+                return user;
+            }
+
+            function render() {
+                refreshUser();
+                document.getElementById('topbar-name').textContent = user.name.split(' ')[0];
+                document.getElementById('avatar').textContent = initials(user.name);
+
+                // Plan pill (sidebar)
+                var planPill = document.getElementById('plan-pill');
+                var trialLeft = EduAuth.trialDaysLeft(user);
+                if (user.plan === 'premium') {
+                    planPill.innerHTML = '<div class="flex items-center gap-2 text-primary font-bold"><span class="material-symbols-outlined text-base">workspace_premium</span> Premium Member</div>';
+                } else {
+                    planPill.innerHTML = '<div class="flex items-center gap-2 text-amber-700 font-bold"><span class="material-symbols-outlined text-base">schedule</span> Free Trial · ' + trialLeft + 'd left</div>';
+                }
+
+                // Trial banner
+                var trialBanner = document.getElementById('trial-banner');
+                if (user.plan === 'free') {
+                    trialBanner.classList.remove('hidden');
+                    document.getElementById('trial-days-left').textContent = trialLeft;
+                } else {
+                    trialBanner.classList.add('hidden');
+                }
+
+                // Stats
+                var verifiedCount = user.documents.filter(function (d) { return d.status === 'verified'; }).length;
+                document.getElementById('stat-stage').textContent = STAGES[user.stageIndex];
+                document.getElementById('stat-docs').textContent = verifiedCount + ' / ' + user.documents.length;
+                document.getElementById('stat-destination').textContent = user.destination || '—';
+
+                // Stage tracker (overview)
+                var tracker = document.getElementById('stage-tracker');
+                tracker.innerHTML = STAGES.map(function (label, i) {
+                    var state = i < user.stageIndex ? 'done' : (i === user.stageIndex ? 'current' : 'upcoming');
+                    var circleClass = state === 'done' ? 'bg-brand-green text-white' : state === 'current' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-400';
+                    var lineClass = i < user.stageIndex ? 'bg-brand-green' : 'bg-gray-200';
+                    return '<div class="flex-1 flex sm:flex-col items-center sm:items-center gap-3 sm:gap-2 relative">' +
+                        (i > 0 ? '<div class="hidden sm:block absolute top-4 right-1/2 w-full h-0.5 ' + lineClass + '" style="z-index:0;"></div>' : '') +
+                        '<div class="relative z-10 size-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ' + circleClass + '">' + (state === 'done' ? '✓' : (i + 1)) + '</div>' +
+                        '<p class="text-xs sm:text-center font-semibold ' + (state === 'upcoming' ? 'text-gray-400' : 'text-gray-800') + '">' + label + '</p>' +
+                        '</div>';
+                }).join('');
+
+                // Application panel
+                document.getElementById('app-destination').textContent = user.destination || '—';
+                document.getElementById('app-stage-label').textContent = STAGES[user.stageIndex];
+                var timeline = document.getElementById('app-timeline');
+                timeline.innerHTML = STAGES.map(function (label, i) {
+                    var state = i < user.stageIndex ? 'done' : (i === user.stageIndex ? 'current' : 'upcoming');
+                    var dot = state === 'done' ? 'bg-brand-green' : state === 'current' ? 'bg-primary' : 'bg-gray-200';
+                    var lastClass = i === STAGES.length - 1 ? '' : 'pb-8 border-l-2 ' + (state === 'upcoming' ? 'border-gray-100' : 'border-brand-green/30') + ' ml-[7px]';
+                    return '<div class="relative pl-6 ' + lastClass + '">' +
+                        '<div class="absolute -left-[7px] top-0 size-4 rounded-full ' + dot + ' ring-4 ring-white"></div>' +
+                        '<p class="font-semibold ' + (state === 'upcoming' ? 'text-gray-400' : 'text-gray-900') + '">' + label + '</p>' +
+                        (state === 'current' ? '<p class="text-xs text-primary font-semibold mt-1">In progress</p>' : (state === 'done' ? '<p class="text-xs text-brand-green font-semibold mt-1">Completed</p>' : '')) +
+                        '</div>';
+                }).join('');
+
+                // Documents
+                var uploadLimit = user.plan === 'free' ? 3 : Infinity;
+                var uploadedCount = user.documents.filter(function (d) { return d.status !== 'not_uploaded'; }).length;
+                document.getElementById('doc-limit-note').textContent = user.plan === 'free'
+                    ? ('Free Trial: ' + uploadedCount + ' / 3 documents used — upgrade for unlimited uploads.')
+                    : 'Premium: unlimited uploads.';
+
+                var docList = document.getElementById('doc-list');
+                docList.innerHTML = user.documents.map(function (doc) {
+                    var typeDef = DOC_TYPES.find(function (t) { return t.id === doc.typeId; });
+                    var statusLabel = { not_uploaded: 'Not uploaded', pending: 'Pending review', verified: 'Verified', rejected: 'Rejected' }[doc.status];
+                    var canUpload = !(user.plan === 'free' && doc.status === 'not_uploaded' && uploadedCount >= uploadLimit);
+                    return '<div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_12px_rgb(0,0,0,0.03)]">' +
+                        '<div class="flex justify-between items-start gap-3 mb-3">' +
+                        '<div>' +
+                        '<p class="font-semibold text-gray-900">' + typeDef.label + (typeDef.required ? ' <span class="text-red-500">*</span>' : '') + '</p>' +
+                        (doc.fileName ? '<p class="text-xs text-gray-400 mt-1">' + doc.fileName + (doc.sizeLabel ? ' · ' + doc.sizeLabel : '') + '</p>' : '') +
+                        '</div>' +
+                        '<span class="status-chip status-' + doc.status + '">' + statusLabel + '</span>' +
+                        '</div>' +
+                        (doc.status === 'rejected' && doc.note ? '<div class="bg-red-50 text-red-700 text-xs rounded-lg p-3 mb-3">' + doc.note + '</div>' : '') +
+                        '<button data-doc-type="' + doc.typeId + '" class="upload-btn w-full h-10 rounded-lg text-sm font-bold ' +
+                        (canUpload ? 'bg-[#eff6ff] text-primary hover:bg-primary/10' : 'bg-gray-100 text-gray-400 cursor-not-allowed') + '" ' +
+                        (canUpload ? '' : 'disabled') + '>' +
+                        (doc.status === 'not_uploaded' ? (canUpload ? 'Upload File' : 'Upgrade to unlock') : 'Re-upload File') +
+                        '</button>' +
+                        '</div>';
+                }).join('');
+
+                document.querySelectorAll('.upload-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        pendingUploadType = btn.getAttribute('data-doc-type');
+                        document.getElementById('hidden-file-input').click();
+                    });
+                });
+
+                // doc alert badge
+                var rejectedCount = user.documents.filter(function (d) { return d.status === 'rejected'; }).length;
+                document.getElementById('doc-alert-badge').classList.toggle('hidden', rejectedCount === 0);
+
+                // Membership
+                var currentPlanBanner = document.getElementById('current-plan-banner');
+                if (user.plan === 'premium') {
+                    currentPlanBanner.className = 'rounded-2xl p-6 border border-primary/20 bg-primary/5';
+                    currentPlanBanner.innerHTML = '<p class="font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">workspace_premium</span> You are on the Premium plan. Enjoy unlimited access!</p>';
+                } else {
+                    currentPlanBanner.className = 'rounded-2xl p-6 border border-amber-200 bg-amber-50';
+                    currentPlanBanner.innerHTML = '<p class="font-bold text-amber-800 flex items-center gap-2"><span class="material-symbols-outlined">schedule</span> You are on a Free Trial — ' + trialLeft + ' day(s) remaining.</p>';
+                }
+
+                // Appointments list
+                var allAppts = EduAuth.allAppointments().filter(function (a) { return a.userId === user.id; });
+                var apptList = document.getElementById('appt-list');
+                apptList.innerHTML = allAppts.length ? allAppts.map(function (a) {
+                    return '<div class="bg-white rounded-xl p-4 border border-gray-100 flex justify-between items-center">' +
+                        '<div><p class="font-semibold text-sm text-gray-900">' + a.topic + '</p><p class="text-xs text-gray-400">' + a.date + ' at ' + a.time + '</p></div>' +
+                        '<span class="status-chip status-pending">' + a.status + '</span></div>';
+                }).join('') : '<p class="text-sm text-gray-400">No appointment requests yet.</p>';
+
+                // Profile
+                document.getElementById('pf-name').value = user.name;
+                document.getElementById('pf-email').value = user.email;
+                document.getElementById('pf-phone').value = user.phone;
+                document.getElementById('pf-destination').value = user.destination;
+
+                // Notifications
+                var unread = user.notifications.filter(function (n) { return !n.read; }).length;
+                document.getElementById('notif-dot').classList.toggle('hidden', unread === 0);
+                document.getElementById('notif-panel').innerHTML = user.notifications.length
+                    ? user.notifications.map(function (n) {
+                        return '<div class="p-3 rounded-xl hover:bg-gray-50 text-sm text-gray-700 border-b border-gray-50 last:border-0">' + n.text + '<p class="text-[10px] text-gray-400 mt-1">' + new Date(n.createdAt).toLocaleString() + '</p></div>';
+                    }).join('')
+                    : '<p class="p-3 text-sm text-gray-400">No notifications yet.</p>';
+
+                renderDocResults();
+            }
+
+            /* ---------------- DOCUMENT CHECK RESULTS (portal cards + modal) ---------------- */
+            function drStatusMeta(item) {
+                if (item.mismatched > 0) return { cls: 'mismatch', label: 'Mismatch Found' };
+                return { cls: 'match', label: 'All Matched' };
+            }
+            function drFieldStampMeta(status) {
+                if (status === 'match') return { cls: 'match', label: 'Matched' };
+                if (status === 'mismatch') return { cls: 'mismatch', label: 'Mismatch' };
+                if (status === 'ref-missing') return { cls: 'ref-missing', label: 'No reference value' };
+                return { cls: 'single', label: 'Single source' };
+            }
+            function drEscape(s) {
+                return (s || '').toString().replace(/[&<>"']/g, function (c) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+                });
+            }
+
+            function renderDocResults() {
+                var isUnlimited = user.role === 'admin' || user.plan === 'premium';
+                var list = EduAuth.docCheckHistory(user.id);
+                var grid = document.getElementById('docresults-grid');
+                var empty = document.getElementById('docresults-empty');
+                var badge = document.getElementById('docresults-badge');
+
+                var lockedCount = list.filter(function (r) { return !r.unlocked && !isUnlimited; }).length;
+                if (badge) {
+                    badge.textContent = lockedCount;
+                    badge.classList.toggle('hidden', lockedCount === 0);
+                }
+
+                if (!list.length) {
+                    grid.innerHTML = '';
+                    empty.classList.remove('hidden');
+                    return;
+                }
+                empty.classList.add('hidden');
+
+                grid.innerHTML = list.map(function (item) {
+                    var meta = drStatusMeta(item);
+                    var unlocked = isUnlimited || item.unlocked;
+                    var dateLabel = new Date(item.timestamp).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                    return '<div class="dr-card" data-id="' + item.id + '">' +
+                        '<div class="flex items-center justify-between mb-3">' +
+                        '<span class="dr-status ' + meta.cls + '">' + (meta.cls === 'match' ? '✓' : '!') + ' ' + meta.label + '</span>' +
+                        '<span class="text-[11px] text-gray-400 font-semibold">' + dateLabel + '</span>' +
+                        '</div>' +
+                        '<p class="font-display text-lg font-semibold text-gray-900 truncate">' + drEscape(item.refFile) + '</p>' +
+                        '<p class="text-xs text-gray-400 mb-4">Reference file · ' + item.fileCount + ' file(s) compared</p>' +
+                        '<div class="flex items-center gap-4 text-xs text-gray-500 mb-4">' +
+                        '<span>✓ ' + item.matched + ' matched</span>' +
+                        (item.mismatched ? '<span class="text-red-500">✗ ' + item.mismatched + ' mismatched</span>' : '') +
+                        '</div>' +
+                        (unlocked
+                            ? '<div class="dr-unlocked-pill"><span class="material-symbols-outlined text-sm">lock_open</span> Full report unlocked</div>'
+                            : '<div class="dr-lock-pill"><span class="material-symbols-outlined text-sm">lock</span> Unlock full report — ৳100</div>') +
+                        '</div>';
+                }).join('');
+
+                document.querySelectorAll('.dr-card').forEach(function (card) {
+                    card.addEventListener('click', function () {
+                        openDrModal(card.getAttribute('data-id'));
+                    });
+                });
+            }
+
+            function drFieldRowsHtml(item) {
+                if (!item.fields || !item.fields.length) return '<p class="text-sm text-gray-400">No field-level detail was saved for this check.</p>';
+                return item.fields.map(function (f) {
+                    var stamp = drFieldStampMeta(f.status);
+                    var rows = (f.values || []).map(function (v) {
+                        return '<div class="flex justify-between gap-3 text-xs py-1">' +
+                            '<span class="text-gray-400 truncate max-w-[55%]">' + drEscape(v.name) + (v.isRef ? ' <b class="text-primary">(ref)</b>' : '') + '</span>' +
+                            '<span class="' + (v.isDiff ? 'text-red-600 font-semibold' : 'text-gray-700') + ' truncate text-right">' + (v.raw ? drEscape(v.raw) : '—') + '</span>' +
+                            '</div>';
+                    }).join('');
+                    return '<div class="dr-field-row-wrap mb-3">' +
+                        '<div class="dr-field-row"><span class="font-semibold text-gray-800">' + drEscape(f.label) + '</span><span class="dr-stamp ' + stamp.cls + '">' + stamp.label + '</span></div>' +
+                        '<div class="pl-1">' + rows + '</div>' +
+                        '</div>';
+                }).join('');
+            }
+
+            function openDrModal(resultId) {
+                var list = EduAuth.docCheckHistory(user.id);
+                var item = list.find(function (x) { return x.id === resultId; });
+                if (!item) return;
+                var isUnlimited = user.role === 'admin' || user.plan === 'premium';
+                var unlocked = isUnlimited || item.unlocked;
+                var meta = drStatusMeta(item);
+                var overlay = document.getElementById('dr-modal-overlay');
+                var modal = document.getElementById('dr-modal');
+                var dateLabel = new Date(item.timestamp).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                modal.innerHTML =
+                    '<div class="p-6 border-b border-gray-100 flex items-start justify-between gap-3">' +
+                    '<div>' +
+                    '<p class="text-[11px] uppercase tracking-widest text-gray-400 font-bold mb-1">' + dateLabel + '</p>' +
+                    '<h3 class="font-display text-2xl font-semibold text-gray-900">' + drEscape(item.refFile) + '</h3>' +
+                    '<span class="dr-status ' + meta.cls + ' mt-2 inline-flex">' + (meta.cls === 'match' ? '✓' : '!') + ' ' + meta.label + '</span>' +
+                    '</div>' +
+                    '<button id="dr-modal-close" class="size-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-lg">close</span></button>' +
+                    '</div>' +
+                    '<div class="p-6">' +
+                    '<div class="grid grid-cols-3 gap-3 mb-6">' +
+                    '<div class="bg-green-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-green-700">' + item.matched + '</p><p class="text-[10px] uppercase tracking-wide text-green-600 font-bold mt-1">Matched</p></div>' +
+                    '<div class="bg-red-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-red-600">' + item.mismatched + '</p><p class="text-[10px] uppercase tracking-wide text-red-500 font-bold mt-1">Mismatched</p></div>' +
+                    '<div class="bg-amber-50 rounded-xl p-3 text-center"><p class="font-display text-2xl font-bold text-amber-600">' + (item.refMissing || 0) + '</p><p class="text-[10px] uppercase tracking-wide text-amber-600 font-bold mt-1">Missing on Ref</p></div>' +
+                    '</div>' +
+                    '<div class="dr-blur-wrap' + (unlocked ? '' : ' locked') + '">' +
+                    '<div class="dr-blur-target">' + drFieldRowsHtml(item) + '</div>' +
+                    (unlocked ? '' :
+                        '<div class="dr-unlock-overlay">' +
+                        '<span class="material-symbols-outlined text-3xl text-primary">lock</span>' +
+                        '<p class="font-display text-lg font-semibold text-gray-900">Unlock the full field-by-field report</p>' +
+                        '<p class="text-xs text-gray-500 max-w-xs">Pay a one-time fee of ৳100 via bKash or Nagad to see exactly which fields matched or mismatched, and in which file.</p>' +
+                        '<button id="dr-unlock-btn" class="h-11 px-6 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90">Unlock with bKash / Nagad — ৳100</button>' +
+                        '</div>') +
+                    '</div>' +
+                    '</div>';
+
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                function closeDrModal() {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                document.getElementById('dr-modal-close').addEventListener('click', closeDrModal);
+                overlay.addEventListener('click', function (e) { if (e.target === overlay) closeDrModal(); }, { once: true });
+
+                var unlockBtn = document.getElementById('dr-unlock-btn');
+                if (unlockBtn) {
+                    unlockBtn.addEventListener('click', function () {
+                        EduPayment.open({
+                            title: 'Unlock Full Report',
+                            subtitle: 'Pay via bKash or Nagad to see the complete field-by-field breakdown.',
+                            amount: EduAuth.DOC_CHECK_PRICE_BDT,
+                            onConfirm: function () {
+                                EduAuth.unlockDocCheckResult(user.id, item.id);
+                                renderDocResults();
+                                openDrModal(item.id);
+                            }
+                        });
+                    });
+                }
+            }
+
+            var pendingUploadType = null;
+
+            document.getElementById('hidden-file-input').addEventListener('change', function (e) {
+                var file = e.target.files[0];
+                if (!file || !pendingUploadType) return;
+                var sizeLabel = (file.size / (1024 * 1024) >= 1)
+                    ? (file.size / (1024 * 1024)).toFixed(1) + ' MB'
+                    : (file.size / 1024).toFixed(0) + ' KB';
+                EduAuth.uploadDocument(user.id, pendingUploadType, file.name, sizeLabel);
+                e.target.value = '';
+                render();
+            });
+
+            // Navigation
+            function setPanel(name) {
+                document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+                document.getElementById('panel-' + name).classList.add('active');
+                document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.toggle('active', n.getAttribute('data-panel') === name); });
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+                document.getElementById('sidebar').classList.remove('translate-x-0');
+                document.getElementById('mobile-sidebar-overlay').classList.remove('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            document.querySelectorAll('.nav-item[data-panel]').forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    setPanel(item.getAttribute('data-panel'));
+                });
+            });
+            document.querySelectorAll('.goto-panel').forEach(function (btn) {
+                btn.addEventListener('click', function () { setPanel(btn.getAttribute('data-goto')); });
+            });
+
+            // Deep-link support: e.g. client-dashboard.html#profile opens that panel directly
+            (function openPanelFromHash() {
+                var target = (window.location.hash || '').replace('#', '');
+                if (target && document.getElementById('panel-' + target)) {
+                    setPanel(target);
+                }
+            })();
+
+            // Mobile sidebar toggle
+            document.getElementById('menu-toggle').addEventListener('click', function () {
+                document.getElementById('sidebar').classList.toggle('-translate-x-full');
+                document.getElementById('sidebar').classList.toggle('translate-x-0');
+                document.getElementById('mobile-sidebar-overlay').classList.toggle('show');
+            });
+            document.getElementById('mobile-sidebar-overlay').addEventListener('click', function () {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+                document.getElementById('mobile-sidebar-overlay').classList.remove('show');
+            });
+
+            // Notifications
+            document.getElementById('notif-btn').addEventListener('click', function () {
+                document.getElementById('notif-panel').classList.toggle('hidden');
+                user.notifications.forEach(function (n) { n.read = true; });
+                EduAuth.updateProfile(user.id, { notifications: user.notifications });
+                render();
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#notif-btn') && !e.target.closest('#notif-panel')) {
+                    document.getElementById('notif-panel').classList.add('hidden');
+                }
+            });
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                EduAuth.logout();
+                window.location.href = 'login.html';
+            });
+
+            // Plan upgrade modal
+            var payModal = document.getElementById('pay-modal');
+            var targetPlan = null;
+            document.getElementById('btn-plan-premium').addEventListener('click', function () {
+                if (user.plan === 'premium') return;
+                targetPlan = 'premium';
+                payModal.classList.remove('hidden'); payModal.classList.add('flex');
+            });
+            document.getElementById('btn-plan-free').addEventListener('click', function () {
+                if (user.plan === 'free') return;
+                EduAuth.upgradePlan(user.id, 'free');
+                render();
+            });
+            document.getElementById('pay-cancel').addEventListener('click', function () {
+                payModal.classList.add('hidden'); payModal.classList.remove('flex');
+            });
+            document.getElementById('pay-confirm').addEventListener('click', function () {
+                EduAuth.upgradePlan(user.id, targetPlan);
+                payModal.classList.add('hidden'); payModal.classList.remove('flex');
+                render();
+                setPanel('membership');
+            });
+
+            // Appointment form
+            document.getElementById('appt-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                EduAuth.bookAppointment({
+                    userId: user.id,
+                    name: user.name,
+                    email: user.email,
+                    date: document.getElementById('appt-date').value,
+                    time: document.getElementById('appt-time').value,
+                    topic: document.getElementById('appt-topic').value,
+                    notes: document.getElementById('appt-notes').value
+                });
+                this.reset();
+                render();
+            });
+
+            // Profile form
+            document.getElementById('profile-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                EduAuth.updateProfile(user.id, {
+                    name: document.getElementById('pf-name').value,
+                    phone: document.getElementById('pf-phone').value,
+                    destination: document.getElementById('pf-destination').value
+                });
+                render();
+                var saved = document.getElementById('profile-saved');
+                saved.classList.remove('hidden');
+                setTimeout(function () { saved.classList.add('hidden'); }, 2000);
+            });
+
+            /* ------------------------- UNIVERSITY MATCHES ------------------------- */
+            function cdMoney(n) { return '৳' + Number(n || 0).toLocaleString('en-IN'); }
+            function cdCardHTML(u) {
+                return '' +
+                    '<div class="premium-card">' +
+                    '  <div class="pc-img-wrap"><img src="' + u.image + '" alt="' + u.name + '" loading="lazy">' +
+                    '    <span class="pc-ranking-badge">' + (u.ranking || u.country) + '</span>' +
+                    '    <span class="pc-price-badge">' + cdMoney(u.minBudgetBDT) + '+</span>' +
+                    '  </div>' +
+                    '  <div class="p-4">' +
+                    '    <div class="text-gray-400 text-[11px] mb-1 font-medium">' + u.city + ', ' + u.country + '</div>' +
+                    '    <h3 class="font-bold text-[15px] text-gray-900 leading-snug mb-2">' + u.name + '</h3>' +
+                    '    <p class="text-[12px] text-gray-500 mb-3">IELTS ' + u.minIELTS + '+ &middot; Age ' + u.minAge + '-' + u.maxAge + ' &middot; ' + u.tuitionLabel + '</p>' +
+                    '    <p class="text-[12px] text-gray-600 mb-3"><span class="font-bold text-gray-800">Subjects:</span> ' + (u.subjects || []).slice(0, 3).join(', ') + '</p>' +
+                    '    <a href="Appointment-form.html" class="block w-full text-center bg-primary text-white text-[12px] font-bold uppercase tracking-wide rounded-full py-2.5 hover:bg-brand-600 transition">Book Appointment</a>' +
+                    '  </div>' +
+                    '</div>';
+            }
+            var cdForm = document.getElementById('cd-elig-form');
+            if (cdForm) {
+                var cdSubjectList = document.getElementById('cd-elig-subject-list');
+                if (cdSubjectList && typeof EduAuth.allSubjects === 'function') {
+                    cdSubjectList.innerHTML = EduAuth.allSubjects().map(function (s) {
+                        return '<option value="' + s + '"></option>';
+                    }).join('');
+                }
+                cdForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var age = document.getElementById('cd-elig-age').value;
+                    var ielts = document.getElementById('cd-elig-ielts').value;
+                    var budget = document.getElementById('cd-elig-budget').value;
+                    var subject = document.getElementById('cd-elig-subject').value;
+                    var matches = EduAuth.matchUniversities({ age: age, ielts: ielts, budget: budget, subject: subject });
+                    var resultsEl = document.getElementById('cd-elig-results');
+                    var metaEl = document.getElementById('cd-elig-meta');
+                    var emptyEl = document.getElementById('cd-elig-empty');
+                    resultsEl.innerHTML = matches.map(cdCardHTML).join('');
+                    if (matches.length) {
+                        metaEl.textContent = 'You are eligible for ' + matches.length + ' partner universit' + (matches.length === 1 ? 'y' : 'ies') + (subject ? (' offering ' + subject) : '') + '.';
+                        metaEl.classList.remove('hidden');
+                        emptyEl.classList.add('hidden');
+                    } else {
+                        metaEl.classList.add('hidden');
+                        emptyEl.classList.remove('hidden');
+                        emptyEl.textContent = 'No matching universities for these criteria — try lowering the IELTS requirement, increasing the budget, or trying a broader field of study.';
+                    }
+                });
+            }
+
+            render();
+        })();
+    </script>
+</body>
+
+</html>

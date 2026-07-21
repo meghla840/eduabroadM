@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immigration Visa | Edu Abroad</title>
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1b3168',
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#e0e8ff',
+                            500: '#1b3168',
+                            600: '#152654',
+                            700: '#0f1b3b',
+                            900: '#090f23',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+    html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+    }
+
+    body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #1a202c;
+    }
+
+    h1 { font-size: 2.5rem; line-height: 1.2; font-weight: 900; }
+    h2 { font-size: 2rem; line-height: 1.2; font-weight: 700; }
+    h3 { font-size: 1.5rem; line-height: 1.2; font-weight: 700; }
+
+    .hero-gradient {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    }
+
+    .content-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Glassmorphism Header from index.html */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* For inner pages like USA, we want the text to be dark/visible since it might not be a dark background at the top */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+    
+        #mobile-menu-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(400px, 88vw); background: #ffffff; z-index: 1001; transform: translateX(100%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; box-shadow: -18px 0 50px rgba(0,0,0,.12); overflow-y: auto; }
+        #mobile-menu-drawer.active { transform: translateX(0); }
+        #mobile-menu-overlay { position: fixed; inset: 0; background: rgba(15,15,20,.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+        #mobile-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .hamburger-line { transition: all .3s ease; transform-origin: center; }
+        .menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+        .menu-open .line-2 { opacity: 0; }
+        .menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+        .sidebar-link { display: flex; align-items: center; gap: .85rem; width: 100%; padding: .85rem 1rem; border-radius: .75rem; color: #374151; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; transition: background-color .2s ease, color .2s ease; text-align: left; }
+        .sidebar-link:hover { background: #f3f4f6; color: #1b3168; }
+        .sidebar-link.active-page { background: rgba(27,49,104,0.08); color: #1b3168; }
+        .sidebar-link svg { flex-shrink: 0; color: #9ca3af; transition: color .2s ease; }
+        .sidebar-link:hover svg, .sidebar-link.active-page svg { color: #1b3168; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #1b3168, #00a2e8); z-index: 1000; width: 0%; transition: width .1s ease; }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4144669152460134');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', { content_name: 'Service: Immigration Visa' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4144669152460134&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+    <script src="js/app-data.js"></script>
+    <script src="js/ai-chat-widget.js"></script>
+    <div id="scroll-progress"></div>
+
+    <!-- Global Header -->
+    <header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <a href="index.html" class="w-10 flex items-center text-gray-700 hover:text-primary transition-colors" aria-label="Back to Home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+            </a>
+
+            <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="hamburger-line line-1" x="4" y="6" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-2" x="4" y="11" width="16" height="2" rx="1" fill="currentColor" />
+                    <rect class="hamburger-line line-3" x="4" y="16" width="16" height="2" rx="1" fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=2170&auto=format&fit=crop"
+            alt="Immigration Visa" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center px-6">
+            <h1 class="text-[2rem] md:text-[2.5rem] font-black text-white uppercase tracking-tighter mb-4">Immigration Visa</h1>
+            <p class="text-[1rem] md:text-[1.25rem] text-white/90 font-medium tracking-wide">Your Pathway to a New Life
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <main class="container mx-auto px-6 py-16 md:py-24">
+        <div class="max-w-4xl mx-auto">
+            
+<div class="content-card rounded-[2.5rem] p-8 md:p-16">
+                <h1 class="text-[1.5rem] md:text-[2.25rem] font-black text-brand-500 mb-8 border-b border-gray-100 pb-6 uppercase tracking-tight">
+                    Your Guide to a Successful Immigration Journey
+                </h1>
+                <article class="space-y-12 text-[1rem] md:text-[1.125rem] leading-[1.75] text-gray-700">
+                    <!-- INTRODUCTION -->
+                    <section id="introduction" class="relative group mt-8 clear-both">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">🌟 What is an Immigration Visa?</h2>
+                        <p class="mb-4">An immigration visa is a document that allows you to live and work permanently in a foreign country. Unlike a student or tourist visa, an immigration visa is your first step towards obtaining permanent residency (PR) and, eventually, citizenship. It opens up a world of opportunities, from career advancement to a higher quality of life for you and your family.</p>
+                        <p class="mb-4">The process of obtaining an immigration visa is often complex and highly competitive. It typically involves a points-based system where factors like your age, education, work experience, and language proficiency are assessed. At Edu Abroad, our licensed immigration consultants provide transparent and fully regulated advice to fast-track your application.</p>
+                    </section>
+                    <!-- WHY CHOOSE US -->
+                    <section id="why-choose-us" class="relative group mt-8 clear-both">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">⚖️ Why Trust Edu Abroad with Your Immigration Case?</h2>
+                        <p class="mb-4">Choosing the right consultant is crucial for a successful immigration journey. We provide a direct and legal pathway to global residency status. Our services are built on a foundation of transparency, integrity, and deep expertise in immigration law and policy.</p>
+                        <p class="mb-4">We specialize in various immigration streams, including skilled migration, family sponsorship, and investment visas. We conduct a thorough assessment of your profile to determine the most suitable pathway for you. Our goal is to maximize your points and present your case in the most favorable light to immigration authorities. We also help with immediate family inclusion in your application.</p>
+                    </section>
+                    <!-- APPLICATION PROCESS -->
+                    <section id="application-process" class="relative group mt-8 clear-both">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">📋 The Immigration Visa Application Process</h2>
+                        <p class="mb-4">The immigration process usually starts with an Expression of Interest (EOI) where you provide details about your skills and qualifications. If you meet the eligibility criteria, you may receive an Invitation to Apply (ITA).</p>
+                        <p class="mb-4">Upon receiving an ITA, you will need to submit a full application with detailed supporting documents. This includes your educational credentials, employment records, language test results, police clearance certificates, and medical examination reports. It is critical that all information is accurate and all documents are genuine.</p>
+                        <p class="mb-4">Our team at Edu Abroad assists you at every stage, from preparing your EOI to compiling your final application. We ensure that your application is complete, accurate, and submitted on time, giving you the best possible chance of success.</p>
+                    </section>
+                    <!-- FAQ -->
+                    <section id="faq" class="relative group mt-8 clear-both">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-4 flex items-center gap-2">❓ Frequently Asked Questions (FAQ)</h2>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: How long does the immigration process take?</strong><br>A: The processing time can vary significantly depending on the country, the visa category, and the complexity of your case. It can range from a few months to several years. We will provide you with an estimated timeline based on current processing trends.</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: What is a points-based system?</strong><br>A: Many countries use a points-based system to select skilled immigrants. Points are awarded for factors like age, education, work experience, language skills, and adaptability. You need to score a minimum number of points to be eligible to apply.</p>
+                        <p class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm"><strong>Q: Can I include my family in my immigration application?</strong><br>A: Yes, in most cases, you can include your spouse or partner and dependent children in your application. They will also receive permanent residency if your application is successful.</p>
+                    </section>
+                    <!-- DESTINATIONS -->
+                    <section id="immigration-destinations" class="relative group mt-12 clear-both">
+                        <h2 class="text-[1.5rem] font-bold text-gray-900 mb-6 flex items-center gap-2">🌍 Top Immigration Destinations</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- USA -->
+                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                                <h3 class="text-xl font-black text-brand-600 mb-3 flex items-center gap-2">
+                                    <img src="https://flagcdn.com/w40/us.png" alt="USA Flag" class="w-8 h-auto rounded-sm shadow-sm">
+                                    USA
+                                </h3>
+                                <p class="text-[1rem] leading-relaxed text-gray-700 mb-4">The United States offers diverse immigration pathways, providing excellent career prospects and a dynamic cultural experience.</p>
+                                <ul class="flex flex-col gap-2 border-t border-gray-200 pt-4">
+                                    <li>
+                                        <a href="eb3.html" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-800 font-bold transition-colors group/link">
+                                            <span class="p-1 rounded bg-brand-100 text-brand-600 group-hover/link:bg-brand-600 group-hover/link:text-white transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                            </span>
+                                            EB-3 Visa
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- CANADA -->
+                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                                <h3 class="text-xl font-black text-brand-600 mb-3 flex items-center gap-2">
+                                    <img src="https://flagcdn.com/w40/ca.png" alt="Canada Flag" class="w-8 h-auto rounded-sm shadow-sm">
+                                    CANADA
+                                </h3>
+                                <p class="text-[1rem] leading-relaxed text-gray-700">Consistently ranked for high quality of life, Canada matches skilled immigrants with opportunities through Express Entry and Provincial Nominee Programs.</p>
+                            </div>
+
+                            <!-- AUSTRALIA -->
+                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                                <h3 class="text-xl font-black text-brand-600 mb-3 flex items-center gap-2">
+                                    <img src="https://flagcdn.com/w40/au.png" alt="Australia Flag" class="w-8 h-auto rounded-sm shadow-sm">
+                                    AUSTRALIA
+                                </h3>
+                                <p class="text-[1rem] leading-relaxed text-gray-700">Known for a robust economy and excellent standard of living, Australia's SkillSelect system provides clear pathways for professionals seeking permanent residency.</p>
+                            </div>
+
+                            <!-- NEW ZEALAND -->
+                            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                                <h3 class="text-xl font-black text-brand-600 mb-3 flex items-center gap-2">
+                                    <img src="https://flagcdn.com/w40/nz.png" alt="New Zealand Flag" class="w-8 h-auto rounded-sm shadow-sm">
+                                    NEW ZEALAND
+                                </h3>
+                                <p class="text-[1rem] leading-relaxed text-gray-700">Offering a balanced lifestyle and beautiful landscapes, New Zealand has a straightforward points-based immigration system for skilled workers and their families.</p>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+
+                <div class="mt-16 pt-12 border-t border-gray-100 text-center">
+                    <p class="text-sm font-bold uppercase tracking-widest text-brand-500 mb-6">Ready to Build Your New Life?</p>
+                    <div class="bg-brand-900 rounded-[2rem] p-8 md:p-12 text-white relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <h3 class="text-[1.5rem] md:text-[2rem] font-black uppercase mb-4">Book a Professional Consultation</h3>
+                            <p class="text-white/70 mb-8 max-w-xl mx-auto">Let our licensed consultants assess your profile and guide you on the best immigration pathway.</p>
+                            <a href="Appointment-form.html"
+                                class="inline-block px-12 py-5 bg-white text-brand-900 font-black uppercase tracking-widest rounded-2xl hover:bg-brand-100 transition-all hover:scale-105 active:scale-95 shadow-2xl">Schedule a Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="mobile-menu-overlay"></div>
+    <aside id="mobile-menu-drawer">
+        <div class="flex items-center justify-between px-6 h-20 border-b border-gray-100 shrink-0">
+            <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-10 w-auto object-contain" />
+            <button type="button" id="mobile-menu-close" aria-label="Close menu" class="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu-greeting" class="hidden px-5 pt-5 shrink-0">
+            <div class="flex items-center gap-3 bg-primary/5 border border-primary/10 rounded-2xl p-4">
+                <div id="mobile-menu-avatar" class="size-11 rounded-full bg-primary text-white flex items-center justify-center font-bold font-display text-lg shrink-0"></div>
+                <div class="min-w-0">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Welcome back</p>
+                    <p id="mobile-menu-username" class="font-display font-semibold text-gray-900 text-lg leading-tight truncate"></p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 py-5 space-y-1 overflow-y-auto">
+            <a href="about.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                About
+            </a>
+            <a href="index.html#services-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Services
+            </a>
+            <a href="index.html#destinations-section" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Destinations
+            </a>
+            <a href="document-check.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.5 0 2.91.37 4.15 1.02"></path><path d="M12 3v9l4-2"></path></svg>
+                Document Check
+            </a>
+            <a href="blog.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Blog
+            </a>
+            <a href="company-profile.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="9" y1="13" x2="9.01" y2="13"></line><line x1="9" y1="17" x2="9.01" y2="17"></line></svg>
+                Company Profile
+            </a>
+            <a href="Appointment-form.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Book Appointment
+            </a>
+            <a href="contact.html" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Contact
+            </a>
+
+            <div class="my-3 border-t border-gray-100"></div>
+
+            <a href="login.html" id="mobile-portal-link" class="mobile-nav-link sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span id="mobile-portal-label">Portal</span>
+            </a>
+        </nav>
+
+        <div class="px-5 py-5 border-t border-gray-100 shrink-0">
+            <div id="mobile-guest-actions" class="flex flex-col gap-3">
+                <a href="login.html" class="w-full text-center py-3 rounded-xl border border-gray-200 font-semibold text-sm text-gray-700 hover:border-primary hover:text-primary transition-colors">Login</a>
+                <a href="Appointment-form.html" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Get Started</a>
+            </div>
+            <div id="mobile-authed-actions" class="hidden flex-col gap-3">
+                <a href="client-dashboard.html" id="mobile-dashboard-btn" class="mobile-nav-link w-full text-center py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors">Go to Portal</a>
+                <button type="button" id="mobile-logout-btn" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 font-semibold text-sm text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var windist = document.documentElement.scrollTop;
+            var winheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = winheight ? (windist / winheight) * 100 : 0;
+            var progress = document.getElementById('scroll-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        var menuClose = document.getElementById('mobile-menu-close');
+        var menuDrawer = document.getElementById('mobile-menu-drawer');
+        var menuOverlay = document.getElementById('mobile-menu-overlay');
+        var mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            menuDrawer.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            menuDrawer.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menuDrawer.classList.contains('active')) closeMenu(); else openMenu();
+        }
+        if (menuToggle && menuDrawer && menuOverlay) {
+            menuToggle.addEventListener('click', toggleMenu);
+            if (menuClose) menuClose.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(function (link) {
+                link.addEventListener('click', function () { if (menuDrawer.classList.contains('active')) closeMenu(); });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menuDrawer.classList.contains('active')) closeMenu();
+            });
+        }
+
+        (function () {
+            if (typeof EduAuth === 'undefined') return;
+            var user = EduAuth.currentUser();
+            var guestActions = document.getElementById('mobile-guest-actions');
+            var authedActions = document.getElementById('mobile-authed-actions');
+            var greeting = document.getElementById('mobile-menu-greeting');
+            var usernameEl = document.getElementById('mobile-menu-username');
+            var avatarEl = document.getElementById('mobile-menu-avatar');
+            var portalLink = document.getElementById('mobile-portal-link');
+            var portalLabel = document.getElementById('mobile-portal-label');
+            var dashboardBtn = document.getElementById('mobile-dashboard-btn');
+            var logoutBtn = document.getElementById('mobile-logout-btn');
+            if (!user) return;
+            var isAdmin = user.role === 'admin';
+            var portalHref = isAdmin ? 'admin-dashboard.html' : 'client-dashboard.html';
+            var displayName = user.name || user.email;
+            if (guestActions) guestActions.classList.add('hidden');
+            if (authedActions) { authedActions.classList.remove('hidden'); authedActions.classList.add('flex'); }
+            if (greeting) greeting.classList.remove('hidden');
+            if (usernameEl) usernameEl.textContent = displayName;
+            if (avatarEl) avatarEl.textContent = displayName.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+            if (portalLink) portalLink.setAttribute('href', portalHref);
+            if (portalLabel) portalLabel.textContent = isAdmin ? 'Admin Portal' : 'My Portal';
+            if (dashboardBtn) dashboardBtn.setAttribute('href', portalHref);
+            if (logoutBtn) logoutBtn.addEventListener('click', function () { EduAuth.logout(); window.location.href = 'index.html'; });
+        })();
+    </script>
+
+</body>
+</html>
