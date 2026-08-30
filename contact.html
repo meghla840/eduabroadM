@@ -53,6 +53,7 @@
 </head>
 <body class="bg-white">
     <script src="js/app-data.js"></script>
+    <script src="js/comments-widget.js"></script>
     <script src="js/ai-chat-widget.js"></script>
     <div id="scroll-progress"></div>
     <header class="fixed top-0 w-full z-50 py-4 px-8 md:px-16 shadow-sm transition-all duration-300 bg-[#e7e4df]">
@@ -62,7 +63,7 @@
             </a>
 
             <a href="index.html" class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
-                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
+                <img src="images/logo_Black.png" alt="Edu Abroad Logo" class="h-11 md:h-14 w-auto object-contain drop-shadow-sm" />
             </a>
 
             <button id="mobile-menu-toggle" class="p-2 text-gray-900 focus:outline-none z-[1002] transition-colors" aria-label="Toggle Menu">
@@ -160,6 +161,18 @@
             </div>
         </section>
 
+        <!-- Comments -->
+        <section class="pb-20">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="text-center mb-10">
+                    <h2 class="font-display text-2xl md:text-3xl font-semibold text-[#1A1A1A] mb-2">Questions or
+                        Feedback?</h2>
+                    <p class="text-gray-500 text-sm">Leave a comment below and our team will get back to you.</p>
+                </div>
+                <div data-edu-comments data-page-id="contact" data-page-title="Contact Page"></div>
+            </div>
+        </section>
+
         <!-- Map -->
         <section class="pb-20">
             <div class="container mx-auto px-6 max-w-6xl">
@@ -196,7 +209,7 @@
         <div class="container mx-auto px-6 py-20 pb-12 grid md:grid-cols-4 gap-12 text-left relative z-10">
             <div class="md:col-span-2 space-y-6">
                 <a href="index.html" class="inline-block transition-all duration-300">
-                    <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-16 w-auto object-contain" />
+                    <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-12 w-auto object-contain" />
                 </a>
                 <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-sm mt-6">We are a premier international education consultancy, dedicated to transforming student ambitions into global realities. Your future starts here.</p>
             </div>

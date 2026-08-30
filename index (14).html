@@ -885,7 +885,6 @@
 
 <body class="bg-white">
     <script src="js/app-data.js"></script>
-    <script src="js/comments-widget.js"></script>
     <script src="js/ai-chat-widget.js"></script>
     <div id="scroll-progress"></div>
 
@@ -898,7 +897,7 @@
 
             <div class="flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2">
                 <img src="images/logo_Black.png" alt="Edu Abroad Logo"
-                    class="h-11 md:h-14 w-auto object-contain drop-shadow-sm" />
+                    class="h-16 md:h-20 w-auto object-contain drop-shadow-sm" />
             </div>
 
             <!-- Mobile Menu Toggle (Always Visible) -->
@@ -1060,75 +1059,6 @@
                             FREE CONSULTATION
                         </a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===========================
-             ELIGIBILITY CHECKER SECTION
-             =========================== -->
-        <section id="eligibility-section" class="py-24 md:py-32 relative overflow-hidden" style="background:#0f1b3b;">
-            <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#00a2e8]/20 blur-3xl elig-float"></div>
-            <div class="absolute -bottom-24 -right-16 w-96 h-96 rounded-full bg-[#39b54a]/10 blur-3xl elig-float-delay"></div>
-
-            <div class="container mx-auto px-6 relative z-10">
-                <div class="text-center max-w-2xl mx-auto mb-14">
-                    <div class="text-[#00a2e8] text-[13px] uppercase tracking-[0.25em] font-bold mb-4">Find Your Match</div>
-                    <h2 class="text-[32px] md:text-[48px] font-bold font-display text-white leading-[1.15] mb-5">
-                        Check Your University <span class="text-[#00a2e8]">Eligibility</span>
-                    </h2>
-                    <p class="text-white/70 text-[16px] md:text-[18px] leading-relaxed">
-                        Enter your age, IELTS score and budget — or search by your field of study — to instantly see which of our partner universities you qualify for, along with required documents and subjects.
-                    </p>
-                </div>
-
-                <!-- Checker Form -->
-                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-14">
-                    <form id="eligibility-form" class="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
-                        <div>
-                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Your Age</label>
-                            <input type="number" id="elig-age" min="15" max="60" placeholder="e.g. 22"
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
-                        </div>
-                        <div>
-                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Program Level</label>
-                            <select id="elig-level" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
-                                <option value="">Any Level</option>
-                                <option value="Honors">Honors / Bachelor</option>
-                                <option value="Masters">Masters</option>
-                                <option value="PhD">PhD</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Field of Study</label>
-                            <input type="text" id="elig-subject" list="elig-subject-list" placeholder="e.g. Computer Science"
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
-                            <datalist id="elig-subject-list"></datalist>
-                        </div>
-                        <div>
-                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">IELTS Score</label>
-                            <input type="number" id="elig-ielts" min="0" max="9" step="0.5" placeholder="e.g. 6.5"
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
-                        </div>
-                        <div>
-                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Budget (BDT/yr)</label>
-                            <input type="number" id="elig-budget" min="0" step="50000" placeholder="e.g. 1500000"
-                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
-                        </div>
-                        <button type="submit"
-                            class="bg-[#1b3168] hover:bg-[#00a2e8] text-white font-bold text-[14px] uppercase tracking-wider rounded-xl px-6 py-3.5 transition-all duration-300 shadow-lg hover:shadow-[#00a2e8]/40">
-                            Check Eligibility
-                        </button>
-                    </form>
-                    <p id="elig-error" class="hidden text-red-600 text-sm mt-3 font-medium"></p>
-                </div>
-
-                <!-- Results -->
-                <div id="elig-results-meta" class="hidden text-center text-white/80 text-sm mb-6"></div>
-                <div id="elig-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                <div id="elig-empty" class="hidden text-center py-14">
-                    <p class="text-white/70 text-lg">No matching universities found for these criteria — try lowering the IELTS score or increasing the budget, or contact our counselors for alternatives.</p>
-                    <a href="Appointment-form.html" class="inline-block mt-6 bg-[#00a2e8] text-white font-bold text-[13px] uppercase tracking-wider rounded-full px-8 py-3.5 hover:bg-white hover:text-[#1b3168] transition">Talk to a Counselor</a>
                 </div>
             </div>
         </section>
@@ -1570,6 +1500,74 @@
             </div>
         </section>
 
+        <!-- ===========================
+             ELIGIBILITY CHECKER SECTION
+             =========================== -->
+        <section id="eligibility-section" class="py-24 md:py-32 relative overflow-hidden" style="background:#0f1b3b;">
+            <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#00a2e8]/20 blur-3xl elig-float"></div>
+            <div class="absolute -bottom-24 -right-16 w-96 h-96 rounded-full bg-[#39b54a]/10 blur-3xl elig-float-delay"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <div class="text-[#00a2e8] text-[13px] uppercase tracking-[0.25em] font-bold mb-4">Find Your Match</div>
+                    <h2 class="text-[32px] md:text-[48px] font-bold font-display text-white leading-[1.15] mb-5">
+                        Check Your University <span class="text-[#00a2e8]">Eligibility</span>
+                    </h2>
+                    <p class="text-white/70 text-[16px] md:text-[18px] leading-relaxed">
+                        Enter your age, IELTS score and budget — or search by your field of study — to instantly see which of our partner universities you qualify for, along with required documents and subjects.
+                    </p>
+                </div>
+
+                <!-- Checker Form -->
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-14">
+                    <form id="eligibility-form" class="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Your Age</label>
+                            <input type="number" id="elig-age" min="15" max="60" placeholder="e.g. 22"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Program Level</label>
+                            <select id="elig-level" class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
+                                <option value="">Any Level</option>
+                                <option value="Honors">Honors / Bachelor</option>
+                                <option value="Masters">Masters</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Field of Study</label>
+                            <input type="text" id="elig-subject" list="elig-subject-list" placeholder="e.g. Computer Science"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition">
+                            <datalist id="elig-subject-list"></datalist>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">IELTS Score</label>
+                            <input type="number" id="elig-ielts" min="0" max="9" step="0.5" placeholder="e.g. 6.5"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-[12px] font-bold uppercase tracking-wider text-gray-500 mb-2">Budget (BDT/yr)</label>
+                            <input type="number" id="elig-budget" min="0" step="50000" placeholder="e.g. 1500000"
+                                class="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#00a2e8] transition" required>
+                        </div>
+                        <button type="submit"
+                            class="bg-[#1b3168] hover:bg-[#00a2e8] text-white font-bold text-[14px] uppercase tracking-wider rounded-xl px-6 py-3.5 transition-all duration-300 shadow-lg hover:shadow-[#00a2e8]/40">
+                            Check Eligibility
+                        </button>
+                    </form>
+                    <p id="elig-error" class="hidden text-red-600 text-sm mt-3 font-medium"></p>
+                </div>
+
+                <!-- Results -->
+                <div id="elig-results-meta" class="hidden text-center text-white/80 text-sm mb-6"></div>
+                <div id="elig-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div id="elig-empty" class="hidden text-center py-14">
+                    <p class="text-white/70 text-lg">No matching universities found for these criteria — try lowering the IELTS score or increasing the budget, or contact our counselors for alternatives.</p>
+                    <a href="Appointment-form.html" class="inline-block mt-6 bg-[#00a2e8] text-white font-bold text-[13px] uppercase tracking-wider rounded-full px-8 py-3.5 hover:bg-white hover:text-[#1b3168] transition">Talk to a Counselor</a>
+                </div>
+            </div>
+        </section>
 
         <!-- ===========================
              DESTINATIONS SECTION — Apple-style full-bleed grid
@@ -2135,20 +2133,6 @@
             </div>
         </section>
 
-        <!-- Visitor Comments -->
-        <section id="comments-section" class="py-20 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-10">
-                    <div class="text-sm font-bold uppercase tracking-widest text-secondary mb-2">Feedback</div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 tracking-tight">Leave Us a
-                        <span class="text-brand-600">Comment</span></h2>
-                    <p class="text-gray-500 mt-3 max-w-xl mx-auto">Have a question or want to share your experience
-                        with Edu Abroad? Post it below.</p>
-                </div>
-                <div data-edu-comments data-page-id="home" data-page-title="Homepage" data-show-rating></div>
-            </div>
-        </section>
-
         <section id="consultation-cta-section" class="py-24 md:py-28 relative overflow-hidden elig-shimmer">
             <div class="absolute inset-0 bg-black/25"></div>
             <div class="container mx-auto px-6 max-w-5xl text-center relative z-10">
@@ -2187,7 +2171,7 @@
             data-svc-delay="0">
             <div class="md:col-span-2 space-y-6">
                 <a href="#" class="inline-block transition-all duration-300">
-                    <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-12 w-auto object-contain" />
+                    <img src="images/logo_white.png" alt="Edu Abroad Logo" class="h-16 w-auto object-contain" />
                 </a>
                 <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-sm mt-6">We are a premier
                     international
